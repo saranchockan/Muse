@@ -1,1 +1,5 @@
 .DS_STORE
+Muse.xcodeproj/project.xcworkspace/xcshareddata/*
+Muse.xcodeproj/xcuserdata/*
+Muse.xcodeproj/project.xcworkspace/xcuserdata/*
+
