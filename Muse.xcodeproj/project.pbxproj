@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5BE71A2A29AE88AA0067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A2929AE88AA0067DD61 /* Logo.png */; };
-		5BE71A2E29AE896E0067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A2D29AE896E0067DD61 /* LogoWithName.png */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
+		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
+		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
 		B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C229AE7030003D2C44 /* AppDelegate.swift */; };
 		B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */; };
 		B6DA27C729AE7030003D2C44 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C629AE7030003D2C44 /* SplashScreen.swift */; };
@@ -19,9 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5BE71A2929AE88AA0067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = ../../../Downloads/Logo.png; sourceTree = "<group>"; };
-		5BE71A2D29AE896E0067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoWithName.png; path = ../../../Downloads/LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
+		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		B6DA27BF29AE7030003D2C44 /* Muse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DA27C229AE7030003D2C44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,8 +70,8 @@
 				B6DA27CB29AE7035003D2C44 /* Assets.xcassets */,
 				B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */,
 				B6DA27D029AE7035003D2C44 /* Info.plist */,
-				5BE71A2929AE88AA0067DD61 /* Logo.png */,
-				5BE71A2D29AE896E0067DD61 /* LogoWithName.png */,
+				5BE71A3229AFFCA40067DD61 /* Logo.png */,
+				5BE71A3129AFFCA40067DD61 /* LogoWithName.png */,
 			);
 			path = Muse;
 			sourceTree = "<group>";
@@ -134,11 +134,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BE71A2A29AE88AA0067DD61 /* Logo.png in Resources */,
 				B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */,
+				5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */,
+				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,
-				5BE71A2E29AE896E0067DD61 /* LogoWithName.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
