@@ -10,7 +10,6 @@
 		1E33C35829AFFEDD00B4D320 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1E33C35729AFFEDD00B4D320 /* FirebaseAuth */; };
 		1E33C35A29AFFEDD00B4D320 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1E33C35929AFFEDD00B4D320 /* FirebaseAuthCombine-Community */; };
 		1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */; };
-		1E33C36029B007BD00B4D320 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E33C35F29B007BD00B4D320 /* GoogleService-Info.plist */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
@@ -24,7 +23,6 @@
 
 /* Begin PBXFileReference section */
 		1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirstViewController.swift; sourceTree = "<group>"; };
-		1E33C35F29B007BD00B4D320 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 		B6DA27C129AE7030003D2C44 /* Muse */ = {
 			isa = PBXGroup;
 			children = (
-				1E33C35F29B007BD00B4D320 /* GoogleService-Info.plist */,
 				B6DA27C229AE7030003D2C44 /* AppDelegate.swift */,
 				B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */,
 				B6DA27C629AE7030003D2C44 /* SplashScreen.swift */,
@@ -156,7 +153,6 @@
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,
-				1E33C36029B007BD00B4D320 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
