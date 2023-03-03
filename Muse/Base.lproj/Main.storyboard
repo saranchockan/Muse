@@ -255,6 +255,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Connect to Spotify" subtitle="" cornerStyle="fixed"/>
                                 <connections>
+                                    <action selector="connectToSpotify:" destination="kkn-b1-zGL" eventType="touchUpInside" id="U3K-b7-ZOn"/>
                                     <segue destination="neG-uT-s3T" kind="show" id="ENs-H2-MIO"/>
                                 </connections>
                             </button>
