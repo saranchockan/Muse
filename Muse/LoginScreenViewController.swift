@@ -14,8 +14,23 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        email.layer.cornerRadius = 30
+        let emailPaddingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: 23, height: 31))
+        email.leftView = emailPaddingView
+        email.leftViewMode = .always
+        
+        password.layer.cornerRadius = 30
+        let passPaddingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: 23, height: 31))
+        password.leftView = passPaddingView
+        password.leftViewMode = .always
+        
+        loginButton.layer.cornerRadius = 30
     }
     
     
