@@ -10,9 +10,8 @@ import FirebaseAuth
 
 class RegisterFirstViewController: UIViewController {
 
-    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var confirmPassword: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +19,11 @@ class RegisterFirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
-    
-
-    @IBAction func registerUser(_ sender: Any) {
-        print("Registering user in Firebase")
-//        Auth.auth().createUser(withEmail: username.text!, password: password.text!) { authResult, error in
-//            // [START_EXCLUDE]
-//            print(authResult)
-//            print(error)
-//            // [END_EXCLUDE]
-//          }
+    @IBAction func continueToWelcomeScreen(_ sender: Any) {
+        userEmail = email.text!
+        userPassword = password.text!
     }
+    
     /*
     // MARK: - Navigation
 

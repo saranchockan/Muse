@@ -9,11 +9,26 @@ import UIKit
 
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
+
+// User Metadata
+// Should move to globla state context
+// Should be populated by Firebase
+// during app intialization
+public var userEmail: String = ""
+public var userFirstName: String = ""
+public var userLastName: String = ""
+public var userPassword: String = ""
+public var userPhoneNumber: String = ""
+public var userLocation: String = ""
+
+// Firebase setup
+public let db = Firestore.firestore()
 
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         

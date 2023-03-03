@@ -9,10 +9,22 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+    @IBOutlet weak var phoneNumber: UITextField!
+    @IBOutlet weak var location: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func continueToConnectSpotify(_ sender: Any) {
+        userFirstName = firstName.text!
+        userLastName = lastName.text!
+        userPhoneNumber = phoneNumber.text!
+        userLocation = location.text!
     }
     
 
