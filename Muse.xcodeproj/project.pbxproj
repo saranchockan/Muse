@@ -27,6 +27,7 @@
 		B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27C829AE7030003D2C44 /* Main.storyboard */; };
 		B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CB29AE7035003D2C44 /* Assets.xcassets */; };
 		B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */; };
+		F64233C929B2899E00D671E1 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F64233C829B2899E00D671E1 /* SpotifyAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E33C35829AFFEDD00B4D320 /* FirebaseAuth in Frameworks */,
+				F64233C929B2899E00D671E1 /* SpotifyAPI in Frameworks */,
 				1E33C35A29AFFEDD00B4D320 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +128,7 @@
 			packageProductDependencies = (
 				1E33C35729AFFEDD00B4D320 /* FirebaseAuth */,
 				1E33C35929AFFEDD00B4D320 /* FirebaseAuthCombine-Community */,
+				F64233C829B2899E00D671E1 /* SpotifyAPI */,
 			);
 			productName = Muse;
 			productReference = B6DA27BF29AE7030003D2C44 /* Muse.app */;
@@ -157,6 +160,7 @@
 			mainGroup = B6DA27B629AE7030003D2C44;
 			packageReferences = (
 				1E33C35629AFFEDD00B4D320 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */,
 			);
 			productRefGroup = B6DA27C029AE7030003D2C44 /* Products */;
 			projectDirPath = "";
@@ -427,6 +431,14 @@
 				kind = branch;
 			};
 		};
+		F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Peter-Schorn/SpotifyAPI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -439,6 +451,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E33C35629AFFEDD00B4D320 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
+		};
+		F64233C829B2899E00D671E1 /* SpotifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */;
+			productName = SpotifyAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

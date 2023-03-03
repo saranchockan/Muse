@@ -24,12 +24,13 @@ class RegisterFirstViewController: UIViewController {
     
 
     @IBAction func registerUser(_ sender: Any) {
-        Auth.auth().createUser(withEmail: username.text!, password: password.text!) { authResult, error in
-            // [START_EXCLUDE]
-            print(authResult)
-            print(error)
-            // [END_EXCLUDE]
-          }
+        print("Registering user in Firebase")
+//        Auth.auth().createUser(withEmail: username.text!, password: password.text!) { authResult, error in
+//            // [START_EXCLUDE]
+//            print(authResult)
+//            print(error)
+//            // [END_EXCLUDE]
+//          }
     }
     /*
     // MARK: - Navigation

@@ -122,8 +122,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Continue"/>
                                 <connections>
-                                    <action selector="registerUser:" destination="Z9w-eD-VPz" eventType="touchUpInside" id="auB-IW-8bz"/>
-                                    <segue destination="dI7-dh-asN" kind="show" id="XmG-v6-Jyy"/>
+                                    <segue destination="dI7-dh-asN" kind="show" id="dy8-jB-kqw"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKu-7M-NSo">
@@ -227,8 +226,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Continue" subtitle="" cornerStyle="fixed"/>
                                 <connections>
-                                    <action selector="loginUser:" destination="dI7-dh-asN" eventType="touchUpInside" id="WiB-1O-nX1"/>
-                                    <segue destination="kkn-b1-zGL" kind="show" id="Sjz-2C-KRf"/>
+                                    <segue destination="kkn-b1-zGL" kind="show" id="GQb-4y-dhR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -236,11 +234,6 @@
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="Nkw-JZ-xsN"/>
-                    <connections>
-                        <outlet property="email" destination="e0Q-9f-gsk" id="oVy-Ot-l4O"/>
-                        <outlet property="loginButton" destination="48b-96-l9W" id="BAn-Vo-axc"/>
-                        <outlet property="password" destination="RPN-X0-NU3" id="Ueh-WX-6Tw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="18f-je-SJR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -262,8 +255,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Connect to Spotify" subtitle="" cornerStyle="fixed"/>
                                 <connections>
-                                    <action selector="loginUser:" destination="kkn-b1-zGL" eventType="touchUpInside" id="QIn-1E-vUa"/>
-                                    <segue destination="neG-uT-s3T" kind="show" id="aA0-JF-vBL"/>
+                                    <segue destination="neG-uT-s3T" kind="show" id="ENs-H2-MIO"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LogoWithName.png" translatesAutoresizingMaskIntoConstraints="NO" id="HJ6-q8-rNJ">
@@ -275,9 +267,6 @@
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="yNA-d5-I5A"/>
-                    <connections>
-                        <outlet property="loginButton" destination="QWZ-na-gHE" id="DjX-an-H8H"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0X-Gs-HAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -305,18 +294,12 @@
                                 <color key="tintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Finish" subtitle="" cornerStyle="fixed"/>
-                                <connections>
-                                    <action selector="loginUser:" destination="neG-uT-s3T" eventType="touchUpInside" id="ZIk-Mp-qKC"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q4H-5r-6us"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="fre-LF-yGy"/>
-                    <connections>
-                        <outlet property="loginButton" destination="xvg-Fd-hqA" id="ZzL-tQ-p4e"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLE-bx-I0t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,6 +337,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="lue-Cp-uGf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6bk-3Q-Cvs">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
