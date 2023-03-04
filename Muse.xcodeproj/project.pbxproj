@@ -21,7 +21,7 @@
 		5BE71A3629B166B40067DD61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */; };
 		B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C229AE7030003D2C44 /* AppDelegate.swift */; };
 		B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */; };
-		B6DA27C729AE7030003D2C44 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C629AE7030003D2C44 /* SplashScreen.swift */; };
+		B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C629AE7030003D2C44 /* SplashScreenViewController.swift */; };
 		B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27C829AE7030003D2C44 /* Main.storyboard */; };
 		B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CB29AE7035003D2C44 /* Assets.xcassets */; };
 		B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */; };
@@ -71,7 +71,7 @@
 		B6DA27BF29AE7030003D2C44 /* Muse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DA27C229AE7030003D2C44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B6DA27C629AE7030003D2C44 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		B6DA27C629AE7030003D2C44 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		B6DA27C929AE7030003D2C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6DA27CB29AE7035003D2C44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DA27CE29AE7035003D2C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,6 +117,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B82A74529B2C6C90032C1FE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6DA27C629AE7030003D2C44 /* SplashScreenViewController.swift */,
+				1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */,
+				5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */,
+				5B49B78B29B1780F00247E0C /* WelcomeViewController.swift */,
+				5B49B78D29B178CC00247E0C /* ConnectSpotifyViewController.swift */,
+				5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */,
+				5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */,
+				5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */,
+				5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */,
+				5B82A74329B17D890032C1FE /* MyListeningViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		B6DA27B629AE7030003D2C44 = {
 			isa = PBXGroup;
 			children = (
@@ -136,25 +153,16 @@
 		B6DA27C129AE7030003D2C44 /* Muse */ = {
 			isa = PBXGroup;
 			children = (
+				5B82A74529B2C6C90032C1FE /* ViewControllers */,
 				B6DA27C229AE7030003D2C44 /* AppDelegate.swift */,
 				B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */,
-				B6DA27C629AE7030003D2C44 /* SplashScreen.swift */,
 				B6DA27C829AE7030003D2C44 /* Main.storyboard */,
-				1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */,
-				5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */,
 				B6DA27CB29AE7035003D2C44 /* Assets.xcassets */,
 				B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */,
 				B6DA27D029AE7035003D2C44 /* Info.plist */,
 				5BE71A3229AFFCA40067DD61 /* Logo.png */,
 				5BE71A3129AFFCA40067DD61 /* LogoWithName.png */,
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
-				5B49B78B29B1780F00247E0C /* WelcomeViewController.swift */,
-				5B49B78D29B178CC00247E0C /* ConnectSpotifyViewController.swift */,
-				5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */,
-				5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */,
-				5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */,
-				5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */,
-				5B82A74329B17D890032C1FE /* MyListeningViewController.swift */,
 			);
 			path = Muse;
 			sourceTree = "<group>";
@@ -267,7 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6DA27C729AE7030003D2C44 /* SplashScreen.swift in Sources */,
+				B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */,
 				B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */,
 				1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */,
 				5B49B78C29B1780F00247E0C /* WelcomeViewController.swift in Sources */,
