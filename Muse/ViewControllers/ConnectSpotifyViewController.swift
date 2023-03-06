@@ -12,10 +12,13 @@ class ConnectSpotifyViewController: UIViewController {
     let SPOTIFY_CLIENT_ID_KEY: String = "SPOTIFY_CLIENT_ID"
     let SPOTIFY_CLIENT_SECRET_KEY:String = "SPOTIFY_CLIENT_SECRET"
     let SPOTIFY_AUTH_REDIRECT_URI:String = "muse://login-callback"
+        
+    @IBOutlet weak var connectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Create an instance of SpotifyAPI
+        connectButton.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
     }
     
     @IBAction func connectToSpotify(_ sender: Any) {
