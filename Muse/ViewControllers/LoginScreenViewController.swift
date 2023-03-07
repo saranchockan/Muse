@@ -32,8 +32,13 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func loginUser(_ sender: Any) {
-        Auth.auth().signIn(withEmail: email.text!, password: password.text!) { [weak self] authResult, error in
-          return
+        Auth.auth().signIn(withEmail: email.text!, password: password.text!) {authResult, error in
+            
+            if let error = error as NSError? {
+              print("\(error.localizedDescription)")
+            } else {
+                print("")
+            }
         }
     }
 }

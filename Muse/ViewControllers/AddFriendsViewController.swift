@@ -21,7 +21,6 @@ class AddFriendsViewController: UIViewController {
                 print("Firebase auth error \(String(describing: error))")
                 return
             }
-            print("\(user.email!) created")
             // Add user to Firebase user
             // collection: https://firebase.google.com/docs/firestore/manage-data/add-data#swift
             // Should only execute if firebase auth

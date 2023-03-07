@@ -42,11 +42,10 @@ class WelcomeViewController: UIViewController {
     }
     
     
-    @IBAction func continueToConnectSpotify(_ sender: Any) {
+    @IBAction func continueToConnectSpotify(_ sender: Any){
         userFirstName = firstName.text!
         userLastName = lastName.text!
         userPhoneNumber = phoneNumber.text!
         userLocation = location.text!
     }
-
 }

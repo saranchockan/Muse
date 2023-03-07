@@ -16,6 +16,5 @@ class SplashScreenViewController: UIViewController {
             self.present(nextVC, animated: true)
         }
     }
-
 }
 

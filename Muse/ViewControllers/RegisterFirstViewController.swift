@@ -34,7 +34,6 @@ class RegisterFirstViewController: UIViewController {
         confirmPassword.leftViewMode = .always
         
         continueButton.layer.cornerRadius = 30
-
     }
     
     @IBAction func continueToWelcomeScreen(_ sender: Any) {
