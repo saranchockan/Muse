@@ -12,17 +12,9 @@ class AddFriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func finishRegistration(_ sender: Any) {
-        print(userFirstName)
-        print(userLastName)
-        print(userEmail)
-        print(userPassword)
-        print(userLocation)
-        print(userPhoneNumber)
         // Register user with firebase Auth
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
             guard let user = authResult?.user, error == nil else {
@@ -47,8 +39,6 @@ class AddFriendsViewController: UIViewController {
                     print("Document successfully written!")
                 }
             }
-
         }
-     
     }
 }

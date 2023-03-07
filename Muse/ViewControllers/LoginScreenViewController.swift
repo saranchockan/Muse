@@ -31,11 +31,9 @@ class LoginScreenViewController: UIViewController {
         loginButton.layer.cornerRadius = 30
     }
     
-    
     @IBAction func loginUser(_ sender: Any) {
         Auth.auth().signIn(withEmail: email.text!, password: password.text!) { [weak self] authResult, error in
           return
         }
     }
-    
 }
