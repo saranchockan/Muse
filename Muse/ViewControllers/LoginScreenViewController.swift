@@ -22,6 +22,7 @@ class LoginScreenViewController: UIViewController {
         email.leftView = emailPaddingView
         email.leftViewMode = .always
         
+        password.isSecureTextEntry = true
         password.layer.cornerRadius = 30
         let passPaddingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: 23, height: 31))
         password.leftView = passPaddingView
