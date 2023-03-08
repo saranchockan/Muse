@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */; };
+		5B06281A29B7E36700012791 /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281629B7E36700012791 /* ticket.png */; };
+		5B06281B29B7E36700012791 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281729B7E36700012791 /* profile.png */; };
+		5B06281C29B7E36700012791 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281829B7E36700012791 /* friends.png */; };
+		5B06281D29B7E36700012791 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281929B7E36700012791 /* home.png */; };
+		5B06281F29B7E97600012791 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281E29B7E97600012791 /* settings.png */; };
 		5B49B78C29B1780F00247E0C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49B78B29B1780F00247E0C /* WelcomeViewController.swift */; };
 		5B49B78E29B178CC00247E0C /* ConnectSpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49B78D29B178CC00247E0C /* ConnectSpotifyViewController.swift */; };
 		5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */; };
+		5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */; };
+		5B72CD1829B7F56B0024DEAF /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B72CD1729B7F56B0024DEAF /* edit.png */; };
 		5B82A73C29B179790032C1FE /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */; };
 		5B82A73E29B17ABD0032C1FE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */; };
 		5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */; };
@@ -20,6 +27,7 @@
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
 		5BE71A3629B166B40067DD61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */; };
+		5BEF4C7629B8041B005FA74E /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF4C7529B8041B005FA74E /* back.png */; };
 		B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C229AE7030003D2C44 /* AppDelegate.swift */; };
 		B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */; };
 		B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C629AE7030003D2C44 /* SplashScreenViewController.swift */; };
@@ -58,9 +66,16 @@
 
 /* Begin PBXFileReference section */
 		1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirstViewController.swift; sourceTree = "<group>"; };
+		5B06281629B7E36700012791 /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
+		5B06281729B7E36700012791 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		5B06281829B7E36700012791 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
+		5B06281929B7E36700012791 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		5B06281E29B7E97600012791 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		5B49B78B29B1780F00247E0C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5B49B78D29B178CC00247E0C /* ConnectSpotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSpotifyViewController.swift; sourceTree = "<group>"; };
 		5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpotifyLogo.png; sourceTree = "<group>"; };
+		5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5B72CD1729B7F56B0024DEAF /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertsViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +85,7 @@
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5BEF4C7529B8041B005FA74E /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		B6DA27BF29AE7030003D2C44 /* Muse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DA27C229AE7030003D2C44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +135,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B06281529B7E33600012791 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF4C7529B8041B005FA74E /* back.png */,
+				5B72CD1729B7F56B0024DEAF /* edit.png */,
+				5B06281E29B7E97600012791 /* settings.png */,
+				5B06281829B7E36700012791 /* friends.png */,
+				5B06281929B7E36700012791 /* home.png */,
+				5B06281729B7E36700012791 /* profile.png */,
+				5B06281629B7E36700012791 /* ticket.png */,
+				5BE71A3229AFFCA40067DD61 /* Logo.png */,
+				5BE71A3129AFFCA40067DD61 /* LogoWithName.png */,
+				5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		5B82A74529B2C6C90032C1FE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +165,7 @@
 				5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */,
 				5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */,
 				5B82A74329B17D890032C1FE /* MyListeningViewController.swift */,
+				5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -155,6 +189,7 @@
 		B6DA27C129AE7030003D2C44 /* Muse */ = {
 			isa = PBXGroup;
 			children = (
+				5B06281529B7E33600012791 /* Images */,
 				5B82A74529B2C6C90032C1FE /* ViewControllers */,
 				B6DA27C229AE7030003D2C44 /* AppDelegate.swift */,
 				B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */,
@@ -162,9 +197,6 @@
 				B6DA27CB29AE7035003D2C44 /* Assets.xcassets */,
 				B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */,
 				B6DA27D029AE7035003D2C44 /* Info.plist */,
-				5BE71A3229AFFCA40067DD61 /* Logo.png */,
-				5BE71A3129AFFCA40067DD61 /* LogoWithName.png */,
-				5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */,
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
 			);
 			path = Muse;
@@ -262,11 +294,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B06281F29B7E97600012791 /* settings.png in Resources */,
 				B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */,
+				5B06281A29B7E36700012791 /* ticket.png in Resources */,
+				5B72CD1829B7F56B0024DEAF /* edit.png in Resources */,
+				5BEF4C7629B8041B005FA74E /* back.png in Resources */,
+				5B06281D29B7E36700012791 /* home.png in Resources */,
 				5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */,
 				5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */,
+				5B06281B29B7E36700012791 /* profile.png in Resources */,
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
+				5B06281C29B7E36700012791 /* friends.png in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,
 				5BE71A3629B166B40067DD61 /* GoogleService-Info.plist in Resources */,
 			);
@@ -289,6 +328,7 @@
 				5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */,
 				5B82A74429B17D890032C1FE /* MyListeningViewController.swift in Sources */,
 				B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */,
+				5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */,
 				5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */,
 				5B82A74229B17D7C0032C1FE /* MyFriendsViewController.swift in Sources */,
 			);
