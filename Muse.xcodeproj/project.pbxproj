@@ -27,6 +27,7 @@
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
 		5BE71A3629B166B40067DD61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */; };
+		5BEF4C7629B8041B005FA74E /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF4C7529B8041B005FA74E /* back.png */; };
 		B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C229AE7030003D2C44 /* AppDelegate.swift */; };
 		B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */; };
 		B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA27C629AE7030003D2C44 /* SplashScreenViewController.swift */; };
@@ -84,6 +85,7 @@
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5BEF4C7529B8041B005FA74E /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		B6DA27BF29AE7030003D2C44 /* Muse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DA27C229AE7030003D2C44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DA27C429AE7030003D2C44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		5B06281529B7E33600012791 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5BEF4C7529B8041B005FA74E /* back.png */,
 				5B72CD1729B7F56B0024DEAF /* edit.png */,
 				5B06281E29B7E97600012791 /* settings.png */,
 				5B06281829B7E36700012791 /* friends.png */,
@@ -295,6 +298,7 @@
 				B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */,
 				5B06281A29B7E36700012791 /* ticket.png in Resources */,
 				5B72CD1829B7F56B0024DEAF /* edit.png in Resources */,
+				5BEF4C7629B8041B005FA74E /* back.png in Resources */,
 				5B06281D29B7E36700012791 /* home.png in Resources */,
 				5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */,
 				5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */,
