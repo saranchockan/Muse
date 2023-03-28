@@ -13,10 +13,20 @@ import FirebaseFirestoreSwift
 class HomeViewController: UIViewController {
     
     var sharedSongs:[String: SharedSong] = [:]
+    var sharedArtists:[String:SharedArtist] = [:]
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)  {
         super.viewWillAppear(true)
-        fetchUserData()
+        print("View will appear")
+        
+        self.fetchUserSongArtistData { completion in
+            if completion {
+                self.printOutput()
+            } else {
+                print("error")
+            }
+            
+        }
     }
     
     override func viewDidLoad() {
@@ -24,7 +34,27 @@ class HomeViewController: UIViewController {
         
     }
     
-    func fetchUserData() {
+   
+    
+    func printOutput() {
+        print("Shared Songs count:  \(self.sharedSongs.count) Shared Artists count \(self.sharedArtists.count)")
+        for (_, sharedSong) in sharedSongs {
+            print("\(sharedSong.songName) \(sharedSong.songArtists)")
+            for friend in sharedSong.friends {
+                print(friend)
+            }
+        }
+
+        for (_, sharedArtist) in sharedArtists{
+            print("\(sharedArtist.artistName)")
+            for friend in sharedArtist.friends {
+                print(friend)
+            }
+        }
+        
+    }
+    
+    func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
         
         /* Note: currently is getting the PREVIOUS log in because we have to wait to authenticate*/
         let currentUser = Auth.auth().currentUser?.uid
@@ -44,12 +74,13 @@ class HomeViewController: UIViewController {
                         
                         let songs = data["Top Songs"] as! [String: String]
                         
+                        let artists = data["Top Artists"] as! [String]
+                        
                         
                         let friends = data["friends"] as! [String]
                         
                         
                         for friend in friends {
-                            print("Friend: \(friend)")
                             ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
                             {(querySnapshot, err) in
                                 if let err = err {
@@ -57,14 +88,15 @@ class HomeViewController: UIViewController {
                                 } else {
                                     for document in querySnapshot!.documents {
                                         let friendSongs = document.data()["Top Songs"] as! [String: String]
+                                        let friendArtists = document.data()["Top Artists"] as! [String]
  
                                         for (song, artist) in songs {
                                            if friendSongs[song] != nil {
                                                 let artistIsSame = artist == friendSongs[song]
                                                 if artistIsSame {
                                                     if self.sharedSongs[song] != nil {
-                                                        let currSong = self.sharedSongs[song]
-                                                        currSong?.friends.append(document.data()["First Name"] as! String)
+                                                        var currSong = self.sharedSongs[song]
+                                                        currSong!.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
                                                         self.sharedSongs.removeValue(forKey: song)
                                                         self.sharedSongs[song] = currSong
                                                     } else {
@@ -72,12 +104,33 @@ class HomeViewController: UIViewController {
                                                         currSong.songName = song
                                                         currSong.songArtists = artist
                                                         currSong.friends = []
-                                                        currSong.friends.append(document.data()["First Name"] as! String)
+                                                        currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
                                                         self.sharedSongs[song] = currSong
                                                     }
                                                 }
                                            }
                                        }
+                                        
+                                        
+                                        for artist in artists {
+                                            if friendArtists.contains(artist) {
+                                                if self.sharedArtists[artist] != nil {
+                                                    let currArtist = self.sharedArtists[artist]
+                                                    currArtist?.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                    self.sharedArtists.removeValue(forKey: artist)
+                                                    self.sharedArtists[artist] = currArtist
+                                                } else {
+                                                    let currArtist = SharedArtist()
+                                                    currArtist.artistName = artist
+                                                    currArtist.friends = []
+                                                    currArtist.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                    self.sharedArtists[artist] = currArtist
+                                                }
+                                            }
+                                        }
+                                        
+                                        print("Shared Songs count after fetching:  \(self.sharedSongs.count) Shared Artists count after fetching: \(self.sharedArtists.count)")
+                                        completion(true)
                                     }
                                 }
                             }
