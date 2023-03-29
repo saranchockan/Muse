@@ -34,6 +34,8 @@
 		B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27C829AE7030003D2C44 /* Main.storyboard */; };
 		B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CB29AE7035003D2C44 /* Assets.xcassets */; };
 		B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */; };
+		F607C80929D36D0500FB115B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F607C80829D36D0500FB115B /* Spotify.swift */; };
+		F607C80C29D36FB100FB115B /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F607C80B29D36FB100FB115B /* KeychainAccess */; };
 		F64233C929B2899E00D671E1 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F64233C829B2899E00D671E1 /* SpotifyAPI */; };
 		F64233CC29B2B37100D671E1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F64233CB29B2B37100D671E1 /* FirebaseAnalytics */; };
 		F64233CE29B2B37100D671E1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F64233CD29B2B37100D671E1 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -94,6 +96,7 @@
 		B6DA27CB29AE7035003D2C44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DA27CE29AE7035003D2C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6DA27D029AE7035003D2C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F607C80829D36D0500FB115B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,7 @@
 				F64233D629B2B37100D671E1 /* FirebaseAppDistribution-Beta in Frameworks */,
 				F64233DA29B2B37100D671E1 /* FirebaseAuthCombine-Community in Frameworks */,
 				F64233E629B2B37100D671E1 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				F607C80C29D36FB100FB115B /* KeychainAccess in Frameworks */,
 				F64233D029B2B37100D671E1 /* FirebaseAnalyticsSwift in Frameworks */,
 				F64233F429B2B37100D671E1 /* FirebaseMLModelDownloader in Frameworks */,
 				F64233D229B2B37100D671E1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -189,6 +193,7 @@
 		B6DA27C129AE7030003D2C44 /* Muse */ = {
 			isa = PBXGroup;
 			children = (
+				F607C80729D36CED00FB115B /* Model */,
 				5B06281529B7E33600012791 /* Images */,
 				5B82A74529B2C6C90032C1FE /* ViewControllers */,
 				B6DA27C229AE7030003D2C44 /* AppDelegate.swift */,
@@ -200,6 +205,14 @@
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
 			);
 			path = Muse;
+			sourceTree = "<group>";
+		};
+		F607C80729D36CED00FB115B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F607C80829D36D0500FB115B /* Spotify.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +260,7 @@
 				F64233FB29B2B37100D671E1 /* FirebaseRemoteConfigSwift */,
 				F64233FD29B2B37100D671E1 /* FirebaseStorage */,
 				F64233FF29B2B37100D671E1 /* FirebaseStorageCombine-Community */,
+				F607C80B29D36FB100FB115B /* KeychainAccess */,
 			);
 			productName = Muse;
 			productReference = B6DA27BF29AE7030003D2C44 /* Muse.app */;
@@ -279,6 +293,7 @@
 			packageReferences = (
 				F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */,
 				F64233CA29B2B37100D671E1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F607C80A29D36FB100FB115B /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = B6DA27C029AE7030003D2C44 /* Products */;
 			projectDirPath = "";
@@ -320,6 +335,7 @@
 			files = (
 				B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */,
 				B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */,
+				F607C80929D36D0500FB115B /* Spotify.swift in Sources */,
 				1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */,
 				5B49B78C29B1780F00247E0C /* WelcomeViewController.swift in Sources */,
 				5B82A73C29B179790032C1FE /* AddFriendsViewController.swift in Sources */,
@@ -550,6 +566,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F607C80A29D36FB100FB115B /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Peter-Schorn/SpotifyAPI";
@@ -569,6 +593,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F607C80B29D36FB100FB115B /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F607C80A29D36FB100FB115B /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		F64233C829B2899E00D671E1 /* SpotifyAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */;

@@ -25,6 +25,8 @@ public var userLocation: String = ""
 // Firebase setup
 public let db = Firestore.firestore()
 
+
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

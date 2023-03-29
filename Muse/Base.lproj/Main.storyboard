@@ -388,7 +388,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="connectToSpotify:" destination="kkn-b1-zGL" eventType="touchUpInside" id="U3K-b7-ZOn"/>
-                                    <segue destination="neG-uT-s3T" kind="show" id="ENs-H2-MIO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -459,6 +458,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="kkn-b1-zGL" kind="presentation" identifier="reauthorizeSpotify" id="r6p-Iw-RBb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWB-2U-7Yl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -501,7 +503,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJM-58-cZw">
-                                <rect key="frame" x="-3" y="79" width="394" height="44"/>
+                                <rect key="frame" x="-6" y="79" width="395" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                         </subviews>
@@ -787,6 +789,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZSJ-8r-8eH"/>
+        <segue reference="Ggf-HU-f4g"/>
         <segue reference="ZHE-oL-kFo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
