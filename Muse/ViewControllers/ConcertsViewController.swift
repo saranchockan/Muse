@@ -47,12 +47,26 @@ struct Event {
     var going: Bool
 }
 
-class ConcertsViewController: UIViewController {
+class ConcertsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath)
+        return cell
+    }
+    
     
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
-
+    @IBOutlet weak var tableView: UITableView!
+    let concertCellIdentifier = "ConcertCard"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: concertCellIdentifier)
+        
         // Get events in US: https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
         // TODO: Call endpoint with concert events
         // within user's location

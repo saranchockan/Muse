@@ -10,10 +10,12 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var tableView: UITableView!
     var sharedSongs:[String: SharedSong] = [:]
     var sharedArtists:[String:SharedArtist] = [:]
+    let sharedCellIdentifier = "SharedCard"
     
     override func viewWillAppear(_ animated: Bool)  {
         super.viewWillAppear(true)
@@ -31,10 +33,32 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
+
     }
     
-   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = indexPath.row
+        
+        switch row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
+            cell.name.text = "Justin Bieber"
+            cell.friendsDescription.text = "Saahithi and Liz are listening to this artist"
+            cell.largeContentTitle = "Top Shared Artist"
+            return cell
+        default:
+            print("this isn't supposed to happen")
+            return UITableViewCell()
+        }
+        
+    }
     
     func printOutput() {
         print("Shared Songs count:  \(self.sharedSongs.count) Shared Artists count \(self.sharedArtists.count)")

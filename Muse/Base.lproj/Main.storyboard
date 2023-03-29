@@ -441,17 +441,25 @@
             </objects>
             <point key="canvasLocation" x="6417.5572519083971" y="3.5211267605633805"/>
         </scene>
-        <!--Good-->
+        <!--Good Afternoon-->
         <scene sceneID="DJZ-4b-iOb">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G3b-3n-NfH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="225" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WZL-pJ-Ve8">
+                                <rect key="frame" x="0.0" y="142" width="393" height="641"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="7QC-IX-2vR"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Good" style="editor" id="Ct9-9f-aHY">
+                    <navigationItem key="navigationItem" title="Good Afternoon" style="editor" id="Ct9-9f-aHY">
                         <barButtonItem key="rightBarButtonItem" image="settings.png" style="plain" id="Mmr-q1-KSi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -459,10 +467,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="WZL-pJ-Ve8" id="EED-fx-oPH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWB-2U-7Yl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106" y="2273"/>
+            <point key="canvasLocation" x="1104.5801526717557" y="2272.535211267606"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WN3-lO-jwl">
@@ -470,10 +481,11 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="lue-Cp-uGf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="PDf-28-qt6"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6bk-3Q-Cvs">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="6bk-3Q-Cvs">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="selectedImageTintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
@@ -495,34 +507,73 @@
         <!--Concerts-->
         <scene sceneID="YgC-fk-2Q7">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="3Kw-R2-YOa" customClass="ConcertsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="3Kw-R2-YOa" customClass="ConcertsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XgO-n6-YLc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJM-58-cZw">
-                                <rect key="frame" x="-3" y="79" width="394" height="44"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search By Artist" translatesAutoresizingMaskIntoConstraints="NO" id="n0b-R4-a2e">
+                                <rect key="frame" x="-1" y="143" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </navigationBar>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3Kw-R2-YOa" id="Is7-AW-PIl"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wo6-1U-FwB">
+                                <rect key="frame" x="0.0" y="202" width="393" height="581"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jkG-4m-ehb"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Concerts" id="5GC-ll-GRB"/>
+                    <connections>
+                        <outlet property="tableView" destination="wo6-1U-FwB" id="Pb3-ew-5Nx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bg-6c-bwC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2201" y="2273"/>
+            <point key="canvasLocation" x="2200.7633587786258" y="2272.535211267606"/>
         </scene>
         <!--My Friends-->
         <scene sceneID="Zj8-ES-iJl">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="IZo-Rl-rrq" customClass="MyFriendsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="IZo-Rl-rrq" customClass="MyFriendsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xds-eD-rIU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzW-5u-Gai">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="emO-Ee-jQq">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="emO-Ee-jQq" secondAttribute="bottom" id="44o-Wn-GLJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="emO-Ee-jQq" secondAttribute="trailing" id="6bq-02-jCB"/>
+                                    <constraint firstItem="emO-Ee-jQq" firstAttribute="width" secondItem="PzW-5u-Gai" secondAttribute="width" id="SYi-wr-MCO"/>
+                                    <constraint firstItem="emO-Ee-jQq" firstAttribute="leading" secondItem="PzW-5u-Gai" secondAttribute="leading" id="aMb-vq-aw9"/>
+                                    <constraint firstItem="emO-Ee-jQq" firstAttribute="bottom" secondItem="x1M-KZ-UG9" secondAttribute="bottom" id="e4G-eg-6zW"/>
+                                    <constraint firstItem="emO-Ee-jQq" firstAttribute="top" secondItem="PzW-5u-Gai" secondAttribute="top" id="rdw-OJ-YR0"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="igJ-5f-c3e"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="x1M-KZ-UG9"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="gcp-9t-zmM"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="PzW-5u-Gai" firstAttribute="leading" secondItem="Xds-eD-rIU" secondAttribute="leading" id="2F6-H1-2Pf"/>
+                            <constraint firstItem="PzW-5u-Gai" firstAttribute="bottom" secondItem="gcp-9t-zmM" secondAttribute="bottom" id="RWZ-87-RHk"/>
+                            <constraint firstAttribute="trailing" secondItem="PzW-5u-Gai" secondAttribute="trailing" id="UGN-kf-JTZ"/>
+                            <constraint firstItem="PzW-5u-Gai" firstAttribute="top" secondItem="Xds-eD-rIU" secondAttribute="top" id="hag-Py-eeT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Friends" style="editor" id="4oC-w7-YPu"/>
                 </viewController>
@@ -533,12 +584,39 @@
         <!--My Listening-->
         <scene sceneID="DWv-p2-hPy">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="QEj-pB-Mje" customClass="MyListeningViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="QEj-pB-Mje" customClass="MyListeningViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0B-VM-JH3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKD-ls-8Uh">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="y8K-Gl-App">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="y8K-Gl-App" firstAttribute="bottom" secondItem="o1Z-Od-gAY" secondAttribute="bottom" id="BRc-aN-bEC"/>
+                                    <constraint firstAttribute="trailing" secondItem="y8K-Gl-App" secondAttribute="trailing" id="D5d-xP-Z0u"/>
+                                    <constraint firstItem="y8K-Gl-App" firstAttribute="top" secondItem="VKD-ls-8Uh" secondAttribute="top" id="F4j-8t-dzt"/>
+                                    <constraint firstItem="y8K-Gl-App" firstAttribute="leading" secondItem="VKD-ls-8Uh" secondAttribute="leading" id="J6W-pA-K1O"/>
+                                    <constraint firstItem="y8K-Gl-App" firstAttribute="width" secondItem="VKD-ls-8Uh" secondAttribute="width" id="d2w-sI-cEs"/>
+                                    <constraint firstAttribute="bottom" secondItem="y8K-Gl-App" secondAttribute="bottom" id="qWM-19-rvo"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="CAi-Ne-IAD"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="o1Z-Od-gAY"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="TWm-9N-gJd"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="VKD-ls-8Uh" firstAttribute="leading" secondItem="E0B-VM-JH3" secondAttribute="leading" id="4cZ-1c-02n"/>
+                            <constraint firstAttribute="trailing" secondItem="VKD-ls-8Uh" secondAttribute="trailing" id="9LM-Bm-x2c"/>
+                            <constraint firstItem="VKD-ls-8Uh" firstAttribute="top" secondItem="E0B-VM-JH3" secondAttribute="top" id="E3O-Kw-qqZ"/>
+                            <constraint firstItem="VKD-ls-8Uh" firstAttribute="bottom" secondItem="TWm-9N-gJd" secondAttribute="bottom" id="EIn-IF-DIg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Listening" style="editor" id="2PC-iv-c07"/>
                 </viewController>
@@ -549,14 +627,19 @@
         <!--Navigation Controller-->
         <scene sceneID="rpw-9F-eto">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HR5-om-dz8" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="HR5-om-dz8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home.png" selectedImage="home.png" id="Kp2-fG-c7a">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="eCa-Rq-X6P">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="eCa-Rq-X6P">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -573,7 +656,7 @@
         <!--Settings-->
         <scene sceneID="PwQ-pt-myG">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Zt2-D0-VwT" customClass="SettingsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="Zt2-D0-VwT" customClass="SettingsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MpZ-NA-FSp">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -668,8 +751,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Suq-0j-35l">
+                                <rect key="frame" x="328" y="580" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="Zt2-D0-VwT" eventType="valueChanged" id="eRm-Yv-F6a"/>
+                                </connections>
+                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7B-zu-GOM">
-                                <rect key="frame" x="157" y="663" width="78" height="35"/>
+                                <rect key="frame" x="157" y="650" width="78" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
@@ -679,7 +770,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-Ab-AEy">
-                                <rect key="frame" x="126" y="706" width="141" height="35"/>
+                                <rect key="frame" x="126" y="693" width="141" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
@@ -688,14 +779,6 @@
                                     <action selector="deleteAccount:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="kne-4A-Pl6"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Suq-0j-35l">
-                                <rect key="frame" x="328" y="580" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="logoutButton:" destination="Zt2-D0-VwT" eventType="valueChanged" id="eRm-Yv-F6a"/>
-                                </connections>
-                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MXH-w4-Aws"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -720,9 +803,14 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="pwN-7N-VJv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="pwN-7N-VJv">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -744,9 +832,14 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="t3a-Bl-XTc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="t3a-Bl-XTc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -768,9 +861,14 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="cT7-Uq-K5c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="cT7-Uq-K5c">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -801,6 +899,9 @@
         <image name="profile.png" width="34" height="34"/>
         <image name="settings.png" width="41" height="42"/>
         <image name="ticket.png" width="40" height="40"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
