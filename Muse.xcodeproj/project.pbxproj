@@ -10,6 +10,7 @@
 		1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */; };
 		1EF30EA529D29C9C0082E775 /* SharedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA429D29C9C0082E775 /* SharedSong.swift */; };
 		1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA829D371690082E775 /* SharedArtist.swift */; };
+		1EF30EAF29D525910082E775 /* SharedConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EAE29D525910082E775 /* SharedConcert.swift */; };
 		5B06281A29B7E36700012791 /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281629B7E36700012791 /* ticket.png */; };
 		5B06281B29B7E36700012791 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281729B7E36700012791 /* profile.png */; };
 		5B06281C29B7E36700012791 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281829B7E36700012791 /* friends.png */; };
@@ -70,6 +71,7 @@
 		1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirstViewController.swift; sourceTree = "<group>"; };
 		1EF30EA429D29C9C0082E775 /* SharedSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSong.swift; sourceTree = "<group>"; };
 		1EF30EA829D371690082E775 /* SharedArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedArtist.swift; sourceTree = "<group>"; };
+		1EF30EAE29D525910082E775 /* SharedConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConcert.swift; sourceTree = "<group>"; };
 		5B06281629B7E36700012791 /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
 		5B06281729B7E36700012791 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		5B06281829B7E36700012791 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		B6DA27B629AE7030003D2C44 = {
 			isa = PBXGroup;
 			children = (
+				1EF30EAE29D525910082E775 /* SharedConcert.swift */,
 				B6DA27C129AE7030003D2C44 /* Muse */,
 				B6DA27C029AE7030003D2C44 /* Products */,
 			);
@@ -327,6 +330,7 @@
 				B6DA27C729AE7030003D2C44 /* SplashScreenViewController.swift in Sources */,
 				B6DA27C329AE7030003D2C44 /* AppDelegate.swift in Sources */,
 				1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */,
+				1EF30EAF29D525910082E775 /* SharedConcert.swift in Sources */,
 				1EF30EA529D29C9C0082E775 /* SharedSong.swift in Sources */,
 				5B49B78C29B1780F00247E0C /* WelcomeViewController.swift in Sources */,
 				5B82A73C29B179790032C1FE /* AddFriendsViewController.swift in Sources */,

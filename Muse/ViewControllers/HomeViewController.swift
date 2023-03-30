@@ -10,10 +10,13 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
+
+var sharedArtists:[String:SharedArtist] = [:]
+
 class HomeViewController: UIViewController {
     
     var sharedSongs:[String: SharedSong] = [:]
-    var sharedArtists:[String:SharedArtist] = [:]
+    
     
     override func viewWillAppear(_ animated: Bool)  {
         super.viewWillAppear(true)
@@ -37,7 +40,7 @@ class HomeViewController: UIViewController {
    
     
     func printOutput() {
-        print("Shared Songs count:  \(self.sharedSongs.count) Shared Artists count \(self.sharedArtists.count)")
+        print("Shared Songs count:  \(self.sharedSongs.count) Shared Artists count \(sharedArtists.count)")
         for (_, sharedSong) in sharedSongs {
             print("\(sharedSong.songName) \(sharedSong.songArtists)")
             for friend in sharedSong.friends {
@@ -114,22 +117,22 @@ class HomeViewController: UIViewController {
                                         
                                         for artist in artists {
                                             if friendArtists.contains(artist) {
-                                                if self.sharedArtists[artist] != nil {
-                                                    let currArtist = self.sharedArtists[artist]
+                                                if sharedArtists[artist] != nil {
+                                                    let currArtist = sharedArtists[artist]
                                                     currArtist?.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    self.sharedArtists.removeValue(forKey: artist)
-                                                    self.sharedArtists[artist] = currArtist
+                                                    sharedArtists.removeValue(forKey: artist)
+                                                    sharedArtists[artist] = currArtist
                                                 } else {
                                                     let currArtist = SharedArtist()
                                                     currArtist.artistName = artist
                                                     currArtist.friends = []
                                                     currArtist.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    self.sharedArtists[artist] = currArtist
+                                                    sharedArtists[artist] = currArtist
                                                 }
                                             }
                                         }
                                         
-                                        print("Shared Songs count after fetching:  \(self.sharedSongs.count) Shared Artists count after fetching: \(self.sharedArtists.count)")
+                                        print("Shared Songs count after fetching:  \(self.sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
                                         completion(true)
                                     }
                                 }
