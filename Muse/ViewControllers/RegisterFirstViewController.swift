@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+import FirebaseFirestoreSwift
 
 class RegisterFirstViewController: UIViewController {
 
@@ -39,6 +41,15 @@ class RegisterFirstViewController: UIViewController {
     @IBAction func continueToWelcomeScreen(_ sender: Any) {
         userEmail = email.text!
         userPassword = password.text!
+        
+        let currentUser = Auth.auth().currentUser?.uid
+//        let db = Database.database().reference()
+        
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        var document = ref.document(currentUser!)
+        
+        document.setData(["Email": userEmail])
     }
 
 }

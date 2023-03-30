@@ -22,14 +22,14 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(true)
         print("View will appear")
         
-        self.fetchUserSongArtistData { completion in
-            if completion {
-                self.printOutput()
-            } else {
-                print("error")
-            }
-            
-        }
+//        self.fetchUserSongArtistData { completion in
+//            if completion {
+//                self.printOutput()
+//            } else {
+//                print("error")
+//            }
+//
+//        }
     }
     
     override func viewDidLoad() {

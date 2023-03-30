@@ -55,36 +55,48 @@ class ConcertsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.writeDataIntoFirebase()
         // Get events in US: https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
         // TODO: Call endpoint with concert events
         // within user's location
-//        let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=SZA"
+        //        let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=SZA"
         
         
-        self.fetchUserArtistData { completion in
-            if completion {
-                
-                for artist in self.myArtists {
-                    let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist)"
-//                    print(fetchEventsEndpoint)
-                    self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
-                        if completion {
-                            // PUT FIREBASE LOGIC IN HERE
-//                            self.printOutput()
-                        } else {
-                            print("error")
-                        }
-                        
-                    }
-                   
-                    
-                }
-                
-               
-            } else {
-                print("error")
-            }
-        }
+//        self.fetchUserArtistData { completion in
+//            if completion {
+//
+//                for artist in self.myArtists {
+//                    let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist)"
+//                    //                    print(fetchEventsEndpoint)
+//                    self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
+//                        if completion {
+//                            self.writeDataIntoFirebase()
+//                            // PUT FIREBASE LOGIC IN HERE
+//                            //                            self.printOutput()
+//                        } else {
+//                            print("error")
+//                        }
+//
+//                    }
+//
+//
+//                }
+//
+//
+//            } else {
+//                print("error")
+//            }
+ //       }
+    }
+    
+    func writeDataIntoFirebase() {
+        let currentUser = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        let document = ref.document(currentUser!)
+        
+        document.updateData(["Shared Concerts" : sharedConcerts])
+     
     }
     
     func printOutput() {
@@ -129,10 +141,7 @@ class ConcertsViewController: UIViewController {
     
     
     func callAPI(endpoint: String, artist:String, _ completion: @escaping (_ success: Bool) -> Void) {
-        guard let url = URL(string: endpoint) else {
-//            print("URL not valid")
-            return }
-//        print("URL: \(url)")
+        guard let url = URL(string: endpoint) else {return }
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let data = data else { return }
             if let newEvents = self?.parseEventsJSON(data: data) {
@@ -145,15 +154,15 @@ class ConcertsViewController: UIViewController {
                     let concertBuddies = sharedArtists[artist]?.friends
                     sharedConcert.friends = concertBuddies!
                     self!.sharedConcerts.append(sharedConcert)
-                   
+                    
                 }
-
+                
             }
-
+            
             completion(true)
         }
         
-    
+        
         
         task.resume()
     }
@@ -163,10 +172,7 @@ class ConcertsViewController: UIViewController {
         do {
             let decodedData = try JSONDecoder().decode(EventData.self, from: data)
             for i in 0..<decodedData._embedded.events.count {
-               // print("FOUND AN EVENT")
                 let name = decodedData._embedded.events[i].name
-//                let type = decodedData._embedded.events[i].type
-//                let imageUrl = getImageUrl(images: decodedData._embedded.events[i].images)
                 let date = decodedData._embedded.events[i].dates.start.localDate
                 let event = Event(name: name, date: date)
                 events.append(event)
@@ -176,24 +182,6 @@ class ConcertsViewController: UIViewController {
             print(error)
         }
         return events
-    }
-    
-//    func getImageUrl(images: [ImageData]?) -> String? {
-//        if images == nil || images!.isEmpty { return nil }
-//        for image in images! {
-//            if image.ratio != "16_9" {
-//                return image.url
-//            }
-//        }
-//        return images![0].url
-//    }
-    
-    func getDate(day: String?, time: String?) -> Date? {
-        if day == nil || time == nil { return nil }
-        let dateStr = day! + time!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-ddHH-mm-ss"
-        return dateFormatter.date(from: dateStr)
     }
 }
 

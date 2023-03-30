@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestoreSwift
 
 class WelcomeViewController: UIViewController {
 
@@ -47,5 +50,14 @@ class WelcomeViewController: UIViewController {
         userLastName = lastName.text!
         userPhoneNumber = phoneNumber.text!
         userLocation = location.text!
+        
+        let currentUser = Auth.auth().currentUser?.uid
+//        let db = Database.database().reference()
+        
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        var document = ref.document(currentUser!)
+        
+        document.updateData(["First Name" : userFirstName, "Last Name": userLastName, "Phone Number": userPhoneNumber,"Location": userLocation])
     }
 }
