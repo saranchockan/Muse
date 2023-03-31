@@ -14,8 +14,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var tableView: UITableView!
     var sharedSongs:[String: SharedSong] = [:]
-    var sharedArtists:[String:SharedArtist] = [:]
+    var sharedArtists:[String: SharedArtist] = [:]
     let sharedCellIdentifier = "SharedCard"
+    let imageCellIdentifier = "ImageCard"
     
     override func viewWillAppear(_ animated: Bool)  {
         super.viewWillAppear(true)
@@ -36,7 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
-
+        tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +52,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
             cell.name.text = "Justin Bieber"
             cell.friendsDescription.text = "Saahithi and Liz are listening to this artist"
-            cell.largeContentTitle = "Top Shared Artist"
+            cell.sharedType.text = "Top Shared Artist"
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Who Your Friends Are Listening To"
+            cell.collectionList = Array(sharedArtists.values)
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
+            cell.name.text = "Montero"
+            cell.friendsDescription.text = "Saahithi and Liz are listening to this album"
+            cell.sharedType.text = "Top Shared Album"
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Songs Your Friends Are Listening To"
+            cell.collectionList = Array(sharedArtists.values)
             return cell
         default:
             print("this isn't supposed to happen")

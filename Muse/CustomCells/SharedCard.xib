@@ -27,9 +27,10 @@
                         <rect key="frame" x="17" y="64" width="358" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Annabelle Compressed.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-Ri-48P">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="edit.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-Ri-48P">
                                 <rect key="frame" x="18" y="17" width="116" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="25"/>
@@ -37,14 +38,14 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are listening to..." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEZ-6U-PmC">
-                                <rect key="frame" x="150" y="64" width="190" height="70"/>
+                                <rect key="frame" x="160" y="64" width="179" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist/Album Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmP-A3-QwZ">
-                                <rect key="frame" x="150" y="17" width="190" height="60"/>
+                                <rect key="frame" x="160" y="17" width="179" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -66,12 +67,13 @@
                 <outlet property="friendsDescription" destination="qEZ-6U-PmC" id="Jgh-zb-PGq"/>
                 <outlet property="name" destination="bmP-A3-QwZ" id="O7A-Fs-mcn"/>
                 <outlet property="sharedImage" destination="Xwb-Ri-48P" id="im6-EJ-9Jc"/>
+                <outlet property="sharedType" destination="hy0-s6-fCv" id="bQG-fU-oXW"/>
             </connections>
             <point key="canvasLocation" x="194.6564885496183" y="-79.225352112676063"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Annabelle Compressed.jpeg" width="600" height="800"/>
+        <image name="edit.png" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

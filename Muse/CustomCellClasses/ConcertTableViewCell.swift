@@ -9,6 +9,11 @@ import UIKit
 
 class ConcertTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var artistImage: UIImageView!
+    @IBOutlet weak var concertDescription: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
