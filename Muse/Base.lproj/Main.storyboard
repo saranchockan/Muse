@@ -80,7 +80,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Login" subtitle="" cornerStyle="fixed"/>
                                 <connections>
                                     <action selector="loginUser:" destination="moX-6L-PDK" eventType="touchUpInside" id="3zs-o8-wmN"/>
-                                    <segue destination="lue-Cp-uGf" kind="showDetail" id="yNr-0q-aEg"/>
+                                    <segue destination="lue-Cp-uGf" kind="showDetail" identifier="SignedInIdentifier" id="yNr-0q-aEg"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LogoWithName.png" translatesAutoresizingMaskIntoConstraints="NO" id="kWJ-Us-FIN">
@@ -444,7 +444,7 @@
         <!--Good Afternoon-->
         <scene sceneID="DJZ-4b-iOb">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeScreenIdentifier" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G3b-3n-NfH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -478,7 +478,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WN3-lO-jwl">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="lue-Cp-uGf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="lue-Cp-uGf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="PDf-28-qt6"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="6bk-3Q-Cvs">
@@ -723,6 +723,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                 <connections>
                                     <action selector="logout:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="Pv7-Qd-meM"/>
+                                    <segue destination="moX-6L-PDK" kind="show" id="EKa-lu-XPf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-Ab-AEy">
@@ -840,8 +841,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZSJ-8r-8eH"/>
-        <segue reference="ZHE-oL-kFo"/>
+        <segue reference="yNr-0q-aEg"/>
+        <segue reference="EKa-lu-XPf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

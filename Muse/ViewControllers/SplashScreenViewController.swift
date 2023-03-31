@@ -6,15 +6,28 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginScreenIdentifier") as! LoginScreenViewController
-            self.present(nextVC, animated: true)
+            Auth.auth().addStateDidChangeListener() {
+                auth, user in
+                var nextVC =  UIViewController()
+                if user != nil {
+                    nextVC = self.storyboard?.instantiateViewController(withIdentifier: "TabControllerIdentifier") as! UITabBarController
+                } else {
+                    nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginScreenIdentifier") as! LoginScreenViewController
+                    
+                }
+                self.present(nextVC, animated: true)
+            }
+            
         }
+        
+        
     }
 }
 
