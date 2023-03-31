@@ -513,7 +513,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search By Artist" translatesAutoresizingMaskIntoConstraints="NO" id="n0b-R4-a2e">
-                                <rect key="frame" x="-1" y="143" width="393" height="44"/>
+                                <rect key="frame" x="-2" y="143" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -584,7 +584,7 @@
         <scene sceneID="rpw-9F-eto">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="HR5-om-dz8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="home.png" selectedImage="home.png" id="Kp2-fG-c7a">
+                    <tabBarItem key="tabBarItem" title="" image="home" selectedImage="home.png" id="Kp2-fG-c7a">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -852,8 +852,9 @@
         <image name="SpotifyLogo.png" width="250" height="250"/>
         <image name="edit.png" width="40" height="40"/>
         <image name="friends.png" width="35" height="35"/>
-        <image name="home.png" width="29" height="29"/>
-        <image name="profile.png" width="34" height="34"/>
+        <image name="home" width="128" height="128"/>
+        <image name="home.png" width="29.666666030883789" height="29"/>
+        <image name="profile.png" width="33.333332061767578" height="33.333332061767578"/>
         <image name="settings.png" width="41" height="42"/>
         <image name="ticket.png" width="40" height="40"/>
         <systemColor name="systemRedColor">

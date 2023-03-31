@@ -10,11 +10,6 @@
 		1E33C35E29B0035D00B4D320 /* RegisterFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */; };
 		1EF30EA529D29C9C0082E775 /* SharedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA429D29C9C0082E775 /* SharedSong.swift */; };
 		1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA829D371690082E775 /* SharedArtist.swift */; };
-		5B06281A29B7E36700012791 /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281629B7E36700012791 /* ticket.png */; };
-		5B06281B29B7E36700012791 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281729B7E36700012791 /* profile.png */; };
-		5B06281C29B7E36700012791 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281829B7E36700012791 /* friends.png */; };
-		5B06281D29B7E36700012791 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281929B7E36700012791 /* home.png */; };
-		5B06281F29B7E97600012791 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06281E29B7E97600012791 /* settings.png */; };
 		5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */; };
 		5B38B54E29D37A0A00AE8CC6 /* ConcertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */; };
 		5B38B55029D4DF0200AE8CC6 /* SharedCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */; };
@@ -35,6 +30,11 @@
 		5BE0B6E329D657CE00376010 /* ImageCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6E229D657CE00376010 /* ImageCardCollectionViewCell.swift */; };
 		5BE0B6E529D664FA00376010 /* MyArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6E429D664FA00376010 /* MyArtist.swift */; };
 		5BE0B6E829D6655300376010 /* MySong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6E729D6655300376010 /* MySong.swift */; };
+		5BE0B6F029D782B900376010 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6EF29D782B900376010 /* home@3x.png */; };
+		5BE0B6F529D783A600376010 /* friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F129D783A500376010 /* friends@3x.png */; };
+		5BE0B6F629D783A600376010 /* profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F229D783A500376010 /* profile@3x.png */; };
+		5BE0B6F729D783A600376010 /* ticket@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F329D783A600376010 /* ticket@3x.png */; };
+		5BE0B6F829D783A600376010 /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F429D783A600376010 /* settings@3x.png */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
@@ -80,11 +80,6 @@
 		1E33C35D29B0035D00B4D320 /* RegisterFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirstViewController.swift; sourceTree = "<group>"; };
 		1EF30EA429D29C9C0082E775 /* SharedSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSong.swift; sourceTree = "<group>"; };
 		1EF30EA829D371690082E775 /* SharedArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedArtist.swift; sourceTree = "<group>"; };
-		5B06281629B7E36700012791 /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
-		5B06281729B7E36700012791 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
-		5B06281829B7E36700012791 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
-		5B06281929B7E36700012791 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
-		5B06281E29B7E97600012791 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConcertCard.xib; sourceTree = "<group>"; };
 		5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertTableViewCell.swift; sourceTree = "<group>"; };
 		5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedCard.xib; sourceTree = "<group>"; };
@@ -105,6 +100,11 @@
 		5BE0B6E229D657CE00376010 /* ImageCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BE0B6E429D664FA00376010 /* MyArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyArtist.swift; sourceTree = "<group>"; };
 		5BE0B6E729D6655300376010 /* MySong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySong.swift; sourceTree = "<group>"; };
+		5BE0B6EF29D782B900376010 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F129D783A500376010 /* friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F229D783A500376010 /* profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F329D783A600376010 /* ticket@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F429D783A600376010 /* settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@3x.png"; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
@@ -162,13 +162,13 @@
 		5B06281529B7E33600012791 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5BE0B6F129D783A500376010 /* friends@3x.png */,
+				5BE0B6F229D783A500376010 /* profile@3x.png */,
+				5BE0B6F429D783A600376010 /* settings@3x.png */,
+				5BE0B6F329D783A600376010 /* ticket@3x.png */,
+				5BE0B6EF29D782B900376010 /* home@3x.png */,
 				5BEF4C7529B8041B005FA74E /* back.png */,
 				5B72CD1729B7F56B0024DEAF /* edit.png */,
-				5B06281E29B7E97600012791 /* settings.png */,
-				5B06281829B7E36700012791 /* friends.png */,
-				5B06281929B7E36700012791 /* home.png */,
-				5B06281729B7E36700012791 /* profile.png */,
-				5B06281629B7E36700012791 /* ticket.png */,
 				5BE71A3229AFFCA40067DD61 /* Logo.png */,
 				5BE71A3129AFFCA40067DD61 /* LogoWithName.png */,
 				5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */,
@@ -355,21 +355,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B38B55029D4DF0200AE8CC6 /* SharedCard.xib in Resources */,
+				5BE0B6F729D783A600376010 /* ticket@3x.png in Resources */,
 				5BE0B6DF29D6555E00376010 /* ImageCardCell.xib in Resources */,
+				5BE0B6F529D783A600376010 /* friends@3x.png in Resources */,
 				5BE0B6DB29D6541100376010 /* ImageCard.xib in Resources */,
-				5B06281F29B7E97600012791 /* settings.png in Resources */,
 				B6DA27CF29AE7035003D2C44 /* LaunchScreen.storyboard in Resources */,
-				5B06281A29B7E36700012791 /* ticket.png in Resources */,
 				5B72CD1829B7F56B0024DEAF /* edit.png in Resources */,
 				5BEF4C7629B8041B005FA74E /* back.png in Resources */,
-				5B06281D29B7E36700012791 /* home.png in Resources */,
 				5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */,
 				5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */,
+				5BE0B6F829D783A600376010 /* settings@3x.png in Resources */,
 				5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */,
-				5B06281B29B7E36700012791 /* profile.png in Resources */,
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
-				5B06281C29B7E36700012791 /* friends.png in Resources */,
+				5BE0B6F029D782B900376010 /* home@3x.png in Resources */,
+				5BE0B6F629D783A600376010 /* profile@3x.png in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,
 				5BE71A3629B166B40067DD61 /* GoogleService-Info.plist in Resources */,
 			);
