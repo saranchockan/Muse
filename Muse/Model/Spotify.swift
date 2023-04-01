@@ -5,6 +5,13 @@ import SwiftUI
 import KeychainAccess
 import SpotifyWebAPI
 
+
+enum SpotifyAuthRequestStatus {
+    case REQUESTED
+    case SUCCESS
+    case DENIED
+}
+
 /**
  A helper class that wraps around an instance of `SpotifyAPI` and provides
  convenience methods for authorizing your application.
@@ -89,9 +96,8 @@ final public class Spotify: ObservableObject {
     // MARK: - Methods -
     
     init() {
-        
-        print("Initializing Spotify")
-        
+        print("Initializing Spotify!")
+        print("Authorization State: \(authorizationState)")
         // Configure the loggers.
         self.api.apiRequestLogger.logLevel = .trace
         // self.api.logger.logLevel = .trace
@@ -198,13 +204,7 @@ final public class Spotify: ObservableObject {
      [1]: https://peter-schorn.github.io/SpotifyAPI/documentation/spotifywebapi/spotifyapi/authorizationmanagerdidchange
      */
     func authorizationManagerDidChange() {
-//        withAnimation(SpotifyLoginView.animation) {
-            // Update the @Published `isAuthorized` property. When set to
-            // `true`, `LoginView` is dismissed, allowing the user to interact
-            // with the rest of the app.
-            self.isAuthorized = self.api.authorizationManager.isAuthorized()
-//        }
-        
+        self.isAuthorized = self.api.authorizationManager.isAuthorized()
         print(
             "Spotify.authorizationManagerDidChange: isAuthorized:",
             self.isAuthorized
@@ -238,11 +238,7 @@ final public class Spotify: ObservableObject {
      called.
      */
     func authorizationManagerDidDeauthorize() {
-        
-//        withAnimation(SpotifyLoginView.animation) {
-            self.isAuthorized = false
-//        }
-        
+        self.isAuthorized = false
         self.currentUser = nil
         
         do {

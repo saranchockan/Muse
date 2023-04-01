@@ -15,11 +15,10 @@ class ConnectSpotifyViewController: UIViewController {
     let SPOTIFY_AUTH_REDIRECT_URI:String = "muse://login-callback"
         
     @IBOutlet weak var connectButton: UIButton!
-    // Spotify Model
+
     public let spotify: Spotify = Spotify()
     public var cancellables: Set<AnyCancellable> = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Create an instance of SpotifyAPI
