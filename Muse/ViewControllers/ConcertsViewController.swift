@@ -45,58 +45,81 @@ struct Event {
 //    var going: Bool
 }
 
-class ConcertsViewController: UIViewController {
+class ConcertsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var myArtists:[String] = []
     
     var sharedConcerts:[SharedConcert] = []
     
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
+    @IBOutlet weak var tableView: UITableView!
+    let concertCellIdentifier = "ConcertCard"
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.fetchUserArtistData { completion in
+            if completion {
+
+                for artist in self.myArtists {
+                    let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist)"
+                    //                    print(fetchEventsEndpoint)
+                    self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
+                        if completion {
+                            self.writeDataIntoFirebase()
+                            // PUT FIREBASE LOGIC IN HERE
+                            //                            self.printOutput()
+                        } else {
+                            print("error")
+                        }
+
+                    }
+
+
+                }
+
+
+            } else {
+                print("error")
+            }
+       }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.writeDataIntoFirebase()
-        // Get events in US: https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
-        // TODO: Call endpoint with concert events
-        // within user's location
-        //        let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=SZA"
-        
-        
-//        self.fetchUserArtistData { completion in
-//            if completion {
-//
-//                for artist in self.myArtists {
-//                    let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist)"
-//                    //                    print(fetchEventsEndpoint)
-//                    self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
-//                        if completion {
-//                            self.writeDataIntoFirebase()
-//                            // PUT FIREBASE LOGIC IN HERE
-//                            //                            self.printOutput()
-//                        } else {
-//                            print("error")
-//                        }
-//
-//                    }
-//
-//
-//                }
-//
-//
-//            } else {
-//                print("error")
-//            }
- //       }
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UINib.init(nibName: "ConcertCard", bundle: nil), forCellReuseIdentifier: concertCellIdentifier)
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+        //return concerts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
+        _ = indexPath.row
+        cell.artistName.text = "Lil Nas X"
+        cell.location.text = "Austin, Texas"
+        cell.concertDescription.text = "Your concert buddies are Saahithi and Liz"
+        return cell
+    }
+        
     func writeDataIntoFirebase() {
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
         let document = ref.document(currentUser!)
-        
-        document.updateData(["Shared Concerts" : sharedConcerts])
-     
+        // Store shared concerts in user's
+        // shared concert
+        var sharedConcertsArr = [[String:Any]]()
+        for sharedConcert in sharedConcerts {
+            var concert = ["Concert Name": sharedConcert.concertName, "Concert Date": sharedConcert.concertDate!, "Concert Friends": sharedConcert.friends] as [String : Any]
+            sharedConcertsArr.append(concert)
+            
+        }
+        document.updateData(["Shared Concerts" : sharedConcertsArr])
     }
     
     func printOutput() {
@@ -123,14 +146,9 @@ class ConcertsViewController: UIViewController {
             if let snapshot = snapshot {
                 for document in snapshot.documents {
                     if document.documentID == currentUser {
-                        
                         let data = document.data()
-                        
                         self.myArtists = data["Top Artists"] as! [String]
-                        
-                        
                     }
-                    
                 }
             }
             
@@ -151,19 +169,16 @@ class ConcertsViewController: UIViewController {
                     if event.date != nil {
                         sharedConcert.concertDate = event.date
                     }
-                    let concertBuddies = sharedArtists[artist]?.friends
-                    sharedConcert.friends = concertBuddies!
-                    self!.sharedConcerts.append(sharedConcert)
+                    if sharedArtists[artist] != nil {
+                        let concertBuddies = sharedArtists[artist]?.friends
+                        sharedConcert.friends = concertBuddies!
+                        self!.sharedConcerts.append(sharedConcert)
+                    }
                     
                 }
-                
             }
-            
             completion(true)
         }
-        
-        
-        
         task.resume()
     }
     

@@ -40,5 +40,7 @@ class LoginScreenViewController: UIViewController {
                 print("")
             }
         }
+        email.text = ""
+        password.text = ""
     }
 }

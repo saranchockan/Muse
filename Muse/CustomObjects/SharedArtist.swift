@@ -7,7 +7,13 @@
 
 import Foundation
 
-class SharedArtist {
+class SharedArtist: ImageCardObject {
     var artistName: String = ""
     var friends:[String] = []
+    
+    func getName() -> String {
+        return artistName
+    }
+    
+    func getImage() {}
 }
