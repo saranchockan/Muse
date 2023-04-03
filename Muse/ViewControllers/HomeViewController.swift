@@ -20,27 +20,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
     
-    override func viewWillAppear(_ animated: Bool)  {
-        super.viewWillAppear(true)
-        print("View will appear")
-        
-        self.fetchUserSongArtistData { completion in
-            if completion {
-                // Loading Screen should be false at this point
-                // Reload table view
-                self.printOutput()
-            } else {
-                print("error")
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
+        
+        self.fetchUserSongArtistData { completion in
+            if completion {
+                // Loading Screen should be false at this point
+                // Reload table view
+                self.printOutput()
+                self.tableView.reloadData()
+            } else {
+                print("error")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,6 +45,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
+        
+        // Iterate through sharedSongs and sharedArtists
         
         switch row {
         case 0:
