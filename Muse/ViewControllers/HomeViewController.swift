@@ -61,7 +61,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
-            cell.collectionView.reloadData()
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
@@ -72,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
-            cell.collectionList = Array(sharedArtists.values)
+            cell.collectionList = Array(sharedSongs.values)
             return cell
         default:
             print("this isn't supposed to happen")

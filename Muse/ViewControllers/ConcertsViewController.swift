@@ -93,17 +93,33 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-        //return concerts.count
+        return sharedConcerts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
-        _ = indexPath.row
-        cell.artistName.text = "Lil Nas X"
-        cell.location.text = "Austin, Texas"
-        cell.concertDescription.text = "Your concert buddies are Saahithi and Liz"
+        let concert = sharedConcerts[indexPath.row]
+        cell.artistName.text = concert.concertName
+        cell.location.text = concert.concertDate
+        cell.concertDescription.text = writeConcertDescription(concertFriends: concert.friends)
         return cell
+    }
+    
+    private func writeConcertDescription(concertFriends friends: [String]) -> String{
+        var desc = "Your concert budd"
+        switch friends.count {
+        case 0:
+            desc = "You are your own concert buddy!"
+        case 1:
+            desc += "y is \(friends[0])"
+        case 2:
+            desc += "ies are \(friends[0]) and \(friends[1])"
+        case 3:
+            desc += "ies are \(friends[0]), \(friends[1]), and \(friends[2])"
+        default:
+            desc += "ies are \(friends[0]), \(friends[1]), \(friends[2]), and more!"
+        }
+        return desc
     }
         
     func writeDataIntoFirebase() {
