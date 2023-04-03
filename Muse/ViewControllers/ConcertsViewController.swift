@@ -25,6 +25,12 @@ struct Embedded: Decodable {
 struct EventItem: Decodable {
     let name: String
     let dates: Dates
+    let images: [ImageData]
+}
+
+struct ImageData: Decodable {
+    let ratio: String?
+    let url: String
 }
 
 struct Dates: Decodable {
@@ -39,7 +45,7 @@ struct Start: Decodable {
 struct Event {
     let name: String
 //    let type: String
-//    let imageUrl: String?
+    let imageUrl: String?
     let date: String?
 //    var visited: Bool
 //    var going: Bool
@@ -66,6 +72,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
                         if completion {
                             self.writeDataIntoFirebase()
+                            self.printOutput()
                             // PUT FIREBASE LOGIC IN HERE
                             //                            self.printOutput()
                         } else {
@@ -185,6 +192,10 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     if event.date != nil {
                         sharedConcert.concertDate = event.date
                     }
+                    
+                    if event.imageUrl != nil {
+                        sharedConcert.concertImageURL = event.imageUrl
+                    }
                     if sharedArtists[artist] != nil {
                         let concertBuddies = sharedArtists[artist]?.friends
                         sharedConcert.friends = concertBuddies!
@@ -205,7 +216,8 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
             for i in 0..<decodedData._embedded.events.count {
                 let name = decodedData._embedded.events[i].name
                 let date = decodedData._embedded.events[i].dates.start.localDate
-                let event = Event(name: name, date: date)
+                let imageUrl = getImageUrl(images: decodedData._embedded.events[i].images)
+                let event = Event(name: name,  imageUrl: imageUrl, date: date)
                 events.append(event)
                 if i > 20 { break }
             }
@@ -214,5 +226,15 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         return events
     }
+    
+    func getImageUrl(images: [ImageData]?) -> String? {
+            if images == nil || images!.isEmpty { return nil }
+            for image in images! {
+                if image.ratio != "16_9" {
+                    return image.url
+                }
+            }
+            return images![0].url
+        }
 }
 
