@@ -77,6 +77,8 @@ final public class Spotify: ObservableObject {
     /// `LoginView` to present an activity indicator.
     @Published var isRetrievingTokens = false
     
+    @Published var isCheckingAuthorization = true
+    
     @Published var currentUser: SpotifyUser? = nil
     
     /// The keychain to store the authorization information in.
@@ -154,6 +156,10 @@ final public class Spotify: ObservableObject {
         }
     }
     
+    func isUserAuthSavedToKeychain() -> Bool {
+        return keychain[data: self.authorizationManagerKey] != nil
+    }
+    
     /**
      A convenience method that creates the authorization URL and opens it in the
      browser.
@@ -204,6 +210,7 @@ final public class Spotify: ObservableObject {
      [1]: https://peter-schorn.github.io/SpotifyAPI/documentation/spotifywebapi/spotifyapi/authorizationmanagerdidchange
      */
     func authorizationManagerDidChange() {
+        
         self.isAuthorized = self.api.authorizationManager.isAuthorized()
         print(
             "Spotify.authorizationManagerDidChange: isAuthorized:",
@@ -228,6 +235,8 @@ final public class Spotify: ObservableObject {
                     "in keychain:\n\(error)"
             )
         }
+        self.isCheckingAuthorization = false
+        print("Checked authorization")
     }
     
     /**

@@ -14,23 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var connectSpotifyViewController = ConnectSpotifyViewController()
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
-        // Determine who sent the URL.
-        if let urlContext = connectionOptions.urlContexts.first {
-
-            let sendingAppID = urlContext.options.sourceApplication
-            let url = urlContext.url
-            print("source application = \(sendingAppID ?? "Unknown")")
-            print("url = \(url)")
-
-            // Process the URL similarly to the UIApplicationDelegate example.
-        }
-    }
-
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -61,7 +44,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            connectSpotifyViewController.handleURL(url)
+            print("URL: \(url)")
+//            print("View Controller Name: ", (self.window?.rootViewController?.title)!)
+            guard let _ = (scene as? UIWindowScene) else { return }
+            let rootVC = self.window?.rootViewController
+            print("Root VC: \(String(describing: rootVC?.title))")
         }
     }
 }

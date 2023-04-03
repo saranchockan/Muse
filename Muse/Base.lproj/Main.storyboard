@@ -459,7 +459,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="kkn-b1-zGL" kind="presentation" identifier="reauthorizeSpotify" id="r6p-Iw-RBb"/>
+                        <segue destination="kkn-b1-zGL" kind="presentation" identifier="authorizeSpotify" id="r6p-Iw-RBb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWB-2U-7Yl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -492,7 +492,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iu1-p5-kRz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765.6488549618321" y="801.4084507042254"/>
+            <point key="canvasLocation" x="4053" y="835"/>
         </scene>
         <!--Concerts-->
         <scene sceneID="YgC-fk-2Q7">
@@ -503,7 +503,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJM-58-cZw">
-                                <rect key="frame" x="-6" y="79" width="395" height="44"/>
+                                <rect key="frame" x="-7" y="79" width="396" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                         </subviews>
@@ -788,8 +788,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZSJ-8r-8eH"/>
-        <segue reference="Ggf-HU-f4g"/>
+        <segue reference="yNr-0q-aEg"/>
+        <segue reference="r6p-Iw-RBb"/>
         <segue reference="ZHE-oL-kFo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

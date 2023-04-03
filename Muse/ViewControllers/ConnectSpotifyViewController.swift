@@ -13,10 +13,13 @@ class ConnectSpotifyViewController: UIViewController {
     let SPOTIFY_CLIENT_ID_KEY: String = "SPOTIFY_CLIENT_ID"
     let SPOTIFY_CLIENT_SECRET_KEY:String = "SPOTIFY_CLIENT_SECRET"
     let SPOTIFY_AUTH_REDIRECT_URI:String = "muse://login-callback"
+    
+    var delegate: UIViewController!
+    var spotify: Spotify!
         
     @IBOutlet weak var connectButton: UIButton!
 
-    public let spotify: Spotify = Spotify()
+//    public let spotify: Spotify = Spotify()
     public var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
