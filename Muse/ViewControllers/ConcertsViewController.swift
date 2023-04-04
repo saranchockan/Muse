@@ -93,6 +93,17 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("Num of Shared Artists: \(sharedArtists.count)")
     }
     
+    func fetchImages(_ concert: SharedConcert,_ cell: ConcertTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let imageURL = URL(string: concert.concertImageURL ?? "https://imageio.forbes.com/specials-images/imageserve/746559733/960x0.jpg?format=jpg&width=960")!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.artistImage.image = UIImage(data: imageData! as Data)
+            }
+        }
+        completion(true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sharedConcerts.count
     }
@@ -103,6 +114,13 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.artistName.text = concert.concertName
         cell.location.text = concert.concertDate
         cell.concertDescription.text = writeConcertDescription(concertFriends: concert.friends)
+        fetchImages(concert, cell) { completion in
+            if completion {
+                print("images correctly fetched")
+            } else {
+                print("error")
+            }
+        }
         return cell
     }
     
