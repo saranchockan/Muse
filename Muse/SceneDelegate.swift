@@ -12,7 +12,6 @@ import Combine
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var connectSpotifyViewController = ConnectSpotifyViewController()
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -44,11 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            print("URL: \(url)")
-//            print("View Controller Name: ", (self.window?.rootViewController?.title)!)
-            guard let _ = (scene as? UIWindowScene) else { return }
-            let rootVC = self.window?.rootViewController
-            print("Root VC: \(String(describing: rootVC?.title))")
+            connectSpotifyViewControllerInstance?.handleURL(url)
         }
     }
 }

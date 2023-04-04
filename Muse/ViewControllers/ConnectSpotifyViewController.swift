@@ -9,6 +9,8 @@ import UIKit
 import SpotifyWebAPI
 import Combine
 
+weak var connectSpotifyViewControllerInstance = ConnectSpotifyViewController()
+
 class ConnectSpotifyViewController: UIViewController {
     let SPOTIFY_CLIENT_ID_KEY: String = "SPOTIFY_CLIENT_ID"
     let SPOTIFY_CLIENT_SECRET_KEY:String = "SPOTIFY_CLIENT_SECRET"
@@ -24,8 +26,8 @@ class ConnectSpotifyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Create an instance of SpotifyAPI
         connectButton.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
+        connectSpotifyViewControllerInstance = self
     }
     
     @IBAction func connectToSpotify(_ sender: Any) {
@@ -78,6 +80,9 @@ class ConnectSpotifyViewController: UIViewController {
                 else {
                     print("Couldn't Authorization With Your Account")
                 }
+            } else {
+                let homeVC = self.delegate as! HomeViewController
+                homeVC.processSpotifyData()
             }
         })
         .store(in: &cancellables)

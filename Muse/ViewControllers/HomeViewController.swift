@@ -11,7 +11,11 @@ import Combine
 import Firebase
 import FirebaseAuth
 
-class HomeViewController: UIViewController {
+protocol SpotifyProtocol {
+    func processSpotifyData()
+}
+
+class HomeViewController: UIViewController, SpotifyProtocol {
     
     // Spotify Model
 //    var connectSpotifyViewController = ConnectSpotifyViewController()
@@ -84,7 +88,7 @@ class HomeViewController: UIViewController {
         let db = Firestore.firestore()
         let ref = db.collection("Users")
         let document = ref.document(currentUser!)
-        document.setData(["Top Artists": topArtistNames])
+        document.setData(["Top Artists": topArtistNames], merge: true)
         print("Added user's top artists to Firebase: \(topArtistNames)")
     }
     

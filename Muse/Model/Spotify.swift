@@ -185,7 +185,8 @@ final public class Spotify: ObservableObject {
                 .playlistModifyPublic,
                 .userLibraryRead,
                 .userLibraryModify,
-                .userReadRecentlyPlayed
+                .userReadRecentlyPlayed,
+                .userTopRead
             ]
         )!
         // You can open the URL however you like. For example, you could open
