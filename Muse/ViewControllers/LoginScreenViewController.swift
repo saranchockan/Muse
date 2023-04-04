@@ -33,14 +33,19 @@ class LoginScreenViewController: UIViewController {
     
     @IBAction func loginUser(_ sender: Any) {
         Auth.auth().signIn(withEmail: email.text!, password: password.text!) {authResult, error in
-            
             if let error = error as NSError? {
               print("\(error.localizedDescription)")
             } else {
-                print("")
+                print("User logged in... \(self.email.text!)")
+                // Reset login fields
+                self.email.text = ""
+                self.password.text = ""
+                
+                var tabVC = self.storyboard?.instantiateViewController(withIdentifier: "TabControllerIdentifier") as! UITabBarController
+                self.present(tabVC, animated: true)
+                
             }
         }
-        email.text = ""
-        password.text = ""
+        
     }
 }

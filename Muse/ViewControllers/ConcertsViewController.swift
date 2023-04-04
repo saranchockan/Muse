@@ -57,31 +57,34 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.fetchUserArtistData { completion in
-            if completion {
-
-                for artist in self.myArtists {
-                    let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist)"
-                    //                    print(fetchEventsEndpoint)
-                    self.callAPI(endpoint: fetchEventsEndpoint, artist: artist) { completion in
-                        if completion {
-                            self.writeDataIntoFirebase()
-                            // PUT FIREBASE LOGIC IN HERE
-                            //                            self.printOutput()
-                        } else {
-                            print("error")
-                        }
-
+        // Get concert data from Ticket master
+        // and load it into Firebase
+        
+        // Load concert data from Firebase
+        // into Concert UI
+    }
+    
+    func getConcertDataFromTicketMaster() {
+        print ("in get concert")
+        for artist in sharedArtists {
+            var fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist.key)"
+            //                    print(fetchEventsEndpoint)
+            var fetchEventsEncodedEndpoint: String = fetchEventsEndpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            self.callAPI(endpoint: fetchEventsEncodedEndpoint, artist: artist.value.getName()) { completion in
+                if completion {
+                    self.writeDataIntoFirebase()
+                    print("IN COMPLETION \(self.sharedConcerts.count)")
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
-
-
+                    //self.tableView.reloadData()
+                    // PUT FIREBASE LOGIC IN HERE
+                    //                            self.printOutput()
+                } else {
+                    print("error")
                 }
-
-
-            } else {
-                print("error")
             }
-       }
+        }
     }
     
     override func viewDidLoad() {
@@ -90,13 +93,17 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "ConcertCard", bundle: nil), forCellReuseIdentifier: concertCellIdentifier)
+        
+        getConcertDataFromTicketMaster()
+        
+        print("Num of Shared Artists: \(sharedArtists.count)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sharedConcerts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = sharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName
@@ -130,6 +137,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         // Store shared concerts in user's
         // shared concert
         var sharedConcertsArr = [[String:Any]]()
+        print("writeDataIntoFirebase: \(sharedConcerts.count)")
         for sharedConcert in sharedConcerts {
             var concert = ["Concert Name": sharedConcert.concertName, "Concert Date": sharedConcert.concertDate!, "Concert Friends": sharedConcert.friends] as [String : Any]
             sharedConcertsArr.append(concert)
@@ -175,10 +183,13 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func callAPI(endpoint: String, artist:String, _ completion: @escaping (_ success: Bool) -> Void) {
-        guard let url = URL(string: endpoint) else {return }
+        guard let url = URL(string: endpoint) else { print("Failed! \(endpoint)")
+            return }
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data else { return }
+            guard let data = data else { print("DATA NOT LOADING")
+                return }
             if let newEvents = self?.parseEventsJSON(data: data) {
+                print("IF NEW EVENTS")
                 for event in newEvents {
                     let sharedConcert = SharedConcert()
                     sharedConcert.concertName = event.name
@@ -194,6 +205,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                 }
             }
+            print ("shared concerts call api \(self!.sharedConcerts.count)")
             completion(true)
         }
         task.resume()

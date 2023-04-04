@@ -12,11 +12,12 @@ import FirebaseFirestoreSwift
 
 
 var sharedArtists:[String:SharedArtist] = [:]
+var sharedSongs:[String: SharedSong] = [:]
+
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var sharedSongs:[String: SharedSong] = [:]
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
     
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // Loading Screen should be false at this point
                 // Reload table view
                 self.printOutput()
+                print("Reloading table view data...")
                 self.tableView.reloadData()
             } else {
                 print("error")
@@ -47,13 +49,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let row = indexPath.row
         
         // Iterate through sharedSongs and sharedArtists
+        if (sharedArtists.isEmpty && sharedSongs.isEmpty){
+            self.tableView.isHidden = true
+            return UITableViewCell()
+        }else{
+            self.tableView.isHidden = false
+        }
         
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Justin Bieber"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this artist"
-            cell.sharedType.text = "Top Shared Artist"
+            let featuredTopArtist = sharedArtists.randomElement()
+            cell.name.text = featuredTopArtist!.key
+            cell.friendsDescription.text = writeFeaturedDescription(featuredTopArtist!.value.friends, "artist")
+            cell.sharedType.text = "Featured Shared Artist"
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -77,8 +86,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    private func writeFeaturedDescription(_ friends: [String], _ type: String) -> String{
+        var desc = " also listening to this \(type)"
+        switch friends.count {
+        case 0:
+            desc = "Nobody else is listening to this."
+        case 1:
+            desc = "\(friends[0]) is" + desc
+        case 2:
+            desc = "\(friends[0]) and \(friends[1]) are" + desc
+        case 3:
+            desc = "\(friends[0]), \(friends[1]), and \(friends[2]) are" + desc
+        default:
+            desc = "\(friends[0]), \(friends[1]), \(friends[2]), and more are"
+        }
+        return desc
+    }
+    
     func printOutput() {
-        print("Shared Songs count:  \(self.sharedSongs.count) Shared Artists count \(sharedArtists.count)")
+        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
         for (_, sharedSong) in sharedSongs {
             print("\(sharedSong.songName) \(sharedSong.songArtists)")
             for friend in sharedSong.friends {
@@ -129,19 +155,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         for (song, artist) in songs {
                                             // Both users share song by same artist
                                             if artist == friendSongs[song] {
-                                                if self.sharedSongs[song] != nil {
-                                                    let currSong = self.sharedSongs[song]
+                                                if sharedSongs[song] != nil {
+                                                    let currSong = sharedSongs[song]
                                                     currSong!.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
                                                     // Swift does not have unique keys ??
-                                                    self.sharedSongs.removeValue(forKey: song)
-                                                    self.sharedSongs[song] = currSong
+                                                    sharedSongs.removeValue(forKey: song)
+                                                    sharedSongs[song] = currSong
                                                 } else {
                                                     let currSong = SharedSong()
                                                     currSong.songName = song
                                                     currSong.songArtists = artist
                                                     currSong.friends = []
                                                     currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    self.sharedSongs[song] = currSong
+                                                    sharedSongs[song] = currSong
                                                 }
                                             }
                                            
@@ -165,7 +191,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-                                        print("Shared Songs count after fetching:  \(self.sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
                                         completion(true)
                                     }
                                 }
