@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredSharedSong = sharedArtists.randomElement()
+            let featuredSharedSong = sharedSongs.randomElement()
             cell.name.text = featuredSharedSong!.key
             cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
             cell.sharedType.text = "Featured Shared Song"

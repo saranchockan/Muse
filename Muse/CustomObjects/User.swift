@@ -10,4 +10,5 @@ import Foundation
 class User {
     var uid:String = ""
     var friends:[String] = []
+    var requests:[String] = ["Sneha", "Riya", "Ria"]
 }

@@ -16,8 +16,6 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    var friends: [String] = ["Saahithi", "Liz"]
-    var requests: [String] = ["Richa", "Saran"]
     var tableData: [String] = []
     let cellIdentifier = "FriendCard"
     
@@ -27,11 +25,12 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        tableData = friends
 
         self.getFriends { completion in
             if completion {
                 print("MY FRIENDS: \(self.currentUserObject.friends.count)")
+                self.tableData = self.currentUserObject.friends
+                self.tableView.reloadData()
             } else {
                 print("error")
             }
@@ -41,10 +40,10 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
     @IBAction func segmentChanged(_ sender: Any) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            tableData = friends
+            tableData = currentUserObject.friends
             tableView.reloadData()
         case 1:
-            tableData = requests
+            tableData = currentUserObject.requests
             tableView.reloadData()
         default:
             print("this isn't supposed to happen")
