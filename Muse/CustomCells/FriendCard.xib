@@ -47,16 +47,16 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <action selector="removePressed:" destination="1f2-Nf-dTb" eventType="touchUpInside" id="CXw-xE-7V1"/>
+                            <action selector="buttonPressed:" destination="1f2-Nf-dTb" eventType="touchUpInside" id="FXg-Hd-qPG"/>
                         </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
+                <outlet property="button" destination="ZyK-H7-IHz" id="1MI-MW-7fV"/>
                 <outlet property="name" destination="eNP-dl-4Ch" id="9Jg-HN-4Q6"/>
                 <outlet property="profilePicture" destination="qfC-NE-Okh" id="LOC-pA-eYl"/>
-                <outlet property="removeButton" destination="ZyK-H7-IHz" id="Vcg-n6-Oov"/>
             </connections>
             <point key="canvasLocation" x="180.91603053435114" y="-6.3380281690140849"/>
         </tableViewCell>

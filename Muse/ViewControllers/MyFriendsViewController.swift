@@ -32,6 +32,7 @@ class MyFriendsViewController: UIViewController, UITableViewDelegate, UITableVie
             tableView.reloadData()
         case 1:
             tableData = requests
+            
             tableView.reloadData()
         default:
             print("this isn't supposed to happen")
@@ -45,6 +46,11 @@ class MyFriendsViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FriendCardTableViewCell
         cell.name.text = tableData[indexPath.row]
+        if (segmentControl.selectedSegmentIndex == 0) {
+            cell.button.setTitle("Remove", for: .normal)
+        } else {
+            cell.button.setTitle("Add", for: .normal)
+        }
         return cell
     }
 }

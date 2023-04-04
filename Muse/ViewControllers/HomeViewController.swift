@@ -59,9 +59,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredTopArtist = sharedArtists.randomElement()
-            cell.name.text = featuredTopArtist!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredTopArtist!.value.friends, "artist")
+            let featuredSharedArtist = sharedArtists.randomElement()
+            cell.name.text = featuredSharedArtist!.key
+            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
             cell.sharedType.text = "Featured Shared Artist"
             return cell
         case 1:
@@ -71,9 +71,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Montero"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this album"
-            cell.sharedType.text = "Top Shared Album"
+            let featuredSharedSong = sharedArtists.randomElement()
+            cell.name.text = featuredSharedSong!.key
+            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
+            cell.sharedType.text = "Featured Shared Song"
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
