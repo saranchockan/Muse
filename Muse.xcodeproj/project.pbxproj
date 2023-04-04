@@ -11,6 +11,7 @@
 		1EF30EA529D29C9C0082E775 /* SharedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA429D29C9C0082E775 /* SharedSong.swift */; };
 		1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA829D371690082E775 /* SharedArtist.swift */; };
 		1EF30EAF29D525910082E775 /* SharedConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EAE29D525910082E775 /* SharedConcert.swift */; };
+		1EF30F3129DCACD40082E775 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30F3029DCACD40082E775 /* User.swift */; };
 		5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */; };
 		5B38B54E29D37A0A00AE8CC6 /* ConcertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */; };
 		5B38B55029D4DF0200AE8CC6 /* SharedCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */; };
@@ -82,6 +83,7 @@
 		1EF30EA429D29C9C0082E775 /* SharedSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSong.swift; sourceTree = "<group>"; };
 		1EF30EA829D371690082E775 /* SharedArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedArtist.swift; sourceTree = "<group>"; };
 		1EF30EAE29D525910082E775 /* SharedConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConcert.swift; sourceTree = "<group>"; };
+		1EF30F3029DCACD40082E775 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConcertCard.xib; sourceTree = "<group>"; };
 		5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertTableViewCell.swift; sourceTree = "<group>"; };
 		5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedCard.xib; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				1EF30EA429D29C9C0082E775 /* SharedSong.swift */,
 				5BE0B6E429D664FA00376010 /* MyArtist.swift */,
 				5BE0B6E729D6655300376010 /* MySong.swift */,
+				1EF30F3029DCACD40082E775 /* User.swift */,
 			);
 			path = CustomObjects;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				5B82A74229B17D7C0032C1FE /* MyFriendsViewController.swift in Sources */,
 				5BE0B6E529D664FA00376010 /* MyArtist.swift in Sources */,
 				5BE0B6E129D6557700376010 /* ImageCardTableViewCell.swift in Sources */,
+				1EF30F3129DCACD40082E775 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

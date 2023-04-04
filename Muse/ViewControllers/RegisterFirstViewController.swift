@@ -47,7 +47,7 @@ class RegisterFirstViewController: UIViewController {
         
         let db = Firestore.firestore()
         let ref = db.collection("Users")
-        var document = ref.document(currentUser!)
+        let document = ref.document(currentUser!)
         
         document.setData(["Email": userEmail])
     }
