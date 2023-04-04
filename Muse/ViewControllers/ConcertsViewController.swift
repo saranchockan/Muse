@@ -185,7 +185,8 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     if event.date != nil {
                         sharedConcert.concertDate = event.date
                     }
-                    if sharedArtists[artist] != nil {
+                    if
+                        sharedArtists[artist] != nil {
                         let concertBuddies = sharedArtists[artist]?.friends
                         sharedConcert.friends = concertBuddies!
                         self!.sharedConcerts.append(sharedConcert)

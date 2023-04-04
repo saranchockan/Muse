@@ -36,6 +36,8 @@
 		5BE0B6F629D783A600376010 /* profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F229D783A500376010 /* profile@3x.png */; };
 		5BE0B6F729D783A600376010 /* ticket@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F329D783A600376010 /* ticket@3x.png */; };
 		5BE0B6F829D783A600376010 /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F429D783A600376010 /* settings@3x.png */; };
+		5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F929DB4D8500376010 /* FriendCard.xib */; };
+		5BE0B6FC29DB4D9B00376010 /* FriendCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
@@ -107,6 +109,8 @@
 		5BE0B6F229D783A500376010 /* profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@3x.png"; sourceTree = "<group>"; };
 		5BE0B6F329D783A600376010 /* ticket@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket@3x.png"; sourceTree = "<group>"; };
 		5BE0B6F429D783A600376010 /* settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F929DB4D8500376010 /* FriendCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCard.xib; sourceTree = "<group>"; };
+		5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardTableViewCell.swift; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */,
 				5BE0B6DA29D6541100376010 /* ImageCard.xib */,
 				5BE0B6DE29D6555E00376010 /* ImageCardCell.xib */,
+				5BE0B6F929DB4D8500376010 /* FriendCard.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 				5B38B55129D4DF1E00AE8CC6 /* SharedCardTableViewCell.swift */,
 				5BE0B6E029D6557700376010 /* ImageCardTableViewCell.swift */,
 				5BE0B6E229D657CE00376010 /* ImageCardCollectionViewCell.swift */,
+				5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */,
 			);
 			path = CustomCellClasses;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 				5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */,
 				5BE0B6F829D783A600376010 /* settings@3x.png in Resources */,
 				5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */,
+				5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */,
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
 				5BE0B6F029D782B900376010 /* home@3x.png in Resources */,
@@ -397,6 +404,7 @@
 				5B82A73E29B17ABD0032C1FE /* HomeViewController.swift in Sources */,
 				5B49B78E29B178CC00247E0C /* ConnectSpotifyViewController.swift in Sources */,
 				5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */,
+				5BE0B6FC29DB4D9B00376010 /* FriendCardTableViewCell.swift in Sources */,
 				5B82A74429B17D890032C1FE /* MyListeningViewController.swift in Sources */,
 				B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */,
 				1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */,
