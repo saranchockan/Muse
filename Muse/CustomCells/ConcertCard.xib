@@ -64,6 +64,7 @@
             <connections>
                 <outlet property="artistImage" destination="4fu-qC-WH4" id="mdJ-nK-2k3"/>
                 <outlet property="artistName" destination="zks-LA-POg" id="D0U-9a-cy2"/>
+                <outlet property="cardView" destination="OIO-Ww-rEE" id="ZNv-ov-Myb"/>
                 <outlet property="concertDescription" destination="MRM-T0-DkW" id="IvS-sf-1nP"/>
                 <outlet property="location" destination="QYS-f3-Vcu" id="eHu-gL-3DN"/>
             </connections>

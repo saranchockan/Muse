@@ -39,6 +39,7 @@
 		5BE0B6F829D783A600376010 /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F429D783A600376010 /* settings@3x.png */; };
 		5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F929DB4D8500376010 /* FriendCard.xib */; };
 		5BE0B6FC29DB4D9B00376010 /* FriendCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */; };
+		5BE0B6FE29DCE69A00376010 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
@@ -113,6 +114,7 @@
 		5BE0B6F429D783A600376010 /* settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@3x.png"; sourceTree = "<group>"; };
 		5BE0B6F929DB4D8500376010 /* FriendCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCard.xib; sourceTree = "<group>"; };
 		5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardTableViewCell.swift; sourceTree = "<group>"; };
+		5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */,
 				B6DA27D029AE7035003D2C44 /* Info.plist */,
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
+				5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */,
 			);
 			path = Muse;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */,
 				1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */,
 				5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */,
+				5BE0B6FE29DCE69A00376010 /* UIImage+Extension.swift in Sources */,
 				5B38B54E29D37A0A00AE8CC6 /* ConcertTableViewCell.swift in Sources */,
 				5BE0B6E329D657CE00376010 /* ImageCardCollectionViewCell.swift in Sources */,
 				5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */,

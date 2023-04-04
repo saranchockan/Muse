@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 
-
 // Ticketmaster API call and event parsing
 // code referenced from https://github.com/nastechi/MyEvents
 struct EventData: Decodable {
@@ -99,6 +98,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
             let imageData = NSData(contentsOf: imageURL)
             DispatchQueue.main.async {
                 cell.artistImage.image = UIImage(data: imageData! as Data)
+                cell.cardView.backgroundColor = cell.artistImage.image?.averageColor?.lighter(by: 0.4)
             }
         }
         completion(true)
