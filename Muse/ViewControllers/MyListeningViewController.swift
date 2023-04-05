@@ -13,8 +13,8 @@ import FirebaseFirestoreSwift
 class MyListeningViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var mySongs:[String: String] = [:]
-    var myArtists:[String] = []
+    var mySongs:[String: MySong] = [:]
+    var myArtists:[MyArtist] = []
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
     
@@ -74,12 +74,12 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func printOutput() {
-        for (song, artist) in mySongs {
-            print("Song name: \(song) Song artist: \(artist)")
+        for (song, songObject) in mySongs {
+            print("Song name: \(songObject.songName) Song artist: \(songObject.artistName)")
         }
         
         for artist in myArtists {
-            print("Artist: \(artist)")
+            print("Artist: \(artist.artistName)")
         }
     }
     
@@ -100,9 +100,22 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                         
                         let data = document.data()
                         
-                        self.mySongs = data["Top Songs"] as! [String: String]
+                        let songs = data["Top Songs"] as! [String: String]
                         
-                        self.myArtists = data["Top Artists"] as! [String]
+                        let artists = data["Top Artists"] as! [String]
+                        
+                        for (song, artist) in songs {
+                            var newSong = MySong()
+                            newSong.songName = song
+                            newSong.artistName = artist
+                            self.mySongs[song] = newSong
+                        }
+                        
+                        for artist in artists {
+                            var newArtist = MyArtist()
+                            newArtist.artistName = artist
+                            self.myArtists.append(newArtist)
+                        }
                         
                         
                     }
