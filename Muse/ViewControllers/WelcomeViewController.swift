@@ -51,13 +51,14 @@ class WelcomeViewController: UIViewController {
         userPhoneNumber = phoneNumber.text!
         userLocation = location.text!
         
-        let currentUser = Auth.auth().currentUser?.uid
-//        let db = Database.database().reference()
-        
-        let db = Firestore.firestore()
-        let ref = db.collection("Users")
-        var document = ref.document(currentUser!)
-        
-        document.updateData(["First Name" : userFirstName, "Last Name": userLastName, "Phone Number": userPhoneNumber,"Location": userLocation])
+//        let currentUser = Auth.auth().currentUser?.uid
+////        let db = Database.database().reference()
+//        
+//        let db = Firestore.firestore()
+//        let ref = db.collection("Users")
+//        var document = ref.document(currentUser!)
+//        
+//        document.updateData(["First Name" : userFirstName, "Last Name": userLastName, "Phone Number": userPhoneNumber,"Location": userLocation])
+//        document.updateData(["Top Songs": [], "Top Artists": []])
     }
 }
