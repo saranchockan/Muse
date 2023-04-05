@@ -331,7 +331,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Continue" subtitle="" cornerStyle="fixed"/>
                                 <connections>
                                     <action selector="continueToConnectSpotify:" destination="dI7-dh-asN" eventType="touchUpInside" id="LZc-in-4Au"/>
-                                    <segue destination="kkn-b1-zGL" kind="show" id="Ggf-HU-f4g"/>
+                                    <segue destination="neG-uT-s3T" kind="show" id="9qM-Yc-Mvd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -387,7 +387,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="connectToSpotify:" destination="kkn-b1-zGL" eventType="touchUpInside" id="U3K-b7-ZOn"/>
-                                    <segue destination="neG-uT-s3T" kind="show" id="ENs-H2-MIO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -468,6 +467,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="WZL-pJ-Ve8" id="EED-fx-oPH"/>
+                        <segue destination="kkn-b1-zGL" kind="presentation" identifier="authorizeSpotify" id="KZp-TK-oBe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWB-2U-7Yl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -840,7 +840,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EKa-lu-XPf"/>
+        <segue reference="ZHE-oL-kFo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

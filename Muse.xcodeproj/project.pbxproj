@@ -51,6 +51,8 @@
 		F673155929DD423200CF5751 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F673155829DD423200CF5751 /* FirebaseAuth */; };
 		F673155B29DD423200CF5751 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F673155A29DD423200CF5751 /* FirebaseFirestore */; };
 		F673155D29DD423200CF5751 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F673155C29DD423200CF5751 /* FirebaseFirestoreSwift */; };
+		F673156029DDE29D00CF5751 /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673155F29DDE29D00CF5751 /* Spotify.swift */; };
+		F673156329DDE2EB00CF5751 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F673156229DDE2EB00CF5751 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,7 @@
 		B6DA27CB29AE7035003D2C44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DA27CE29AE7035003D2C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6DA27D029AE7035003D2C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F673155F29DDE29D00CF5751 /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,7 @@
 				F673155929DD423200CF5751 /* FirebaseAuth in Frameworks */,
 				F673155B29DD423200CF5751 /* FirebaseFirestore in Frameworks */,
 				F673155D29DD423200CF5751 /* FirebaseFirestoreSwift in Frameworks */,
+				F673156329DDE2EB00CF5751 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +205,7 @@
 		B6DA27C129AE7030003D2C44 /* Muse */ = {
 			isa = PBXGroup;
 			children = (
+				F673155E29DDE28100CF5751 /* Model */,
 				5BE0B6E629D6651800376010 /* CustomObjects */,
 				5B38B54C29D379E400AE8CC6 /* CustomCellClasses */,
 				5B38B54529D3749000AE8CC6 /* CustomCells */,
@@ -215,6 +220,14 @@
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
 			);
 			path = Muse;
+			sourceTree = "<group>";
+		};
+		F673155E29DDE28100CF5751 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F673155F29DDE29D00CF5751 /* Spotify.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +251,7 @@
 				F673155829DD423200CF5751 /* FirebaseAuth */,
 				F673155A29DD423200CF5751 /* FirebaseFirestore */,
 				F673155C29DD423200CF5751 /* FirebaseFirestoreSwift */,
+				F673156229DDE2EB00CF5751 /* KeychainAccess */,
 			);
 			productName = Muse;
 			productReference = B6DA27BF29AE7030003D2C44 /* Muse.app */;
@@ -270,6 +284,7 @@
 			packageReferences = (
 				F64233C729B2899E00D671E1 /* XCRemoteSwiftPackageReference "SpotifyAPI" */,
 				F673155729DD423100CF5751 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F673156129DDE2EB00CF5751 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = B6DA27C029AE7030003D2C44 /* Products */;
 			projectDirPath = "";
@@ -326,6 +341,7 @@
 				5B49B78E29B178CC00247E0C /* ConnectSpotifyViewController.swift in Sources */,
 				5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */,
 				5B82A74429B17D890032C1FE /* MyListeningViewController.swift in Sources */,
+				F673156029DDE29D00CF5751 /* Spotify.swift in Sources */,
 				B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */,
 				1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */,
 				5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */,
@@ -570,6 +586,14 @@
 				version = 10.7.0;
 			};
 		};
+		F673156129DDE2EB00CF5751 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -592,6 +616,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F673155729DD423100CF5751 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		F673156229DDE2EB00CF5751 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F673156129DDE2EB00CF5751 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
