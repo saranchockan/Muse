@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 class User {
     var uid:String = ""
     var friends:[String] = []
     var requests:[String] = ["Sneha", "Riya", "Ria"]
+    var pic: UIImage?
 }

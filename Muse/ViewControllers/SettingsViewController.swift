@@ -15,20 +15,18 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var fullName: UITextField!
     
-    let imagePicker: UIImagePickerController
+    let imagePicker = UIImagePickerController()
+    var currentUserObject: User = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         profilePicture.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
         
-        imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.mediaTypes = ["public.image"]
-        pickerController.sourceType = .photoLibrary
-        
-        print("media types: \(UIImagePickerController.availableMediaTypes(for: .photoLibrary))")
+        imagePicker.sourceType = .photoLibrary
     }
 
     @IBAction func logout(_ sender: Any) {
@@ -44,5 +42,6 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func editProfilePicture(_ sender: Any) {
+        self.present(imagePicker, animated: true)
     }
 }

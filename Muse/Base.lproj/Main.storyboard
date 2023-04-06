@@ -461,12 +461,13 @@
                         <barButtonItem key="rightBarButtonItem" image="settings.png" style="plain" id="Mmr-q1-KSi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="Zt2-D0-VwT" kind="show" id="542-Cg-Gop"/>
+                                <segue destination="Zt2-D0-VwT" kind="show" identifier="settingsSegue" id="542-Cg-Gop"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="greeting" destination="Ct9-9f-aHY" id="tMP-AB-v9d"/>
+                        <outlet property="settingsButton" destination="Mmr-q1-KSi" id="w0Y-Dp-RLd"/>
                         <outlet property="tableView" destination="WZL-pJ-Ve8" id="EED-fx-oPH"/>
                         <segue destination="kkn-b1-zGL" kind="presentation" identifier="authorizeSpotify" id="KZp-TK-oBe"/>
                     </connections>

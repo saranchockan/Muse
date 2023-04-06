@@ -11,13 +11,12 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
-    
-    var currentUserObject:User = User()
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     var tableData: [String] = []
     let cellIdentifier = "FriendCard"
+    var currentUserObject:User = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +24,9 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-
-        self.getFriends { completion in
-            if completion {
-                print("MY FRIENDS: \(self.currentUserObject.friends.count)")
-                self.tableData = self.currentUserObject.friends
-                self.tableView.reloadData()
-            } else {
-                print("error")
-            }
-        }
+        
+        tableData = self.currentUserObject.friends
+        tableView.reloadData()
     }
     
     @IBAction func segmentChanged(_ sender: Any) {
@@ -64,45 +56,4 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         }
         return cell
 	}
-    
-    func getFriends(_ completion: @escaping (_ success: Bool) -> Void) {
-        let currentUser = Auth.auth().currentUser?.uid
-        let db = Firestore.firestore()
-        let ref = db.collection("Users")
-        
-        ref.getDocuments { snapshot, error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    if document.documentID == currentUser {
-                        self.currentUserObject.uid = currentUser!
-                        
-                        let data = document.data()
-                        let friends = data["friends"] as! [String]
-                        
-                        for friend in friends {
-                            ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
-                            {(querySnapshot, err) in
-                                if let err = err {
-                                    print("Error getting documents: \(err)")
-                                } else {
-                                    print("In friend loop")
-                                    for document in querySnapshot!.documents {
-                                        let friendName: String = "\(document.data()["First Name"]!) \(document.data()["Last Name"]!) "
-                                        self.currentUserObject.friends.append(friendName)
-                                    }
-                                    
-                                    completion (true)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }

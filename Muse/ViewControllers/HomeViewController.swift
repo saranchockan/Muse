@@ -23,9 +23,12 @@ protocol SpotifyProtocol {
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
         
     @IBOutlet weak var greeting: UINavigationItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
+    var currentUserObject:User = User()
     public var spotify: Spotify? = nil
     private var topArtistCancellables: AnyCancellable? = nil
 
@@ -37,6 +40,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         greeting.title = "Hello \(userFirstName)"
+        settingsButton.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -55,6 +59,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
         }
+        
+        self.getFriends { completion in
+            if completion {
+                print("MY FRIENDS: \(self.currentUserObject.friends.count)")
+                let friendsNavVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
+                let friendsVC = friendsNavVC.topViewController as! MyFriendsViewController
+                friendsVC.currentUserObject = self.currentUserObject
+                self.settingsButton.isHidden = false
+            } else {
+                print("error")
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,9 +78,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
            let connectSpotifyVC = segue.destination as? ConnectSpotifyViewController {
             connectSpotifyVC.delegate = self
             connectSpotifyVC.spotify = spotify
+        } else if segue.identifier == "settingsSegue",
+            let settingsVC = segue.destination as? SettingsViewController {
+            settingsVC.currentUserObject = self.currentUserObject
         }
     }
-    
+
     func getTopArtistSongDataFromFirebase() {
         self.fetchUserSongArtistData { completion in
             if completion {
@@ -329,4 +348,44 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func getFriends(_ completion: @escaping (_ success: Bool) -> Void) {
+        let currentUser = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        
+        ref.getDocuments { snapshot, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    if document.documentID == currentUser {
+                        self.currentUserObject.uid = currentUser!
+                        
+                        let data = document.data()
+                        let friends = data["friends"] as! [String]
+                        
+                        for friend in friends {
+                            ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
+                            {(querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    print("In friend loop")
+                                    for document in querySnapshot!.documents {
+                                        let friendName: String = "\(document.data()["First Name"]!) \(document.data()["Last Name"]!) "
+                                        self.currentUserObject.friends.append(friendName)
+                                    }
+                                    
+                                    completion (true)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
