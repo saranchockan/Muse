@@ -22,6 +22,9 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
 
         profilePicture.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
+        if currentUserObject.pic != nil{
+            profilePicture.image = currentUserObject.pic
+        }
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
@@ -43,5 +46,13 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func editProfilePicture(_ sender: Any) {
         self.present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        print("user has picked")
+        self.dismiss(animated: true, completion: { () -> Void in})
+        var tempImage:UIImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        profilePicture.image  = tempImage
+        currentUserObject.pic = tempImage
     }
 }
