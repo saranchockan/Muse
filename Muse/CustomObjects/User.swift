@@ -13,7 +13,7 @@ class User {
     var firstName:String = ""
     var lastName:String = ""
     var location:String = ""
-    var friends:[String] = []
+    var friends:[User] = []
     var requests:[String] = ["Sneha", "Riya", "Ria"]
     var pic: UIImage?
 }
