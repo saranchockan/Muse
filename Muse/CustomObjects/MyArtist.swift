@@ -9,10 +9,13 @@ import Foundation
 
 class MyArtist: ImageCardObject {
     var artistName: String = ""
+    var imgURLString: String = ""
     
     func getName() -> String {
         return artistName
     }
     
-    func getImage() {}
+    func getImage() -> String {
+        return imgURLString
+    }
 }
