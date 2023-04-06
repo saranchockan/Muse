@@ -46,8 +46,17 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        if firstName.text != "" {
+            currentUserObject.firstName = firstName.text!
+        }
+        if lastName.text != "" {
+            currentUserObject.lastName = lastName.text!
+        }
+        if location.text != "" {
+            currentUserObject.location = location.text!
+        }
+        
         //send stuff back to firebase
-        //save info front end also
     }
 
     @IBAction func logout(_ sender: Any) {
