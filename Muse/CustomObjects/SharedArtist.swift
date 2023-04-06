@@ -10,10 +10,13 @@ import Foundation
 class SharedArtist: ImageCardObject {
     var artistName: String = ""
     var friends:[String] = []
+    var imgURLString: String = ""
     
     func getName() -> String {
         return artistName
     }
     
-    func getImage() {}
+    func getImage() -> String {
+        return imgURLString
+    }
 }

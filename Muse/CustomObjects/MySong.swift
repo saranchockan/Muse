@@ -9,6 +9,7 @@ import Foundation
 
 class MySong: ImageCardObject {
     var songName: String = ""
+    var imgURLString: String = ""
     
     var artistName: String = ""
     
@@ -16,9 +17,10 @@ class MySong: ImageCardObject {
         return songName
     }
     
+    func getImage() -> String {
+        return imgURLString
+    }
     func getArtistName() -> String {
         return artistName
-    }
-    
-    func getImage() {}
+    }    
 }

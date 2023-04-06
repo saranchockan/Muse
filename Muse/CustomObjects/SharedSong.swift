@@ -9,7 +9,7 @@ import Foundation
 
 protocol ImageCardObject{
     func getName() -> String
-    func getImage()
+    func getImage() -> String
 }
 
 class SharedSong : ImageCardObject {
@@ -17,10 +17,13 @@ class SharedSong : ImageCardObject {
     var songName:String = ""
     var songArtists:String = ""
     var friends:[String] = []
+    var imgURLString: String = ""
     
     func getName() -> String {
         return songName
     }
     
-    func getImage() {}
+    func getImage() -> String {
+        return imgURLString
+    }
 }

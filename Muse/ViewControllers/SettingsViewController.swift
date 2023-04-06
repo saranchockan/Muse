@@ -51,6 +51,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     @IBAction func logout(_ sender: Any) {
+        sharedArtists = [:]
+        sharedSongs = [:]
         do {
             try Auth.auth().signOut()
         } catch {
@@ -59,6 +61,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func deleteAccount(_ sender: Any) {
+        sharedArtists = [:]
+        sharedSongs = [:]
         Auth.auth().currentUser?.delete()
     }
     

@@ -63,9 +63,9 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func getConcertDataFromTicketMaster() {
         for artist in sharedArtists {
-            var fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist.key)"
+            let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist.key)"
             //                    print(fetchEventsEndpoint)
-            var fetchEventsEncodedEndpoint: String = fetchEventsEndpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let fetchEventsEncodedEndpoint: String = fetchEventsEndpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             self.callAPI(endpoint: fetchEventsEncodedEndpoint, artist: artist.value.getName()) { completion in
                 if completion {
                     self.writeDataIntoFirebase()
