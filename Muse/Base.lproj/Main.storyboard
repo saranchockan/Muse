@@ -439,7 +439,7 @@
             </objects>
             <point key="canvasLocation" x="6417.5572519083971" y="3.5211267605633805"/>
         </scene>
-        <!--Good Afternoon-->
+        <!--Hello-->
         <scene sceneID="DJZ-4b-iOb">
             <objects>
                 <viewController storyboardIdentifier="HomeScreenIdentifier" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
@@ -457,7 +457,7 @@
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Good Afternoon" style="editor" id="Ct9-9f-aHY">
+                    <navigationItem key="navigationItem" title="Hello" style="editor" id="Ct9-9f-aHY">
                         <barButtonItem key="rightBarButtonItem" image="settings.png" style="plain" id="Mmr-q1-KSi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -466,6 +466,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="greeting" destination="Ct9-9f-aHY" id="tMP-AB-v9d"/>
                         <outlet property="tableView" destination="WZL-pJ-Ve8" id="EED-fx-oPH"/>
                         <segue destination="kkn-b1-zGL" kind="presentation" identifier="authorizeSpotify" id="KZp-TK-oBe"/>
                     </connections>

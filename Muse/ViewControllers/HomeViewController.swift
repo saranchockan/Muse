@@ -22,6 +22,7 @@ protocol SpotifyProtocol {
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
         
+    @IBOutlet weak var greeting: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
+        greeting.title = "Hello \(userFirstName)"
         
         spotify = Spotify()
         print("Configure Spotify Authorization")

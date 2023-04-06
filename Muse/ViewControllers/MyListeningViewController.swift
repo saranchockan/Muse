@@ -29,6 +29,7 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
         self.fetchUserSongArtistData { completion in
             if completion {
                 self.printOutput()
+                self.tableView.reloadData()
             } else {
                 print("error")
             }
@@ -46,26 +47,28 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Justin Bieber"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this artist"
-            cell.sharedType.text = "My Top Artist"
+            let featuredMyArtist = myArtists.randomElement()
+            cell.name.text = featuredMyArtist?.artistName
+            cell.friendsDescription.text = ""
+            cell.sharedType.text = "My Featured Artist"
             return cell
-//        case 1:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
-//            cell.title.text = "Recently Played Tracks"
-//            cell.collectionList = Array(mySongs.values)
-//            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Recently Played Tracks"
+            cell.collectionList = Array(mySongs.values)
+            return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Montero"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this album"
-            cell.sharedType.text = "My Top Genre"
+            let featuredMySong = mySongs.randomElement()
+            cell.name.text = featuredMySong?.key
+            cell.friendsDescription.text = ""
+            cell.sharedType.text = "My Featured Song"
             return cell
-//        case 3:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
-//            cell.title.text = "Recommended Music"
-//            cell.collectionList = myArtists
-//            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Recent Artists"
+            cell.collectionList = myArtists
+            return cell
         default:
             print("this isn't supposed to happen")
             return UITableViewCell()
