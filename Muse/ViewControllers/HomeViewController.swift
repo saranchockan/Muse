@@ -378,7 +378,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 } else {
                                     print("In friend loop")
                                     for document in querySnapshot!.documents {
-                                        var currentFriend = User()
+                                        let currentFriend = User()
+                                        currentFriend.uid = document.documentID
+                                        print ("friend UID: \(currentFriend.uid)")
                                         currentFriend.firstName = document.data()["First Name"] as! String
                                         currentFriend.lastName = document.data()["Last Name"] as! String
                                         self.currentUserObject.friends.append(currentFriend)

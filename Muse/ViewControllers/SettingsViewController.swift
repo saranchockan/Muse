@@ -35,7 +35,6 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         location.leftView = thirdPaddingView
         location.leftViewMode = .always
 
-//        profilePicture.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
         if currentUserObject.pic != nil{
             profilePicture.image = currentUserObject.pic
         }
@@ -48,6 +47,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewWillDisappear(_ animated: Bool) {
         //send stuff back to firebase
+        //save info front end also
     }
 
     @IBAction func logout(_ sender: Any) {

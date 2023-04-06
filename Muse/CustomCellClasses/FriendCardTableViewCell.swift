@@ -13,6 +13,9 @@ class FriendCardTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var name: UILabel!
     
+    var currentUserObject: User!
+    var friendUID: String!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         button.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
@@ -25,5 +28,11 @@ class FriendCardTableViewCell: UITableViewCell {
     }
 
     @IBAction func buttonPressed(_ sender: Any) {
+        if button.titleLabel?.text == "Remove"{
+            let index: Int = currentUserObject.friends.firstIndex(where: {$0.uid == friendUID})!
+            currentUserObject.friends.remove(at: index)
+            button.setTitle("Removed", for: .normal)
+            button.backgroundColor = UIColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
+        }
     }
 }
