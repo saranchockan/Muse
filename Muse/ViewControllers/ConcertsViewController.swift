@@ -112,7 +112,14 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = sharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName
-        cell.location.text = concert.concertDate
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        let date = dateFormatterGet.date(from: concert.concertDate ?? "")
+        
+        cell.date.text = dateFormatterPrint.string(from: date!)
         cell.concertDescription.text = writeConcertDescription(concertFriends: concert.friends)
         fetchImages(concert, cell) { completion in
             if completion {

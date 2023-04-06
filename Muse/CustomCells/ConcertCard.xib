@@ -42,7 +42,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYS-f3-Vcu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYS-f3-Vcu">
                                 <rect key="frame" x="160" y="72" width="179" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -66,7 +66,7 @@
                 <outlet property="artistName" destination="zks-LA-POg" id="D0U-9a-cy2"/>
                 <outlet property="cardView" destination="OIO-Ww-rEE" id="ZNv-ov-Myb"/>
                 <outlet property="concertDescription" destination="MRM-T0-DkW" id="IvS-sf-1nP"/>
-                <outlet property="location" destination="QYS-f3-Vcu" id="eHu-gL-3DN"/>
+                <outlet property="date" destination="QYS-f3-Vcu" id="K5k-gf-42F"/>
             </connections>
             <point key="canvasLocation" x="194.6564885496183" y="-95.070422535211279"/>
         </tableViewCell>
