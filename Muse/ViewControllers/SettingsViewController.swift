@@ -22,6 +22,8 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func logout(_ sender: Any) {
+        sharedArtists = [:]
+        sharedSongs = [:]
         do {
             try Auth.auth().signOut()
         } catch {

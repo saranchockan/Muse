@@ -16,7 +16,7 @@ var sharedArtists:[String:SharedArtist] = [:]
 var sharedSongs:[String: SharedSong] = [:]
 
 protocol SpotifyProtocol {
-    func processSpotifyData(_ completion: @escaping (_ success: Bool) -> Void)
+    func processSpotifyData()
     func getTopArtistSongDataFromFirebase()
 }
 
@@ -42,16 +42,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("Authorizing Spotify...")
             self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
         } else {
-            print("Spotify Authorized...")
-            processSpotifyData() { completion in
-                if completion {
-                    self.getTopArtistSongDataFromFirebase()
-                } else {
-                    print("Error processing Spotify data")
-                }
-                
-            }
-            
+            processSpotifyData()
         }
     }
     
@@ -77,22 +68,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func processSpotifyData(_ completion: @escaping (_ success: Bool) -> Void) {
+    func processSpotifyData() {
         print("Spotify Authorized...")
         // Get user's top artists
         print("Retrieving user's top artists")
-        self.processTopArtists()
-        // Get user's top tracks
-        print("Retrieving user's top tracks")
-        self.processTopSongs()
-        
-        // Reload table view
-        // to reflect data about top artists
-        // and top tracks
-        completion(true)
+        self.processTopArtists() { processTopArtistsCompletion in
+            if processTopArtistsCompletion {
+                // Get user's top tracks
+                print("Retrieving user's top tracks")
+                self.processTopSongs() { processTopSongsCompletion in
+                    if processTopSongsCompletion {
+                        self.fetchUserSongArtistData { fetchUserSongArtistDataCompletion in
+                            if fetchUserSongArtistDataCompletion {
+                                // Loading Screen should be false at this point
+                                // Reload table view
+                                self.printOutput()
+                                print("Reloading table view data...")
+                                self.tableView.reloadData()
+                            } else {
+                                print("error")
+                            }
+                        }
+                    } else {
+                        print("Error processTopSongs()")
+                    }
+                }
+            } else {
+                print("Error processTopArtists()")
+            }
+        }
+    
     }
     
-    func processTopArtists() {
+    func processTopArtists(_ completion: @escaping (_ success: Bool) -> Void) {
         var topArtists = [Artist]()
         // Pull user's top artists from Spotify
         self.topArtistCancellables = spotify!.api
@@ -111,11 +119,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
                             self.loadTopArtistsToFirebase(topArtistNames: topArtistNames)
+                            completion(true)
                         }
                     )
     }
     
-    func processTopSongs() {
+    func processTopSongs(_ completion: @escaping (_ success: Bool) -> Void) {
         var topTracks = [Track]()
         // Pull user's top artists from Spotify
         self.topArtistCancellables = spotify!.api
@@ -134,6 +143,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
                             self.loadTopSongsToFirebase(topSongs: topSongs)
+                            completion(true)
                         }
                     )
     }
@@ -314,7 +324,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+//                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
                                         completion(true)
                                     }
                                 }
