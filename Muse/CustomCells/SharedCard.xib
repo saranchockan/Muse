@@ -63,6 +63,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="cardView" destination="6sO-Wv-Ydx" id="GuF-TS-XW6"/>
                 <outlet property="friendsDescription" destination="qEZ-6U-PmC" id="Jgh-zb-PGq"/>
                 <outlet property="name" destination="bmP-A3-QwZ" id="O7A-Fs-mcn"/>
                 <outlet property="sharedImage" destination="Xwb-Ri-48P" id="im6-EJ-9Jc"/>

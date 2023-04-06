@@ -58,6 +58,14 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
             cell.name.text = featuredMyArtist?.artistName
             cell.friendsDescription.text = ""
             cell.sharedType.text = "My Featured Artist"
+            fetchImages(featuredMyArtist! as ImageCardObject, cell) {
+                completion in
+                if completion {
+                    print("images correctly fetched")
+                } else {
+                    print("error")
+                }
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -70,6 +78,14 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
             cell.name.text = featuredMySong?.key
             cell.friendsDescription.text = ""
             cell.sharedType.text = "My Featured Song"
+            fetchImages(featuredMySong!.value as ImageCardObject, cell) {
+                completion in
+                if completion {
+                    print("images correctly fetched")
+                } else {
+                    print("error")
+                }
+            }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -84,13 +100,29 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func printOutput() {
-        for (song, songObject) in mySongs {
+        for (_, songObject) in mySongs {
             print("Song name: \(songObject.songName) Song artist: \(songObject.artistName)")
         }
         
         for artist in myArtists {
             print("Artist: \(artist.artistName)")
         }
+    }
+    
+    func fetchImages(_ item: ImageCardObject,_ cell: SharedCardTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var imageUrlStr = "https://files.radio.co/humorous-skink/staging/default-artwork.png"
+            if (item.getImage() != ""){
+                imageUrlStr = item.getImage()
+            }
+            let imageURL = URL(string: imageUrlStr)!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.sharedImage.image = UIImage(data: imageData! as Data)
+                cell.cardView.backgroundColor = cell.sharedImage.image?.averageColor?.lighter(by: 0.4)
+            }
+        }
+        completion(true)
     }
     
     func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
@@ -115,14 +147,14 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                         let artists = data["Top Artists"] as! [String]
                         
                         for (song, artist) in songs {
-                            var newSong = MySong()
+                            let newSong = MySong()
                             newSong.songName = song
                             newSong.artistName = artist
                             self.mySongs[song] = newSong
                         }
                         
                         for artist in artists {
-                            var newArtist = MyArtist()
+                            let newArtist = MyArtist()
                             newArtist.artistName = artist
                             self.myArtists.append(newArtist)
                         }

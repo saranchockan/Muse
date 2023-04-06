@@ -222,10 +222,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredSharedArtist = sharedArtists.randomElement()
-            cell.name.text = featuredSharedArtist!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
-            cell.sharedType.text = "Featured Shared Artist"
+            if !sharedSongs.isEmpty {
+                let featuredSharedArtist = sharedArtists.randomElement()
+                cell.name.text = featuredSharedArtist!.key
+                cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
+                cell.sharedType.text = "Featured Shared Artist"
+                fetchImages(featuredSharedArtist!.value as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
+                }
+            } else {
+                cell.sharedType.text = "You do not have any shared artists"
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -234,10 +246,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredSharedSong = sharedSongs.randomElement()
-            cell.name.text = featuredSharedSong!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
-            cell.sharedType.text = "Featured Shared Song"
+            if !sharedSongs.isEmpty {
+                let featuredSharedSong = sharedSongs.randomElement()
+                cell.name.text = featuredSharedSong!.key
+                cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
+                cell.sharedType.text = "Featured Shared Song"
+                fetchImages(featuredSharedSong!.value as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
+                }
+            } else {
+                cell.sharedType.text = "You do not have any shared songs"
+            }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -282,6 +306,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(friend)
             }
         }
+    }
+    
+    func fetchImages(_ item: ImageCardObject,_ cell: SharedCardTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var imageUrlStr = "https://files.radio.co/humorous-skink/staging/default-artwork.png"
+            if (item.getImage() != ""){
+                imageUrlStr = item.getImage()
+            }
+            let imageURL = URL(string: imageUrlStr)!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.sharedImage.image = UIImage(data: imageData! as Data)
+                cell.cardView.backgroundColor = cell.sharedImage.image?.averageColor?.lighter(by: 0.4)
+            }
+        }
+        completion(true)
     }
     
     func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
