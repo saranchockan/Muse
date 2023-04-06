@@ -160,24 +160,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             // Parse top artist data
                             // Get artist name, genre?, image?
                             var topSongs = [String:String]()
+                            var topSongImages = [String:String]()
                             for track in topTracks {
                                 topSongs[track.name] = track.artists?[0].name
+                                topSongImages[track.name] = track.album?.images![0].url.absoluteString
                             }
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
-                            self.loadTopSongsToFirebase(topSongs: topSongs)
+                            self.loadTopSongsToFirebase(topSongs: topSongs, topSongImages: topSongImages)
                             completion(true)
                         }
                     )
     }
     
-    func loadTopSongsToFirebase(topSongs: [String: String]) {
+    func loadTopSongsToFirebase(topSongs: [String: String], topSongImages: [String: String]) {
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
         let document = ref.document(currentUser!)
         document.setData(["Top Songs": topSongs], merge: true)
+        document.setData(["Top Song Images": topSongImages], merge: true)
         print("Added user's top songs to Firebase: \(topSongs)")
+        print("Added user's top song images to Firebase: \(topSongImages)")
     }
     
     func loadTopArtistsToFirebase(topArtistNames: [String], topArtistImages: [String:String]) {
@@ -300,6 +304,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let songs = data["Top Songs"] as! [String: String]
                         let artists = data["Top Artists"] as! [String]
                         let artistsImages = data["Top Artist Images"] as! [String: String]
+                        let songImages = data["Top Song Images"] as! [String: String]
                         let friends = data["friends"] as! [String]
                         
                         // Iterate through user's friends to get their Top Songs and Top Artists
@@ -326,6 +331,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                     let currSong = SharedSong()
                                                     currSong.songName = song
                                                     currSong.songArtists = artist
+                                                    print("Song Name: ", song)
+                                                    if let songImageURL =  songImages[song] {
+                                                        currSong.imgURLString = songImageURL
+                                                    }
                                                     currSong.friends = []
                                                     currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
                                                     sharedSongs[song] = currSong
