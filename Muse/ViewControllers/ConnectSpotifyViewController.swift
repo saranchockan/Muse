@@ -81,13 +81,7 @@ class ConnectSpotifyViewController: UIViewController {
                 }
             } else {
                 let homeVC = self.delegate as! HomeViewController
-                homeVC.processSpotifyData() { completion in
-                    if completion {
-                        homeVC.getTopArtistSongDataFromFirebase()
-                    } else {
-                        print("Error processing Spotify data")
-                    }
-                }
+                homeVC.processSpotifyData() 
                 
             }
             self.dismiss(animated: true, completion: nil)

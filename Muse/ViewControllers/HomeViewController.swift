@@ -16,12 +16,13 @@ var sharedArtists:[String:SharedArtist] = [:]
 var sharedSongs:[String: SharedSong] = [:]
 
 protocol SpotifyProtocol {
-    func processSpotifyData(_ completion: @escaping (_ success: Bool) -> Void)
-    func getTopArtistSongDataFromFirebase()
+    func processSpotifyData()
+//    func getTopArtistDataFromFirebase()
+//    func getTopSongDataFromFirebase()
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
-        
+
     @IBOutlet weak var tableView: UITableView!
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
@@ -42,16 +43,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("Authorizing Spotify...")
             self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
         } else {
-            print("Spotify Authorized...")
-            processSpotifyData() { completion in
-                if completion {
-                    self.getTopArtistSongDataFromFirebase()
-                } else {
-                    print("Error processing Spotify data")
+            self.processSpotifyData()
+        }
+    }
+    
+    func processSpotifyData() {
+        print("Spotify Authorized...")
+        processTopArtists() { completion in
+            if completion {
+                print("Processed Spotify Top Artist data")
+                self.processTopSongs() { completion in
+                    if completion {
+                        print("Processed Spotify Top Song data")
+                        self.getTopArtistSongDataFromFirebase()
+                    } else {
+                        print("Error processing Spotify Top Song data")
+                    }
                 }
-                
+            } else {
+                print("Error processing Spotify Top Artist data")
             }
-            
         }
     }
     
@@ -63,37 +74,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func getTopArtistSongDataFromFirebase() {
-        self.fetchUserSongArtistData { completion in
-            if completion {
-                // Loading Screen should be false at this point
-                // Reload table view
-                self.printOutput()
-                print("Reloading table view data...")
-                self.tableView.reloadData()
-            } else {
-                print("error")
-            }
-        }
-    }
-    
-    func processSpotifyData(_ completion: @escaping (_ success: Bool) -> Void) {
-        print("Spotify Authorized...")
-        // Get user's top artists
-        print("Retrieving user's top artists")
-        self.processTopArtists()
-        // Get user's top tracks
-        print("Retrieving user's top tracks")
-        self.processTopSongs()
+//    func getTopArtistDataFromFirebase() {
+//        self.computeSharedArtistsFromFirebase { completion in
+//            if completion {
+//                // Loading Screen should be false at this point
+//                // Reload table view
+//                self.printOutput()
+//                print("Reloading table view data for Top Artist...")
+//                self.tableView.reloadData()
+//            } else {
+//                print("error")
+//            }
+//        }
+//    }
+//
+//    func getTopSongDataFromFirebase() {
+//        self.computeSharedSongsFromFirebase { completion in
+//            if completion {
+//                // Loading Screen should be false at this point
+//                // Reload table view
+//                self.printOutput()
+//                print("Reloading table view data for Top Song...")
+//                self.tableView.reloadData()
+//            } else {
+//                print("error")
+//            }
+//        }
+//    }
         
-        // Reload table view
-        // to reflect data about top artists
-        // and top tracks
-        completion(true)
-    }
-    
-    func processTopArtists() {
+    func processTopArtists(_ completion: @escaping (_ success: Bool) -> Void) {
         var topArtists = [Artist]()
+        var topArtistNames = [String]()
         // Pull user's top artists from Spotify
         self.topArtistCancellables = spotify!.api
             .currentUserTopArtists(.shortTerm)
@@ -104,18 +115,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             topArtists = topArtistsResponse.items
                             // Parse top artist data
                             // Get artist name, genre?, image?
-                            var topArtistNames = [String]()
                             for artist in topArtists {
                                 topArtistNames.append(artist.name)
+                                print("\(artist.name) Image URL: \(String(describing: artist.images?[0].url))")
                             }
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
                             self.loadTopArtistsToFirebase(topArtistNames: topArtistNames)
+                            completion(true)
                         }
                     )
     }
     
-    func processTopSongs() {
+    func processTopSongs(_ completion: @escaping (_ success: Bool) -> Void) {
         var topTracks = [Track]()
         // Pull user's top artists from Spotify
         self.topArtistCancellables = spotify!.api
@@ -134,6 +146,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
                             self.loadTopSongsToFirebase(topSongs: topSongs)
+                            completion(true)
                         }
                     )
     }
@@ -227,95 +240,110 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func printOutput() {
-        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
-        for (_, sharedSong) in sharedSongs {
-            print("\(sharedSong.songName) \(sharedSong.songArtists)")
-            for friend in sharedSong.friends {
-                print(friend)
-            }
-        }
-
-        for (_, sharedArtist) in sharedArtists{
-            print("\(sharedArtist.artistName)")
-            for friend in sharedArtist.friends {
-                print(friend)
-            }
-        }
+//        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
+//        for (_, sharedSong) in sharedSongs {
+//            print("\(sharedSong.songName) \(sharedSong.songArtists)")
+//            for friend in sharedSong.friends {
+//                print(friend)
+//            }
+//        }
+//
+//        for (_, sharedArtist) in sharedArtists{
+//            print("\(sharedArtist.artistName)")
+//            for friend in sharedArtist.friends {
+//                print(friend)
+//            }
+//        }
     }
     
-    func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
-        let currentUser = Auth.auth().currentUser?.uid
-        let db = Firestore.firestore()
-        let ref = db.collection("Users")
-        // Get user data from current user
-        ref.getDocuments { snapshot, error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
+    func getTopArtistSongDataFromFirebase() {
+            self.fetchUserSongArtistData { completion in
+                if completion {
+                    // Loading Screen should be false at this point
+                    // Reload table view
+                    self.printOutput()
+                    print("Reloading table view data...")
+                    self.tableView.reloadData()
+                } else {
+                    print("error")
+                }
             }
-            
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    if document.documentID == currentUser {
-                        
-                        // Get Top Songs, Top Artists, Friends of current user
-                        let data = document.data()
-                        let songs = data["Top Songs"] as! [String: String]
-                        let artists = data["Top Artists"] as! [String]
-                        let friends = data["friends"] as! [String]
-                        
-                        // Iterate through user's friends to get their Top Songs and Top Artists
-                        for friend in friends {
-                            ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
-                            {(querySnapshot, err) in
-                                if let err = err {
-                                    print("Error getting documents: \(err)")
-                                } else {
-                                    for document in querySnapshot!.documents {
-                                        let friendSongs = document.data()["Top Songs"] as! [String: String]
-                                        let friendArtists = document.data()["Top Artists"] as! [String]
- 
-                                        for (song, artist) in songs {
-                                            // Both users share song by same artist
-                                            if artist == friendSongs[song] {
-                                                if sharedSongs[song] != nil {
-                                                    let currSong = sharedSongs[song]
-                                                    currSong!.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    // Swift does not have unique keys ??
-                                                    sharedSongs.removeValue(forKey: song)
-                                                    sharedSongs[song] = currSong
-                                                } else {
-                                                    let currSong = SharedSong()
-                                                    currSong.songName = song
-                                                    currSong.songArtists = artist
-                                                    currSong.friends = []
-                                                    currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    sharedSongs[song] = currSong
+        }
+    
+    func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
+            let currentUser = Auth.auth().currentUser?.uid
+            let db = Firestore.firestore()
+            let ref = db.collection("Users")
+            // Get user data from current user
+            ref.getDocuments { snapshot, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        if document.documentID == currentUser {
+                            
+                            // Get Top Songs, Top Artists, Friends of current user
+                            let data = document.data()
+                            let songs = data["Top Songs"] as! [String: String]
+                            let artists = data["Top Artists"] as! [String]
+                            let friends = data["friends"] as! [String]
+                            
+                            // Iterate through user's friends to get their Top Songs and Top Artists
+                            for friend in friends {
+                                ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
+                                {(querySnapshot, err) in
+                                    if let err = err {
+                                        print("Error getting documents: \(err)")
+                                    } else {
+                                        for document in querySnapshot!.documents {
+                                            let friendSongs = document.data()["Top Songs"] as! [String: String]
+                                            let friendArtists = document.data()["Top Artists"] as! [String]
+     
+                                            for (song, artist) in songs {
+                                                // Both users share song by same artist
+                                                if artist == friendSongs[song] {
+                                                    if sharedSongs[song] != nil {
+                                                        let currSong = sharedSongs[song]
+                                                        currSong!.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                        // Swift does not have unique keys ??
+                                                        sharedSongs.removeValue(forKey: song)
+                                                        sharedSongs[song] = currSong
+                                                    } else {
+                                                        let currSong = SharedSong()
+                                                        currSong.songName = song
+                                                        currSong.songArtists = artist
+                                                        currSong.friends = []
+                                                        currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                        sharedSongs[song] = currSong
+                                                    }
+                                                }
+                                               
+                                           }
+                                            
+                                            
+                                            for artist in artists {
+                                                if friendArtists.contains(artist) {
+                                                    if sharedArtists[artist] != nil {
+                                                        let currArtist = sharedArtists[artist]
+                                                        currArtist?.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                        sharedArtists.removeValue(forKey: artist)
+                                                        sharedArtists[artist] = currArtist
+                                                    } else {
+                                                        let currArtist = SharedArtist()
+                                                        currArtist.artistName = artist
+                                                        currArtist.friends = []
+                                                        currArtist.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                        sharedArtists[artist] = currArtist
+                                                    }
                                                 }
                                             }
-                                           
-                                       }
-                                        
-                                        
-                                        for artist in artists {
-                                            if friendArtists.contains(artist) {
-                                                if sharedArtists[artist] != nil {
-                                                    let currArtist = sharedArtists[artist]
-                                                    currArtist?.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    sharedArtists.removeValue(forKey: artist)
-                                                    sharedArtists[artist] = currArtist
-                                                } else {
-                                                    let currArtist = SharedArtist()
-                                                    currArtist.artistName = artist
-                                                    currArtist.friends = []
-                                                    currArtist.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    sharedArtists[artist] = currArtist
-                                                }
-                                            }
+                                            
+                                            print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+                                            completion(true)
                                         }
-                                        
-                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
-                                        completion(true)
                                     }
                                 }
                             }
@@ -325,5 +353,4 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-}
+
