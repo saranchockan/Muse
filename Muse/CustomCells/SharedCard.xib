@@ -27,10 +27,9 @@
                         <rect key="frame" x="17" y="64" width="358" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="edit.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-Ri-48P">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-Ri-48P">
                                 <rect key="frame" x="18" y="17" width="116" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="25"/>
@@ -64,6 +63,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="cardView" destination="6sO-Wv-Ydx" id="GuF-TS-XW6"/>
                 <outlet property="friendsDescription" destination="qEZ-6U-PmC" id="Jgh-zb-PGq"/>
                 <outlet property="name" destination="bmP-A3-QwZ" id="O7A-Fs-mcn"/>
                 <outlet property="sharedImage" destination="Xwb-Ri-48P" id="im6-EJ-9Jc"/>
@@ -73,7 +73,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="edit.png" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

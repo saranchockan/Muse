@@ -165,24 +165,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             // Parse top artist data
                             // Get artist name, genre?, image?
                             var topSongs = [String:String]()
+                            var topSongImages = [String:String]()
                             for track in topTracks {
                                 topSongs[track.name] = track.artists?[0].name
+                                topSongImages[track.name] = track.album?.images![0].url.absoluteString
                             }
                             // Load user's top artist data into Firebase
                             // Add artist to user top artist
-                            self.loadTopSongsToFirebase(topSongs: topSongs)
+                            self.loadTopSongsToFirebase(topSongs: topSongs, topSongImages: topSongImages)
                             completion(true)
                         }
                     )
     }
     
-    func loadTopSongsToFirebase(topSongs: [String: String]) {
+    func loadTopSongsToFirebase(topSongs: [String: String], topSongImages: [String: String]) {
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
         let document = ref.document(currentUser!)
         document.setData(["Top Songs": topSongs], merge: true)
+        document.setData(["Top Song Images": topSongImages], merge: true)
         print("Added user's top songs to Firebase: \(topSongs)")
+        print("Added user's top song images to Firebase: \(topSongImages)")
     }
     
     func loadTopArtistsToFirebase(topArtistNames: [String], topArtistImages: [String:String]) {
@@ -223,10 +227,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredSharedArtist = sharedArtists.randomElement()
-            cell.name.text = featuredSharedArtist!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
-            cell.sharedType.text = "Featured Shared Artist"
+            if !sharedSongs.isEmpty {
+                let featuredSharedArtist = sharedArtists.randomElement()
+                cell.name.text = featuredSharedArtist!.key
+                cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
+                cell.sharedType.text = "Featured Shared Artist"
+                fetchImages(featuredSharedArtist!.value as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
+                }
+            } else {
+                cell.sharedType.text = "You do not have any shared artists"
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -235,10 +251,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredSharedSong = sharedSongs.randomElement()
-            cell.name.text = featuredSharedSong!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
-            cell.sharedType.text = "Featured Shared Song"
+            if !sharedSongs.isEmpty {
+                let featuredSharedSong = sharedSongs.randomElement()
+                cell.name.text = featuredSharedSong!.key
+                cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
+                cell.sharedType.text = "Featured Shared Song"
+                fetchImages(featuredSharedSong!.value as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
+                }
+            } else {
+                cell.sharedType.text = "You do not have any shared songs"
+            }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -285,6 +313,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func fetchImages(_ item: ImageCardObject,_ cell: SharedCardTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var imageUrlStr = "https://files.radio.co/humorous-skink/staging/default-artwork.png"
+            if (item.getImage() != ""){
+                imageUrlStr = item.getImage()
+            }
+            let imageURL = URL(string: imageUrlStr)!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.sharedImage.image = UIImage(data: imageData! as Data)
+                cell.cardView.backgroundColor = cell.sharedImage.image?.averageColor?.lighter(by: 0.4)
+            }
+        }
+        completion(true)
+    }
+    
     func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
@@ -305,6 +349,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let songs = data["Top Songs"] as! [String: String]
                         let artists = data["Top Artists"] as! [String]
                         let artistsImages = data["Top Artist Images"] as! [String: String]
+                        let songImages = data["Top Song Images"] as! [String: String]
                         let friends = data["friends"] as! [String]
                         
                         // Iterate through user's friends to get their Top Songs and Top Artists
@@ -331,6 +376,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                     let currSong = SharedSong()
                                                     currSong.songName = song
                                                     currSong.songArtists = artist
+                                                    print("Song Name: ", song)
+                                                    if let songImageURL =  songImages[song] {
+                                                        currSong.imgURLString = songImageURL
+                                                    }
                                                     currSong.friends = []
                                                     currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
                                                     sharedSongs[song] = currSong

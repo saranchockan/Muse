@@ -35,6 +35,28 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCardCell", for: indexPath) as! ImageCardCollectionViewCell
         let row = indexPath.row
         cell.label.text = collectionList[row].getName()
+        fetchImages(collectionList[row], cell) { completion in
+            if completion {
+                print("images correctly fetched")
+            } else {
+                print("error")
+            }
+        }
         return cell
+    }
+    
+    func fetchImages(_ item: ImageCardObject,_ cell: ImageCardCollectionViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var imageUrlStr = "https://files.radio.co/humorous-skink/staging/default-artwork.png"
+            if (item.getImage() != ""){
+                imageUrlStr = item.getImage()
+            }
+            let imageURL = URL(string: imageUrlStr)!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.img.image = UIImage(data: imageData! as Data)
+            }
+        }
+        completion(true)
     }
 }
