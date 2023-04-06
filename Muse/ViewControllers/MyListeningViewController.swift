@@ -44,6 +44,13 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         
+        if (myArtists.isEmpty && mySongs.isEmpty){
+            self.tableView.isHidden = true
+            return UITableViewCell()
+        }else{
+            self.tableView.isHidden = false
+        }
+        
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell

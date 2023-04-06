@@ -21,6 +21,7 @@
 		5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */; };
 		5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */; };
 		5B72CD1829B7F56B0024DEAF /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B72CD1729B7F56B0024DEAF /* edit.png */; };
+		5B78156829DF3D22003FB9E2 /* largeProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B78156729DF3D22003FB9E2 /* largeProfile.png */; };
 		5B82A73C29B179790032C1FE /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */; };
 		5B82A73E29B17ABD0032C1FE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */; };
 		5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */; };
@@ -74,6 +75,7 @@
 		5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpotifyLogo.png; sourceTree = "<group>"; };
 		5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5B72CD1729B7F56B0024DEAF /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		5B78156729DF3D22003FB9E2 /* largeProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeProfile.png; sourceTree = "<group>"; };
 		5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertsViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		5B06281529B7E33600012791 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B78156729DF3D22003FB9E2 /* largeProfile.png */,
 				5BE0B6F129D783A500376010 /* friends@3x.png */,
 				5BE0B6F229D783A500376010 /* profile@3x.png */,
 				5BE0B6F429D783A600376010 /* settings@3x.png */,
@@ -327,6 +330,7 @@
 				5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */,
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
+				5B78156829DF3D22003FB9E2 /* largeProfile.png in Resources */,
 				5BE0B6F029D782B900376010 /* home@3x.png in Resources */,
 				5BE0B6F629D783A600376010 /* profile@3x.png in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,

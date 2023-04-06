@@ -108,7 +108,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         return sharedConcerts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = sharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName

@@ -10,6 +10,9 @@ import UIKit
 
 class User {
     var uid:String = ""
+    var firstName:String = ""
+    var lastName:String = ""
+    var location:String = ""
     var friends:[String] = []
     var requests:[String] = ["Sneha", "Riya", "Ria"]
     var pic: UIImage?

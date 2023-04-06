@@ -39,7 +39,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
-        greeting.title = "Hello \(userFirstName)"
         settingsButton.isHidden = true
         
         spotify = Spotify()
@@ -66,6 +65,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let friendsNavVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
                 let friendsVC = friendsNavVC.topViewController as! MyFriendsViewController
                 friendsVC.currentUserObject = self.currentUserObject
+                self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
                 self.settingsButton.isHidden = false
             } else {
                 print("error")
@@ -363,6 +363,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 for document in snapshot.documents {
                     if document.documentID == currentUser {
                         self.currentUserObject.uid = currentUser!
+                        self.currentUserObject.firstName = "\(document.data()["First Name"]!)"
+                        self.currentUserObject.lastName = "\(document.data()["Last Name"]!)"
+                        self.currentUserObject.location = "\(document.data()["Location"]!)"
                         
                         let data = document.data()
                         let friends = data["friends"] as! [String]
