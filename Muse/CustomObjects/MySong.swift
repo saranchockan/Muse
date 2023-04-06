@@ -11,6 +11,8 @@ class MySong: ImageCardObject {
     var songName: String = ""
     var imgURLString: String = ""
     
+    var artistName: String = ""
+    
     func getName() -> String {
         return songName
     }
@@ -18,4 +20,7 @@ class MySong: ImageCardObject {
     func getImage() -> String {
         return imgURLString
     }
+    func getArtistName() -> String {
+        return artistName
+    }    
 }

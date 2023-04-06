@@ -10,5 +10,6 @@ import Foundation
 class SharedConcert {
     var concertName: String = ""
     var concertDate: String?
+    var concertImageURL: String?
     var friends: [String] = []
 }
