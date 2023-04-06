@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 
-
 // Ticketmaster API call and event parsing
 // code referenced from https://github.com/nastechi/MyEvents
 struct EventData: Decodable {
@@ -25,6 +24,12 @@ struct Embedded: Decodable {
 struct EventItem: Decodable {
     let name: String
     let dates: Dates
+    let images: [ImageData]
+}
+
+struct ImageData: Decodable {
+    let ratio: String?
+    let url: String
 }
 
 struct Dates: Decodable {
@@ -39,7 +44,7 @@ struct Start: Decodable {
 struct Event {
     let name: String
 //    let type: String
-//    let imageUrl: String?
+    let imageUrl: String?
     let date: String?
 //    var visited: Bool
 //    var going: Bool
@@ -56,16 +61,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     let concertCellIdentifier = "ConcertCard"
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        // Get concert data from Ticket master
-        // and load it into Firebase
-        
-        // Load concert data from Firebase
-        // into Concert UI
-    }
-    
     func getConcertDataFromTicketMaster() {
-        print ("in get concert")
         for artist in sharedArtists {
             var fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist.key)"
             //                    print(fetchEventsEndpoint)
@@ -77,9 +73,6 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
-                    //self.tableView.reloadData()
-                    // PUT FIREBASE LOGIC IN HERE
-                    //                            self.printOutput()
                 } else {
                     print("error")
                 }
@@ -99,6 +92,18 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("Num of Shared Artists: \(sharedArtists.count)")
     }
     
+    func fetchImages(_ concert: SharedConcert,_ cell: ConcertTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let imageURL = URL(string: concert.concertImageURL ?? "https://imageio.forbes.com/specials-images/imageserve/746559733/960x0.jpg?format=jpg&width=960")!
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                cell.artistImage.image = UIImage(data: imageData! as Data)
+                cell.cardView.backgroundColor = cell.artistImage.image?.averageColor?.lighter(by: 0.4)
+            }
+        }
+        completion(true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sharedConcerts.count
     }
@@ -107,8 +112,22 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = sharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName
-        cell.location.text = concert.concertDate
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        let date = dateFormatterGet.date(from: concert.concertDate ?? "")
+        
+        cell.date.text = dateFormatterPrint.string(from: date!)
         cell.concertDescription.text = writeConcertDescription(concertFriends: concert.friends)
+        fetchImages(concert, cell) { completion in
+            if completion {
+                print("images correctly fetched")
+            } else {
+                print("error")
+            }
+        }
         return cell
     }
     
@@ -196,6 +215,9 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     if event.date != nil {
                         sharedConcert.concertDate = event.date
                     }
+                    if event.imageUrl != nil {
+                        sharedConcert.concertImageURL = event.imageUrl
+                    }
                     if sharedArtists[artist] != nil {
                         let concertBuddies = sharedArtists[artist]?.friends
                         sharedConcert.friends = concertBuddies!
@@ -217,7 +239,8 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
             for i in 0..<decodedData._embedded.events.count {
                 let name = decodedData._embedded.events[i].name
                 let date = decodedData._embedded.events[i].dates.start.localDate
-                let event = Event(name: name, date: date)
+                let imageUrl = getImageUrl(images: decodedData._embedded.events[i].images)
+                let event = Event(name: name,  imageUrl: imageUrl, date: date)
                 events.append(event)
                 if i > 20 { break }
             }
@@ -226,5 +249,15 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         return events
     }
+    
+    func getImageUrl(images: [ImageData]?) -> String? {
+            if images == nil || images!.isEmpty { return nil }
+            for image in images! {
+                if image.ratio != "16_9" {
+                    return image.url
+                }
+            }
+            return images![0].url
+        }
 }
 

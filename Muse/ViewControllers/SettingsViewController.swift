@@ -40,6 +40,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func deleteAccount(_ sender: Any) {
+        Auth.auth().currentUser?.delete()
     }
     
     @IBAction func editProfilePicture(_ sender: Any) {

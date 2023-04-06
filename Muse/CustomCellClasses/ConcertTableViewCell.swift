@@ -9,8 +9,9 @@ import UIKit
 
 class ConcertTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var artistImage: UIImageView!
     @IBOutlet weak var concertDescription: UILabel!
     

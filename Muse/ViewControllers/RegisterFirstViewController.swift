@@ -45,11 +45,11 @@ class RegisterFirstViewController: UIViewController {
         let currentUser = Auth.auth().currentUser?.uid
 //        let db = Database.database().reference()
         
-        let db = Firestore.firestore()
-        let ref = db.collection("Users")
-        var document = ref.document(currentUser!)
-        
-        document.setData(["Email": userEmail])
+//        let db = Firestore.firestore()
+//        let ref = db.collection("Users")
+//        var document = ref.document(currentUser!)
+//
+//        document.setData(["Email": userEmail])
     }
 
 }

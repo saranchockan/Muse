@@ -31,6 +31,9 @@ class AddFriendsViewController: UIViewController {
                 "Last Name": userLastName,
                 "Phone Number": userPhoneNumber,
                 "Location": userLocation,
+                "Top Artists": [],
+                "Top Songs": [String: String](),
+                "friends": [],
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")

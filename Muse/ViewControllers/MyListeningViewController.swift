@@ -13,8 +13,8 @@ import FirebaseFirestoreSwift
 class MyListeningViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var mySongs:[String: String] = [:]
-    var myArtists:[String] = []
+    var mySongs:[String: MySong] = [:]
+    var myArtists:[MyArtist] = []
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
     
@@ -29,6 +29,7 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
         self.fetchUserSongArtistData { completion in
             if completion {
                 self.printOutput()
+                self.tableView.reloadData()
             } else {
                 print("error")
             }
@@ -46,26 +47,28 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Justin Bieber"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this artist"
-            cell.sharedType.text = "My Top Artist"
+            let featuredMyArtist = myArtists.randomElement()
+            cell.name.text = featuredMyArtist?.artistName
+            cell.friendsDescription.text = ""
+            cell.sharedType.text = "My Featured Artist"
             return cell
-//        case 1:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
-//            cell.title.text = "Recently Played Tracks"
-//            cell.collectionList = Array(mySongs.values)
-//            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Recently Played Tracks"
+            cell.collectionList = Array(mySongs.values)
+            return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Montero"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this album"
-            cell.sharedType.text = "My Top Genre"
+            let featuredMySong = mySongs.randomElement()
+            cell.name.text = featuredMySong?.key
+            cell.friendsDescription.text = ""
+            cell.sharedType.text = "My Featured Song"
             return cell
-//        case 3:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
-//            cell.title.text = "Recommended Music"
-//            cell.collectionList = myArtists
-//            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
+            cell.title.text = "Recent Artists"
+            cell.collectionList = myArtists
+            return cell
         default:
             print("this isn't supposed to happen")
             return UITableViewCell()
@@ -74,12 +77,12 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func printOutput() {
-        for (song, artist) in mySongs {
-            print("Song name: \(song) Song artist: \(artist)")
+        for (song, songObject) in mySongs {
+            print("Song name: \(songObject.songName) Song artist: \(songObject.artistName)")
         }
         
         for artist in myArtists {
-            print("Artist: \(artist)")
+            print("Artist: \(artist.artistName)")
         }
     }
     
@@ -100,9 +103,22 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                         
                         let data = document.data()
                         
-                        self.mySongs = data["Top Songs"] as! [String: String]
+                        let songs = data["Top Songs"] as! [String: String]
                         
-                        self.myArtists = data["Top Artists"] as! [String]
+                        let artists = data["Top Artists"] as! [String]
+                        
+                        for (song, artist) in songs {
+                            var newSong = MySong()
+                            newSong.songName = song
+                            newSong.artistName = artist
+                            self.mySongs[song] = newSong
+                        }
+                        
+                        for artist in artists {
+                            var newArtist = MyArtist()
+                            newArtist.artistName = artist
+                            self.myArtists.append(newArtist)
+                        }
                         
                         
                     }
