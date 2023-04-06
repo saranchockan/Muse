@@ -31,6 +31,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentUserObject:User = User()
     public var spotify: Spotify? = nil
     private var topArtistCancellables: AnyCancellable? = nil
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
+    }
 
     
     override func viewDidLoad() {
@@ -393,7 +398,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 if let err = err {
                                     print("Error getting documents: \(err)")
                                 } else {
-                                    print("In friend loop")
                                     for document in querySnapshot!.documents {
                                         let currentFriend = User()
                                         currentFriend.uid = document.documentID

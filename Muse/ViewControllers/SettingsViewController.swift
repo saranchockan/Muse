@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class SettingsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -24,6 +25,21 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         firstName.text = currentUserObject.firstName
         lastName.text = currentUserObject.lastName
         location.text = currentUserObject.location
+        
+        let currentUser = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        
+        db.collection("Users").document(currentUser!).updateData([
+            "First Name": firstName.text! as String,
+            "Last Name": lastName.text! as String,
+            "Location": location.text! as String,
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
         
         let firstPaddingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 31))
         firstName.leftView = firstPaddingView
@@ -43,6 +59,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.allowsEditing = true
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.sourceType = .photoLibrary
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
