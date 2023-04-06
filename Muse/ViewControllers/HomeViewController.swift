@@ -22,9 +22,13 @@ protocol SpotifyProtocol {
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
         
+    @IBOutlet weak var greeting: UINavigationItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
     let sharedCellIdentifier = "SharedCard"
     let imageCellIdentifier = "ImageCard"
+    var currentUserObject:User = User()
     public var spotify: Spotify? = nil
     private var topArtistCancellables: AnyCancellable? = nil
 
@@ -35,6 +39,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
+        settingsButton.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -44,6 +49,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             processSpotifyData()
         }
+        
+        self.getFriends { completion in
+            if completion {
+                print("MY FRIENDS: \(self.currentUserObject.friends.count)")
+                let friendsNavVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
+                let friendsVC = friendsNavVC.topViewController as! MyFriendsViewController
+                friendsVC.currentUserObject = self.currentUserObject
+                self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
+                self.settingsButton.isHidden = false
+            } else {
+                print("error")
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,9 +69,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
            let connectSpotifyVC = segue.destination as? ConnectSpotifyViewController {
             connectSpotifyVC.delegate = self
             connectSpotifyVC.spotify = spotify
+        } else if segue.identifier == "settingsSegue",
+            let settingsVC = segue.destination as? SettingsViewController {
+            settingsVC.currentUserObject = self.currentUserObject
         }
     }
-    
+
     func getTopArtistSongDataFromFirebase() {
         self.fetchUserSongArtistData { completion in
             if completion {
@@ -192,9 +213,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredTopArtist = sharedArtists.randomElement()
-            cell.name.text = featuredTopArtist!.key
-            cell.friendsDescription.text = writeFeaturedDescription(featuredTopArtist!.value.friends, "artist")
+            let featuredSharedArtist = sharedArtists.randomElement()
+            cell.name.text = featuredSharedArtist!.key
+            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
             cell.sharedType.text = "Featured Shared Artist"
             return cell
         case 1:
@@ -204,9 +225,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            cell.name.text = "Montero"
-            cell.friendsDescription.text = "Saahithi and Liz are listening to this album"
-            cell.sharedType.text = "Top Shared Album"
+            let featuredSharedSong = sharedSongs.randomElement()
+            cell.name.text = featuredSharedSong!.key
+            cell.friendsDescription.text = writeFeaturedDescription(featuredSharedSong!.value.friends, "song")
+            cell.sharedType.text = "Featured Shared Song"
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
@@ -336,4 +358,47 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func getFriends(_ completion: @escaping (_ success: Bool) -> Void) {
+        let currentUser = Auth.auth().currentUser?.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        
+        ref.getDocuments { snapshot, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    if document.documentID == currentUser {
+                        self.currentUserObject.uid = currentUser!
+                        self.currentUserObject.firstName = "\(document.data()["First Name"]!)"
+                        self.currentUserObject.lastName = "\(document.data()["Last Name"]!)"
+                        self.currentUserObject.location = "\(document.data()["Location"]!)"
+                        
+                        let data = document.data()
+                        let friends = data["friends"] as! [String]
+                        
+                        for friend in friends {
+                            ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
+                            {(querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    print("In friend loop")
+                                    for document in querySnapshot!.documents {
+                                        let friendName: String = "\(document.data()["First Name"]!) \(document.data()["Last Name"]!) "
+                                        self.currentUserObject.friends.append(friendName)
+                                    }
+                                    
+                                    completion (true)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

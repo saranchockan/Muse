@@ -11,6 +11,7 @@
 		1EF30EA529D29C9C0082E775 /* SharedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA429D29C9C0082E775 /* SharedSong.swift */; };
 		1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EA829D371690082E775 /* SharedArtist.swift */; };
 		1EF30EAF29D525910082E775 /* SharedConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30EAE29D525910082E775 /* SharedConcert.swift */; };
+		1EF30F3129DCACD40082E775 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF30F3029DCACD40082E775 /* User.swift */; };
 		5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */; };
 		5B38B54E29D37A0A00AE8CC6 /* ConcertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */; };
 		5B38B55029D4DF0200AE8CC6 /* SharedCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */; };
@@ -20,6 +21,7 @@
 		5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */; };
 		5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */; };
 		5B72CD1829B7F56B0024DEAF /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B72CD1729B7F56B0024DEAF /* edit.png */; };
+		5B78156829DF3D22003FB9E2 /* largeProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B78156729DF3D22003FB9E2 /* largeProfile.png */; };
 		5B82A73C29B179790032C1FE /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */; };
 		5B82A73E29B17ABD0032C1FE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */; };
 		5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */; };
@@ -36,6 +38,9 @@
 		5BE0B6F629D783A600376010 /* profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F229D783A500376010 /* profile@3x.png */; };
 		5BE0B6F729D783A600376010 /* ticket@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F329D783A600376010 /* ticket@3x.png */; };
 		5BE0B6F829D783A600376010 /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F429D783A600376010 /* settings@3x.png */; };
+		5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6F929DB4D8500376010 /* FriendCard.xib */; };
+		5BE0B6FC29DB4D9B00376010 /* FriendCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */; };
+		5BE0B6FE29DCE69A00376010 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */; };
 		5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */; };
 		5BE71A3329AFFCA40067DD61 /* LogoWithName.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3129AFFCA40067DD61 /* LogoWithName.png */; };
 		5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE71A3229AFFCA40067DD61 /* Logo.png */; };
@@ -60,6 +65,7 @@
 		1EF30EA429D29C9C0082E775 /* SharedSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSong.swift; sourceTree = "<group>"; };
 		1EF30EA829D371690082E775 /* SharedArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedArtist.swift; sourceTree = "<group>"; };
 		1EF30EAE29D525910082E775 /* SharedConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConcert.swift; sourceTree = "<group>"; };
+		1EF30F3029DCACD40082E775 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5B38B54A29D3791F00AE8CC6 /* ConcertCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConcertCard.xib; sourceTree = "<group>"; };
 		5B38B54D29D37A0A00AE8CC6 /* ConcertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertTableViewCell.swift; sourceTree = "<group>"; };
 		5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedCard.xib; sourceTree = "<group>"; };
@@ -69,6 +75,7 @@
 		5B6C828D29B66CBC00A72CD7 /* SpotifyLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpotifyLogo.png; sourceTree = "<group>"; };
 		5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5B72CD1729B7F56B0024DEAF /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		5B78156729DF3D22003FB9E2 /* largeProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeProfile.png; sourceTree = "<group>"; };
 		5B82A73B29B179790032C1FE /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		5B82A73D29B17ABD0032C1FE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertsViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +92,9 @@
 		5BE0B6F229D783A500376010 /* profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@3x.png"; sourceTree = "<group>"; };
 		5BE0B6F329D783A600376010 /* ticket@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket@3x.png"; sourceTree = "<group>"; };
 		5BE0B6F429D783A600376010 /* settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@3x.png"; sourceTree = "<group>"; };
+		5BE0B6F929DB4D8500376010 /* FriendCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCard.xib; sourceTree = "<group>"; };
+		5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardTableViewCell.swift; sourceTree = "<group>"; };
+		5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5BE71A2F29AE89970067DD61 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		5BE71A3129AFFCA40067DD61 /* LogoWithName.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoWithName.png; sourceTree = "<group>"; };
 		5BE71A3229AFFCA40067DD61 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
@@ -120,6 +130,7 @@
 		5B06281529B7E33600012791 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5B78156729DF3D22003FB9E2 /* largeProfile.png */,
 				5BE0B6F129D783A500376010 /* friends@3x.png */,
 				5BE0B6F229D783A500376010 /* profile@3x.png */,
 				5BE0B6F429D783A600376010 /* settings@3x.png */,
@@ -141,6 +152,7 @@
 				5B38B54F29D4DF0200AE8CC6 /* SharedCard.xib */,
 				5BE0B6DA29D6541100376010 /* ImageCard.xib */,
 				5BE0B6DE29D6555E00376010 /* ImageCardCell.xib */,
+				5BE0B6F929DB4D8500376010 /* FriendCard.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -152,6 +164,7 @@
 				5B38B55129D4DF1E00AE8CC6 /* SharedCardTableViewCell.swift */,
 				5BE0B6E029D6557700376010 /* ImageCardTableViewCell.swift */,
 				5BE0B6E229D657CE00376010 /* ImageCardCollectionViewCell.swift */,
+				5BE0B6FB29DB4D9B00376010 /* FriendCardTableViewCell.swift */,
 			);
 			path = CustomCellClasses;
 			sourceTree = "<group>";
@@ -182,6 +195,7 @@
 				1EF30EA429D29C9C0082E775 /* SharedSong.swift */,
 				5BE0B6E429D664FA00376010 /* MyArtist.swift */,
 				5BE0B6E729D6655300376010 /* MySong.swift */,
+				1EF30F3029DCACD40082E775 /* User.swift */,
 			);
 			path = CustomObjects;
 			sourceTree = "<group>";
@@ -218,6 +232,7 @@
 				B6DA27CD29AE7035003D2C44 /* LaunchScreen.storyboard */,
 				B6DA27D029AE7035003D2C44 /* Info.plist */,
 				5BE71A3529B166B40067DD61 /* GoogleService-Info.plist */,
+				5BE0B6FD29DCE69A00376010 /* UIImage+Extension.swift */,
 			);
 			path = Muse;
 			sourceTree = "<group>";
@@ -312,8 +327,10 @@
 				5B6C828E29B66CBC00A72CD7 /* SpotifyLogo.png in Resources */,
 				5BE0B6F829D783A600376010 /* settings@3x.png in Resources */,
 				5B38B54B29D3791F00AE8CC6 /* ConcertCard.xib in Resources */,
+				5BE0B6FA29DB4D8500376010 /* FriendCard.xib in Resources */,
 				5BE71A3429AFFCA40067DD61 /* Logo.png in Resources */,
 				B6DA27CC29AE7035003D2C44 /* Assets.xcassets in Resources */,
+				5B78156829DF3D22003FB9E2 /* largeProfile.png in Resources */,
 				5BE0B6F029D782B900376010 /* home@3x.png in Resources */,
 				5BE0B6F629D783A600376010 /* profile@3x.png in Resources */,
 				B6DA27CA29AE7030003D2C44 /* Main.storyboard in Resources */,
@@ -340,17 +357,20 @@
 				5B82A73E29B17ABD0032C1FE /* HomeViewController.swift in Sources */,
 				5B49B78E29B178CC00247E0C /* ConnectSpotifyViewController.swift in Sources */,
 				5BE71A3029AE89970067DD61 /* LoginScreenViewController.swift in Sources */,
+				5BE0B6FC29DB4D9B00376010 /* FriendCardTableViewCell.swift in Sources */,
 				5B82A74429B17D890032C1FE /* MyListeningViewController.swift in Sources */,
 				F673156029DDE29D00CF5751 /* Spotify.swift in Sources */,
 				B6DA27C529AE7030003D2C44 /* SceneDelegate.swift in Sources */,
 				1EF30EA929D371690082E775 /* SharedArtist.swift in Sources */,
 				5B72CD1629B7F0C00024DEAF /* SettingsViewController.swift in Sources */,
+				5BE0B6FE29DCE69A00376010 /* UIImage+Extension.swift in Sources */,
 				5B38B54E29D37A0A00AE8CC6 /* ConcertTableViewCell.swift in Sources */,
 				5BE0B6E329D657CE00376010 /* ImageCardCollectionViewCell.swift in Sources */,
 				5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */,
 				5B82A74229B17D7C0032C1FE /* MyFriendsViewController.swift in Sources */,
 				5BE0B6E529D664FA00376010 /* MyArtist.swift in Sources */,
 				5BE0B6E129D6557700376010 /* ImageCardTableViewCell.swift in Sources */,
+				1EF30F3129DCACD40082E775 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
