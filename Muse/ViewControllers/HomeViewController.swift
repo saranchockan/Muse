@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentUserObject:User = User()
     public var spotify: Spotify? = nil
     private var topArtistCancellables: AnyCancellable? = nil
+    var fromRegistration = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,7 +45,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
-        settingsButton.isHidden = true
+        settingsButton.isHidden = !newAccount
+        
+        if newAccount{
+            var currentUserObject = User()
+            currentUserObject.firstName = userFirstName
+            currentUserObject.lastName = userLastName
+            currentUserObject.location = userLocation
+        }
         
         spotify = Spotify()
         print("Configure Spotify Authorization")

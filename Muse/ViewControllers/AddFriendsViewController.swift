@@ -15,6 +15,7 @@ class AddFriendsViewController: UIViewController {
     }
     
     @IBAction func finishRegistration(_ sender: Any) {
+        newAccount = true
         // Register user with firebase Auth
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
             guard let user = authResult?.user, error == nil else {
