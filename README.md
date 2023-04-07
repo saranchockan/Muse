@@ -28,7 +28,7 @@ We were unable to implement the ability to add friends through our app’s My Fr
 We added an unforeseen feature. We used keychain to store Spotify authorization so the user does not have to authenticate every time they open the app.
 We will not be implementing push notifications in our app because the data we are fetching is not real time. It doesn’t make sense to have notifications in this context.
 We will be implementing the ability to add friends by the final project.
-Test Account: saahithi@gmail.com
+Test Account: richa@gmail.com
 You will not be able to sign in on your account because your Spotify account has to be added to a Spotify allow list. Even if you were able to sign in, you would not have friends, so you would not see any meaningful data in the home screen or concerts screen.
 
 # IMPORTANT
@@ -38,7 +38,7 @@ There are three ways to properly test the Beta. There are two reasons why we can
 A) To show the full fledged functionality of our app, we can come in during office hours and show you how it works on our end. We prefer this method as there are a lot of complications that we addressed above. 
 
 B) (Assuming you have your email register in our Spotify Developer Dashboard) You can sign in into one of our accounts and authorize your Spotify. 
-username: saahithi@gmail.com
+username: richa@gmail.com
 password: password
 Your Spotify data would be merged with Saahithi’s spotify data but you would still be able to see your music data in the UI. 
 
