@@ -52,6 +52,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             currentUserObject.firstName = userFirstName
             currentUserObject.lastName = userLastName
             currentUserObject.location = userLocation
+            
+            self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
         }
         
         spotify = Spotify()
