@@ -40,7 +40,7 @@ A) To show the full fledged functionality of our app, we can come in during offi
 B) (Assuming you have your email register in our Spotify Developer Dashboard) You can sign in into one of our accounts and authorize your Spotify. 
 username: richa@gmail.com
 password: password
-Your Spotify data would be merged with Saahithi’s spotify data but you would still be able to see your music data in the UI. 
+Your Spotify data would be merged with Richa’s spotify data but you would still be able to see your music data in the UI. 
 
 C) You create your own account and register with your Spotify account. You will not see any data on Home and Concert as you will not have any friends to share music with. But, you will be able to see your Spotify data in your Listening Page. 
 
