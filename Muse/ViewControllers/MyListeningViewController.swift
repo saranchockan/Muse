@@ -143,19 +143,27 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                         let data = document.data()
                         
                         let songs = data["Top Songs"] as! [String: String]
-                        
                         let artists = data["Top Artists"] as! [String]
+                        let artistsImages = data["Top Artist Images"] as! [String: String]
+                        let songImages = data["Top Song Images"] as! [String: String]
                         
                         for (song, artist) in songs {
                             let newSong = MySong()
                             newSong.songName = song
                             newSong.artistName = artist
+                            if let songImageURL =  songImages[song] {
+                                newSong.imgURLString = songImageURL
+                            }
                             self.mySongs[song] = newSong
                         }
                         
                         for artist in artists {
                             let newArtist = MyArtist()
                             newArtist.artistName = artist
+                            newArtist.imgURLString = artistsImages[artist]!
+                            if let songImageURL =  artistsImages[artist] {
+                                newArtist.imgURLString = songImageURL
+                            }
                             self.myArtists.append(newArtist)
                         }
                         
