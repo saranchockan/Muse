@@ -63,21 +63,23 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
             currentUserObject.location = location.text!
         }
         
-        let currentUser = Auth.auth().currentUser?.uid
-        let db = Firestore.firestore()
         
-        db.collection("Users").document(currentUser!).updateData([
-            "First Name": currentUserObject.firstName,
-            "Last Name": currentUserObject.lastName,
-            "Location": currentUserObject.location,
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+        let currentUser = Auth.auth().currentUser?.uid
+        
+        if currentUser != nil {
+            let db = Firestore.firestore()
+            db.collection("Users").document(currentUser!).updateData([
+                "First Name": currentUserObject.firstName,
+                "Last Name": currentUserObject.lastName,
+                "Location": currentUserObject.location,
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
             }
         }
-
     }
 
     @IBAction func logout(_ sender: Any) {
