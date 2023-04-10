@@ -47,13 +47,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         settingsButton.isHidden = !newAccount
         
+        print("New Account State: \(newAccount)")
         if newAccount{
-            var currentUserObject = User()
             currentUserObject.firstName = userFirstName
             currentUserObject.lastName = userLastName
             currentUserObject.location = userLocation
             
-            self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
+            self.greeting.title = "Hello, \(currentUserObject.firstName)"
         }
         
         spotify = Spotify()
@@ -74,7 +74,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
                 self.settingsButton.isHidden = false
             } else {
-                print("error")
+                print("error getting user object")
             }
         }
     }

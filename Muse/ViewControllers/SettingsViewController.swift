@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
-        
+        print("Current User uid: \(currentUser)")
         db.collection("Users").document(currentUser!).updateData([
             "First Name": currentUserObject.firstName,
             "Last Name": currentUserObject.lastName,
