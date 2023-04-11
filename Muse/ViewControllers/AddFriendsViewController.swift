@@ -40,6 +40,9 @@ class AddFriendsViewController: UIViewController {
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
+                    
+                    var tabVC = self.storyboard?.instantiateViewController(withIdentifier: "TabControllerIdentifier") as! UITabBarController
+                    self.present(tabVC, animated: true)
                 }
             }
         }

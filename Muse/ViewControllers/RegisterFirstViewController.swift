@@ -41,8 +41,7 @@ class RegisterFirstViewController: UIViewController {
     @IBAction func continueToWelcomeScreen(_ sender: Any) {
         userEmail = email.text!
         userPassword = password.text!
-        
-        let currentUser = Auth.auth().currentUser?.uid
+//        let currentUser = Auth.auth().currentUser?.uid
 //        let db = Database.database().reference()
         
 //        let db = Firestore.firestore()
