@@ -23,8 +23,8 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         super.viewDidLoad()
         segmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
         segmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        segmentControl.frame.size.height = 45
 
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
