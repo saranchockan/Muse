@@ -29,6 +29,13 @@ class LoginScreenViewController: UIViewController {
         password.leftViewMode = .always
         
         loginButton.layer.cornerRadius = 30
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func loginUser(_ sender: Any) {

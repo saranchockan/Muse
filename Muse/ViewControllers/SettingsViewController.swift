@@ -49,7 +49,12 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.sourceType = .photoLibrary
         
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

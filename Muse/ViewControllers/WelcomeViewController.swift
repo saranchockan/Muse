@@ -42,8 +42,14 @@ class WelcomeViewController: UIViewController {
         location.leftViewMode = .always
         
         continueButton.layer.cornerRadius = 30
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     @IBAction func continueToConnectSpotify(_ sender: Any){
         userFirstName = firstName.text!
