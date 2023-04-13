@@ -10,7 +10,12 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
-class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+protocol ModifyFriendsDelegate {
+    func addSelectedToSet(cell: FriendCardTableViewCell)
+    func removeSelectedFromSet(cell: FriendCardTableViewCell)
+}
+
+class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, ModifyFriendsDelegate {
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var emptyLabel: UILabel!
@@ -18,6 +23,7 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
     var tableData: [User] = []
     let cellIdentifier = "FriendCard"
     var currentUserObject:User = User()
+    var selectedSet: Set<FriendCardTableViewCell> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,13 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         tableView.reloadData()
     }
     
-    @IBAction func segmentChanged(_ sender: Any) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(false)
+        actOnSelected(index: segmentControl.selectedSegmentIndex)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
         switch segmentControl.selectedSegmentIndex {
         case 0:
             tableData = currentUserObject.friends
@@ -58,6 +70,58 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         }
     }
     
+    @IBAction func segmentChanged(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            actOnSelected(index: 1)
+            tableData = currentUserObject.friends
+            if tableData.isEmpty {
+                tableView.isHidden = true
+                emptyLabel.text = "You have no friends"
+            } else {
+                tableView.reloadData()
+                tableView.isHidden = false
+            }
+        case 1:
+            actOnSelected(index: 0)
+            tableData = currentUserObject.requests
+            if tableData.isEmpty {
+                tableView.isHidden = true
+                emptyLabel.text = "You have no requests"
+            } else {
+                tableView.reloadData()
+                tableView.isHidden = false
+            }
+        default:
+            print("this isn't supposed to happen")
+        }
+    }
+    
+    func actOnSelected(index: Int) {
+        switch index {
+        case 0:
+            for cell in selectedSet {
+                cell.removeFriend()
+            }
+            selectedSet.removeAll()
+        case 1:
+            for cell in selectedSet {
+                cell.addFriend()
+            }
+            selectedSet.removeAll()
+        default:
+            print("this isn't supposed to happen")
+        }
+    }
+    
+    func addSelectedToSet(cell: FriendCardTableViewCell) {
+        selectedSet.insert(cell)
+    }
+    
+    func removeSelectedFromSet(cell: FriendCardTableViewCell) {
+        selectedSet.remove(cell)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
@@ -67,6 +131,9 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         cell.name.text = "\(tableData[indexPath.row].firstName) \(tableData[indexPath.row].lastName)"
         cell.currentUserObject = currentUserObject
         cell.friendUID = tableData[indexPath.row].uid
+        cell.delegate = self
+        cell.button.isSelected = false
+        cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
         if (segmentControl.selectedSegmentIndex == 0) {
             cell.button.setTitle("Remove", for: .normal)
         } else {

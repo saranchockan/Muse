@@ -16,7 +16,8 @@ class FriendCardTableViewCell: UITableViewCell {
     
     var currentUserObject: User!
     var friendUID: String!
-    var friendObject: User?
+    //var friendObject: User?
+    var delegate: MyFriendsViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,29 +39,37 @@ class FriendCardTableViewCell: UITableViewCell {
       }
     }
     
+    func removeFriend() {
+        let index: Int = currentUserObject.friends.firstIndex(where: {$0.uid == friendUID})!
+        //friendObject = currentUserObject.friends[index]
+        currentUserObject.friends.remove(at: index)
+        let currentUserId = currentUserObject.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        let document = ref.document(currentUserId)
+        
+        document.updateData(["friends": FieldValue.arrayRemove([friendUID!])])
+        
+        let friendDocument = ref.document(friendUID)
+        friendDocument.updateData(["friends": FieldValue.arrayRemove([currentUserId])])
+    }
+    
+    func addFriend() {
+        let currentUserId = currentUserObject.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        let document = ref.document(currentUserId)
+        document.updateData(["friends": FieldValue.arrayUnion([friendUID!])])
+        //currentUserObject.friends.append(friendObject!)
+    }
+    
     @IBAction func buttonPressed(_ sender: Any) {
         if !button.isSelected {
             button.backgroundColor = UIColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
-            let index: Int = currentUserObject.friends.firstIndex(where: {$0.uid == friendUID})!
-            friendObject = currentUserObject.friends[index]
-            currentUserObject.friends.remove(at: index)
-            let currentUserId = currentUserObject.uid
-            let db = Firestore.firestore()
-            let ref = db.collection("Users")
-            let document = ref.document(currentUserId)
-            
-            document.updateData(["friends": FieldValue.arrayRemove([friendUID!])])
-            
-            let friendDocument = ref.document(friendUID)
-            friendDocument.updateData(["friends": FieldValue.arrayRemove([currentUserId])])
+            delegate.addSelectedToSet(cell: self)
         } else {
             button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
-            let currentUserId = currentUserObject.uid
-            let db = Firestore.firestore()
-            let ref = db.collection("Users")
-            let document = ref.document(currentUserId)
-            document.updateData(["friends": FieldValue.arrayUnion([friendUID!])])
-            currentUserObject.friends.append(friendObject!)
+            delegate.removeSelectedFromSet(cell: self)
         }
     }
 }
