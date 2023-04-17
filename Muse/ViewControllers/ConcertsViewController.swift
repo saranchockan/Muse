@@ -57,6 +57,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     var sharedConcerts:[SharedConcert] = []
     
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     let concertCellIdentifier = "ConcertCard"
     
@@ -72,6 +73,10 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     print("IN COMPLETION \(self.sharedConcerts.count)")
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        if self.sharedConcerts.isEmpty {
+                            self.tableView.isHidden = true
+                            self.emptyLabel.isHidden = false
+                        }
                     }
                 } else {
                     print("error")
@@ -86,6 +91,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "ConcertCard", bundle: nil), forCellReuseIdentifier: concertCellIdentifier)
+        emptyLabel.isHidden = true
         
         getConcertDataFromTicketMaster()
         
@@ -108,7 +114,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         return sharedConcerts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = sharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName

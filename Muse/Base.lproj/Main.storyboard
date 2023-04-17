@@ -51,7 +51,7 @@
                                 <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
@@ -132,7 +132,7 @@
                                 <color key="backgroundColor" red="0.1215686275" green="0.1333333333" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
@@ -145,7 +145,7 @@
                                 <color key="backgroundColor" red="0.1215686275" green="0.1333333333" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
@@ -451,6 +451,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently do not have any friends. Go to the My Friends page to add some!" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qJk-tN-Vjc">
+                                <rect key="frame" x="16" y="180" width="361" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="225" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WZL-pJ-Ve8">
                                 <rect key="frame" x="0.0" y="142" width="393" height="641"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -470,6 +477,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyLabel" destination="qJk-tN-Vjc" id="DWN-5g-48H"/>
                         <outlet property="greeting" destination="Ct9-9f-aHY" id="tMP-AB-v9d"/>
                         <outlet property="settingsButton" destination="Mmr-q1-KSi" id="w0Y-Dp-RLd"/>
                         <outlet property="tableView" destination="WZL-pJ-Ve8" id="EED-fx-oPH"/>
@@ -517,6 +525,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently do not have any friends. Go to the My Friends page to add some!" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qAl-Ql-v3M">
+                                <rect key="frame" x="16" y="200" width="361" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="180" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wo6-1U-FwB">
                                 <rect key="frame" x="0.0" y="202" width="393" height="581"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -528,6 +543,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Concerts" id="5GC-ll-GRB"/>
                     <connections>
+                        <outlet property="emptyLabel" destination="qAl-Ql-v3M" id="JQl-0p-cNz"/>
                         <outlet property="tableView" destination="wo6-1U-FwB" id="Pb3-ew-5Nx"/>
                     </connections>
                 </viewController>
@@ -544,7 +560,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3YG-8M-GYz">
-                                <rect key="frame" x="0.0" y="250" width="393" height="21"/>
+                                <rect key="frame" x="16" y="250" width="361" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -571,7 +587,14 @@
                         <viewLayoutGuide key="safeArea" id="gcp-9t-zmM"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Friends" style="editor" id="4oC-w7-YPu"/>
+                    <navigationItem key="navigationItem" title="My Friends" style="editor" id="4oC-w7-YPu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vER-Sf-RgK">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="neG-uT-s3T" kind="showDetail" id="DiM-Qr-LJm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyLabel" destination="3YG-8M-GYz" id="nMp-Yi-fbT"/>
                         <outlet property="segmentControl" destination="VLo-H8-q5A" id="ZgN-eh-gnX"/>
@@ -866,7 +889,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6tA-8Z-tHe"/>
+        <segue reference="7f4-2W-FFG"/>
+        <segue reference="DiM-Qr-LJm"/>
+        <segue reference="ZHE-oL-kFo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

@@ -23,8 +23,8 @@ class FriendCardTableViewCell: UITableViewCell {
         super.awakeFromNib()
         button.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
         button.addTarget(self, action: #selector(myButtonTapped), for: UIControl.Event.touchUpInside)
-        button.setTitle("Remove", for: .normal)
-        button.setTitle("Removed", for: .selected)
+//        button.setTitle("Remove", for: .normal)
+//        button.setTitle("Removed", for: .selected)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

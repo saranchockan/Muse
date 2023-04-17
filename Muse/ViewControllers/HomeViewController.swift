@@ -22,6 +22,7 @@ protocol SpotifyProtocol {
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
         
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var greeting: UINavigationItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -46,6 +47,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         settingsButton.isHidden = !newAccount
+        emptyLabel.isHidden = true
         
         print("New Account State: \(newAccount)")
         if newAccount{
@@ -63,6 +65,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
         } else {
             processSpotifyData()
+            
         }
         
         self.getFriends { completion in
@@ -229,6 +232,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Iterate through sharedSongs and sharedArtists
         if (sharedArtists.isEmpty && sharedSongs.isEmpty){
             self.tableView.isHidden = true
+            if self.currentUserObject.friends.isEmpty {
+                self.emptyLabel.isHidden = false
+            }
             return UITableViewCell()
         }else{
             self.tableView.isHidden = false
@@ -237,7 +243,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            if !sharedSongs.isEmpty {
+            if !sharedArtists.isEmpty {
                 let featuredSharedArtist = sharedArtists.randomElement()
                 cell.name.text = featuredSharedArtist!.key
                 cell.friendsDescription.text = writeFeaturedDescription(featuredSharedArtist!.value.friends, "artist")
@@ -251,13 +257,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } else {
-                cell.sharedType.text = "You do not have any shared artists"
+                cell.cardView.isHidden = true
+                cell.sharedType.text = "Featured Shared Artist"
+                cell.emptyLabel.text = "You do not have any shared artists"
             }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
+            if !sharedSongs.isEmpty {
+                cell.emptyLabel.isHidden = true
+            } else {
+                cell.collectionView.isHidden = true
+                cell.emptyLabel.isHidden = false
+                cell.emptyLabel.text = "You do not have any shared artists"
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
@@ -275,13 +290,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } else {
-                cell.sharedType.text = "You do not have any shared songs"
+                cell.sharedType.text = "Featured Shared Song"
+                cell.cardView.isHidden = true
+                cell.emptyLabel.text = "You do not have any shared songs"
             }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
             cell.collectionList = Array(sharedSongs.values)
+            if !sharedSongs.isEmpty {
+                cell.emptyLabel.isHidden = true
+            } else {
+                cell.collectionView.isHidden = true
+                cell.emptyLabel.isHidden = false
+                cell.emptyLabel.text = "You do not have any shared songs"
+            }
             return cell
         default:
             print("this isn't supposed to happen")

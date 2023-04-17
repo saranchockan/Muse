@@ -136,8 +136,10 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
         if (segmentControl.selectedSegmentIndex == 0) {
             cell.button.setTitle("Remove", for: .normal)
+            cell.button.setTitle("Removed", for: .selected)
         } else {
             cell.button.setTitle("Add", for: .normal)
+            cell.button.setTitle("Added", for: .selected)
         }
         return cell
 	}

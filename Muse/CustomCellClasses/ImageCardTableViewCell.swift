@@ -9,6 +9,7 @@ import UIKit
 
 class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var title: UILabel!
     var cellIdentifier = "ImageCardCell"

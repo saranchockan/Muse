@@ -9,6 +9,7 @@ import UIKit
 
 class SharedCardTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var sharedType: UILabel!
     @IBOutlet weak var name: UILabel!
