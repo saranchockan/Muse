@@ -17,7 +17,6 @@ var sharedSongs:[String: SharedSong] = [:]
 
 protocol SpotifyProtocol {
     func processSpotifyData()
-    func getTopArtistSongDataFromFirebase()
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
@@ -47,6 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         settingsButton.isHidden = true
+        tableView.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -86,19 +86,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-  
-
-    func getTopArtistSongDataFromFirebase() {
-        self.fetchUserSongArtistData { completion in
-            if completion {
-                // Loading Screen should be false at this point
-                // Reload table view
-                self.printOutput()
-                print("Reloading table view data...")
-                self.tableView.reloadData()
-            } else {
-                print("error")
-            }
+    func checktableData() {
+        print("check table data")
+        // Iterate through sharedSongs and sharedArtists
+        if !(sharedArtists.isEmpty && sharedSongs.isEmpty){
+            self.tableView.isHidden = false
         }
     }
     
@@ -112,13 +104,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Retrieving user's top tracks")
                 self.processTopSongs() { processTopSongsCompletion in
                     if processTopSongsCompletion {
+                        print("Processed top songs")
                         self.fetchUserSongArtistData { fetchUserSongArtistDataCompletion in
                             if fetchUserSongArtistDataCompletion {
                                 // Loading Screen should be false at this point
                                 // Reload table view
                                 self.printOutput()
-                                print("Reloading table view data...")
-                                self.tableView.reloadData()
+                                print("HOME: Reloading table view data...")
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                    self.checktableData()
+                                    self.tableView.isHidden = false
+                                    self.emptyLabel.isHidden = true
+                                }
                             } else {
                                 print("error")
                             }
@@ -223,14 +221,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        
-        // Iterate through sharedSongs and sharedArtists
-        if (sharedArtists.isEmpty && sharedSongs.isEmpty){
-            self.tableView.isHidden = true
-            return UITableViewCell()
-        } else {
-            self.tableView.isHidden = false
-        }
+        print("row \(row)")
         
         switch row {
         case 0:
@@ -438,12 +429,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-//                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
-                                        completion(true)
+                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+//                                        completion(true)
                                     }
                                 }
                             }
                         }
+                        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
+                        completion(true)
                     }
                 }
             }
