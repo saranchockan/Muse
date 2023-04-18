@@ -497,10 +497,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         self.currentUserObject.friends.append(currentFriend)
                                     }
                                     
-                                    completion (true)
                                 }
                             }
                         }
+                        completion (true)
                     }
                 }
             }
