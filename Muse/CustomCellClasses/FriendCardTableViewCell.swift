@@ -15,16 +15,13 @@ class FriendCardTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
     var currentUserObject: User!
-    var friendUID: String!
-    //var friendObject: User?
-    var delegate: MyFriendsViewController!
+    var friendObject: User!
+    var delegate: ModifyFriendsDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         button.layer.borderColor = CGColor(red: 150/255, green: 150/255, blue: 219/255, alpha: 1)
         button.addTarget(self, action: #selector(myButtonTapped), for: UIControl.Event.touchUpInside)
-//        button.setTitle("Remove", for: .normal)
-//        button.setTitle("Removed", for: .selected)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,27 +37,52 @@ class FriendCardTableViewCell: UITableViewCell {
     }
     
     func removeFriend() {
+        let friendUID = friendObject.uid
         let index: Int = currentUserObject.friends.firstIndex(where: {$0.uid == friendUID})!
-        //friendObject = currentUserObject.friends[index]
         currentUserObject.friends.remove(at: index)
         let currentUserId = currentUserObject.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
         let document = ref.document(currentUserId)
         
-        document.updateData(["friends": FieldValue.arrayRemove([friendUID!])])
+        document.updateData(["friends": FieldValue.arrayRemove([friendUID])])
         
         let friendDocument = ref.document(friendUID)
         friendDocument.updateData(["friends": FieldValue.arrayRemove([currentUserId])])
     }
     
     func addFriend() {
+        let friendUID = friendObject.uid
+        let index: Int = currentUserObject.requests.firstIndex(where: {$0.uid == friendUID})!
+        currentUserObject.requests.remove(at: index)
+        currentUserObject.friends.append(friendObject)
+        
         let currentUserId = currentUserObject.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
+        
         let document = ref.document(currentUserId)
-        document.updateData(["friends": FieldValue.arrayUnion([friendUID!])])
-        //currentUserObject.friends.append(friendObject!)
+        document.updateData(["friends": FieldValue.arrayUnion([friendUID])])
+        document.updateData(["requests": FieldValue.arrayRemove([friendUID])])
+        
+        let friendDocument = ref.document(friendUID)
+        friendDocument.updateData(["friends": FieldValue.arrayUnion([currentUserId])])
+        friendDocument.updateData(["requested": FieldValue.arrayRemove([currentUserId])])
+    }
+    
+    func requestFriend() {
+        let friendUID = friendObject.uid
+        currentUserObject.requests.append(friendObject)
+        
+        let currentUserId = currentUserObject.uid
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        
+        let document = ref.document(currentUserId)
+        document.updateData(["requested": FieldValue.arrayUnion([friendUID])])
+        
+        let friendDocument = ref.document(friendUID)
+        friendDocument.updateData(["requests": FieldValue.arrayUnion([currentUserId])])
     }
     
     @IBAction func buttonPressed(_ sender: Any) {

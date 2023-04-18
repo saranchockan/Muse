@@ -478,6 +478,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.currentUserObject.firstName = "\(document.data()["First Name"]!)"
                         self.currentUserObject.lastName = "\(document.data()["Last Name"]!)"
                         self.currentUserObject.location = "\(document.data()["Location"]!)"
+                        self.currentUserObject.requested = document.data()["requested"] as! [String]
                         
                         let data = document.data()
                         let friends = data["friends"] as! [String]

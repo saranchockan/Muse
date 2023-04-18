@@ -346,7 +346,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Continue" subtitle="" cornerStyle="fixed"/>
                                 <connections>
                                     <action selector="continueToConnectSpotify:" destination="dI7-dh-asN" eventType="touchUpInside" id="LZc-in-4Au"/>
-                                    <segue destination="neG-uT-s3T" kind="show" id="9qM-Yc-Mvd"/>
+                                    <segue destination="neG-uT-s3T" kind="show" identifier="addFriendsNewUserIdentifier" id="9qM-Yc-Mvd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -438,7 +438,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="finishRegistration:" destination="neG-uT-s3T" eventType="touchUpInside" id="b0E-pP-grD"/>
+                                    <action selector="finishPressed:" destination="neG-uT-s3T" eventType="touchUpInside" id="o4D-Cv-Kpo"/>
                                     <segue destination="lue-Cp-uGf" kind="showDetail" id="gi8-vC-lbU"/>
                                 </connections>
                             </button>
@@ -449,11 +449,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LxK-m1-Sab">
+                                <rect key="frame" x="0.0" y="211" width="393" height="473"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q4H-5r-6us"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="fre-LF-yGy"/>
+                    <connections>
+                        <outlet property="tableView" destination="LxK-m1-Sab" id="4AE-9J-t2U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLE-bx-I0t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -616,7 +624,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vER-Sf-RgK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="neG-uT-s3T" kind="showDetail" id="DiM-Qr-LJm"/>
+                                <segue destination="neG-uT-s3T" kind="showDetail" identifier="addFriendsExistingUserIdentifier" id="DiM-Qr-LJm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
