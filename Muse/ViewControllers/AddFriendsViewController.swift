@@ -10,12 +10,14 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
-class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ModifyFriendsDelegate {
+class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ModifyFriendsDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     let cellIdentifier = "FriendCard"
     var currentUserObject: User!
     var potentialFriends: [User] = []
+    var filteredPotentialFriends: [User] = []
     var selectedSet: Set<FriendCardTableViewCell> = []
     
     override func viewDidLoad() {
@@ -23,12 +25,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
         self.getNonFriendUsers { completion in
             if completion {
                 print ("potential friends in completion size", self.potentialFriends.count)
+                self.filteredPotentialFriends = self.potentialFriends
                 self.tableView.reloadData()
             } else {
                 print("error getting potential user objects")
@@ -45,15 +49,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("POTENTIAL FRIENDS SIZE ", potentialFriends.count)
-        return potentialFriends.count
+        return filteredPotentialFriends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FriendCardTableViewCell
-        cell.name.text = "\(potentialFriends[indexPath.row].firstName) \(potentialFriends[indexPath.row].lastName)"
+        cell.name.text = "\(filteredPotentialFriends[indexPath.row].firstName) \(filteredPotentialFriends[indexPath.row].lastName)"
         cell.currentUserObject = currentUserObject
-        cell.friendObject = potentialFriends[indexPath.row]
+        cell.friendObject = filteredPotentialFriends[indexPath.row]
         cell.delegate = self
         cell.button.isSelected = false
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
@@ -87,6 +90,19 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 completion(true)
             }
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredPotentialFriends = potentialFriends
+        } else {
+            filteredPotentialFriends = potentialFriends.filter { (item: User) -> Bool in
+                let fullName = "\(item.firstName) \(item.lastName)"
+                return fullName.range(of: searchText, options: .caseInsensitive) != nil
+            }
+        }
+        
+        tableView.reloadData()
     }
     
     @IBAction func finishPressed(_ sender: Any) {
