@@ -59,8 +59,8 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     let concertCellIdentifier = "ConcertCard"
-    
     
     func getConcertDataFromTicketMaster() {
         for artist in sharedArtists {

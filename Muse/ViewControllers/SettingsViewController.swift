@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var lastName: UITextField!
     
     let imagePicker = UIImagePickerController()
@@ -56,8 +57,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
+
+    @IBAction func savePressed(_ sender: Any) {
         if firstName.text != "" {
             currentUserObject.firstName = firstName.text!
         }
@@ -68,25 +69,22 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
             currentUserObject.location = location.text!
         }
         
-        
         let currentUser = Auth.auth().currentUser?.uid
         
-        if currentUser != nil {
-            let db = Firestore.firestore()
-            db.collection("Users").document(currentUser!).updateData([
-                "First Name": currentUserObject.firstName,
-                "Last Name": currentUserObject.lastName,
-                "Location": currentUserObject.location,
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                }
+        let db = Firestore.firestore()
+        db.collection("Users").document(currentUser!).updateData([
+            "First Name": currentUserObject.firstName,
+            "Last Name": currentUserObject.lastName,
+            "Location": currentUserObject.location,
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
     }
-
+    
     @IBAction func logout(_ sender: Any) {
         sharedArtists = [:]
         sharedSongs = [:]

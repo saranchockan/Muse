@@ -257,6 +257,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } else {
+                print("case 0")
                 cell.cardView.isHidden = true
                 cell.sharedType.text = "Featured Shared Artist"
                 cell.emptyLabel.text = "You do not have any shared artists"
@@ -269,6 +270,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {
+                print("case 1")
                 cell.collectionView.isHidden = true
                 cell.emptyLabel.isHidden = false
                 cell.emptyLabel.text = "You do not have any shared artists"
@@ -290,9 +292,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } else {
+                print("case 2")
                 cell.sharedType.text = "Featured Shared Song"
                 cell.cardView.isHidden = true
                 cell.emptyLabel.text = "You do not have any shared songs"
+                
             }
             return cell
         case 3:
@@ -302,6 +306,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {
+                print("case 3")
                 cell.collectionView.isHidden = true
                 cell.emptyLabel.isHidden = false
                 cell.emptyLabel.text = "You do not have any shared songs"

@@ -537,6 +537,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-aq-goj">
+                                <rect key="frame" x="0.0" y="158" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3Kw-R2-YOa" id="BSp-dJ-mtm"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jkG-4m-ehb"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -544,6 +552,7 @@
                     <navigationItem key="navigationItem" title="Concerts" id="5GC-ll-GRB"/>
                     <connections>
                         <outlet property="emptyLabel" destination="qAl-Ql-v3M" id="JQl-0p-cNz"/>
+                        <outlet property="searchBar" destination="7Yn-aq-goj" id="MgL-dR-cUc"/>
                         <outlet property="tableView" destination="wo6-1U-FwB" id="Pb3-ew-5Nx"/>
                     </connections>
                 </viewController>
@@ -738,30 +747,42 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp1-Si-nzm">
-                                <rect key="frame" x="21" y="580" width="168" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Suq-0j-35l">
-                                <rect key="frame" x="328" y="580" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="logoutButton:" destination="Zt2-D0-VwT" eventType="valueChanged" id="eRm-Yv-F6a"/>
-                                </connections>
-                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7B-zu-GOM">
                                 <rect key="frame" x="157" y="650" width="78" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Logout" titleAlignment="center"/>
                                 <connections>
                                     <action selector="logout:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="Pv7-Qd-meM"/>
                                     <segue destination="moX-6L-PDK" kind="showDetail" id="EKa-lu-XPf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-QA-3hy">
+                                <rect key="frame" x="267" y="163" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="edit.png"/>
+                                <connections>
+                                    <action selector="editProfilePicture:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="XFk-Xl-fZ2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsQ-Mb-H7x">
+                                <rect key="frame" x="144" y="587" width="104" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save" subtitle="" cornerStyle="fixed"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="continueToWelcomeScreen:" destination="Z9w-eD-VPz" eventType="touchUpInside" id="dkF-l3-Pft"/>
+                                    <action selector="loginUser:" destination="moX-6L-PDK" eventType="touchUpInside" id="KbZ-UJ-Hjg"/>
+                                    <action selector="savePressed:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="XVK-3h-EPD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-Ab-AEy">
@@ -775,15 +796,6 @@
                                     <segue destination="moX-6L-PDK" kind="showDetail" id="Far-xt-RVw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-QA-3hy">
-                                <rect key="frame" x="267" y="163" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="edit.png"/>
-                                <connections>
-                                    <action selector="editProfilePicture:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="XFk-Xl-fZ2"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MXH-w4-Aws"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -794,11 +806,12 @@
                         <outlet property="lastName" destination="NzE-eU-cUN" id="hEm-jM-CGX"/>
                         <outlet property="location" destination="l6Z-sd-pB4" id="WVL-h9-WpN"/>
                         <outlet property="profilePicture" destination="R6u-SX-dbQ" id="tB9-Ei-R65"/>
+                        <outlet property="saveButton" destination="HsQ-Mb-H7x" id="sTp-Vi-QEn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Noc-iE-IEA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="3092"/>
+            <point key="canvasLocation" x="1014.5038167938931" y="3091.5492957746478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cxP-Sb-kfp">
@@ -889,9 +902,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7f4-2W-FFG"/>
-        <segue reference="DiM-Qr-LJm"/>
-        <segue reference="ZHE-oL-kFo"/>
+        <segue reference="9qM-Yc-Mvd"/>
+        <segue reference="Far-xt-RVw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

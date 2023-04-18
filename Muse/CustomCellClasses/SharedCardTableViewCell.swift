@@ -18,7 +18,8 @@ class SharedCardTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        name.adjustsFontSizeToFitWidth = true
+        friendsDescription.adjustsFontSizeToFitWidth = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
