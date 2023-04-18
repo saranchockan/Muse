@@ -42,7 +42,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUserDataInFirebase()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
@@ -94,16 +93,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func setUserDataInFirebase() {
-        let currentUser = Auth.auth().currentUser?.uid
-        let db = Firestore.firestore()
-        let ref = db.collection("Users")
-        let document = ref.document(currentUser!)
-        document.setData(["First Name": userFirstName], merge: true)
-        document.setData(["Last Name": userLastName], merge: true)
-        document.setData(["Phone Number": userPhoneNumber], merge: true)
-        document.setData(["Location": userLocation], merge: true)
-    }
+  
 
     func getTopArtistSongDataFromFirebase() {
         self.fetchUserSongArtistData { completion in
