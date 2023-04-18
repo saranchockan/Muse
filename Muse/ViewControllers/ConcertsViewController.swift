@@ -96,6 +96,13 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         getConcertDataFromTicketMaster()
         
         print("Num of Shared Artists: \(sharedArtists.count)")
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func fetchImages(_ concert: SharedConcert,_ cell: ConcertTableViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
