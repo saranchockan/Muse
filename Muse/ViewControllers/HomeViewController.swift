@@ -46,17 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
-        settingsButton.isHidden = !newAccount
-        emptyLabel.isHidden = true
-        
-        print("New Account State: \(newAccount)")
-        if newAccount{
-            currentUserObject.firstName = userFirstName
-            currentUserObject.lastName = userLastName
-            currentUserObject.location = userLocation
-            
-            self.greeting.title = "Hello, \(currentUserObject.firstName)"
-        }
+        settingsButton.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -76,6 +66,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 friendsVC.currentUserObject = self.currentUserObject
                 self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
                 self.settingsButton.isHidden = false
+                if self.currentUserObject.friends.isEmpty {
+                    self.emptyLabel.isHidden = false
+                }
             } else {
                 print("error getting user object")
             }
@@ -234,11 +227,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Iterate through sharedSongs and sharedArtists
         if (sharedArtists.isEmpty && sharedSongs.isEmpty){
             self.tableView.isHidden = true
-            if self.currentUserObject.friends.isEmpty {
-                self.emptyLabel.isHidden = false
-            }
             return UITableViewCell()
-        }else{
+        } else {
             self.tableView.isHidden = false
         }
         

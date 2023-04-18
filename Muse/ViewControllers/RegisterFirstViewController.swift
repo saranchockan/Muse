@@ -49,7 +49,6 @@ class RegisterFirstViewController: UIViewController {
         userEmail = email.text!
         userPassword = password.text!
         
-        newAccount = true
         // Register user with firebase Auth
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
             guard let user = authResult?.user, error == nil else {
