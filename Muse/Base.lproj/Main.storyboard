@@ -162,7 +162,6 @@
                                 <connections>
                                     <action selector="continueToWelcomeScreen:" destination="Z9w-eD-VPz" eventType="touchUpInside" id="kWG-Di-uX0"/>
                                     <action selector="loginUser:" destination="moX-6L-PDK" eventType="touchUpInside" id="RJb-h5-IYC"/>
-                                    <segue destination="dI7-dh-asN" kind="show" id="al8-RR-NwE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWY-HR-tDu">
@@ -258,8 +257,8 @@
         <!--Welcome View Controller-->
         <scene sceneID="Lnt-Em-o7Y">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="dI7-dh-asN" customClass="WelcomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rs9-5e-lmQ">
+                <viewController storyboardIdentifier="WelcomeScreen" modalPresentationStyle="fullScreen" id="dI7-dh-asN" customClass="WelcomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rs9-5e-lmQ" customClass="Welcome">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -411,7 +410,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvg-Fd-hqA">
-                                <rect key="frame" x="50" y="719" width="292" height="70.000000000000199"/>
+                                <rect key="frame" x="50" y="719" width="292" height="70.000000000000227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
@@ -424,6 +423,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="finishRegistration:" destination="neG-uT-s3T" eventType="touchUpInside" id="b0E-pP-grD"/>
+                                    <segue destination="lue-Cp-uGf" kind="showDetail" id="gi8-vC-lbU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX5-uW-SCZ">
@@ -448,7 +448,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeScreenIdentifier" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oaH-D6-mp0" customClass="HomeViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G3b-3n-NfH">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently do not have any friends. Go to the My Friends page to add some!" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qJk-tN-Vjc">
@@ -522,7 +522,7 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="3Kw-R2-YOa" customClass="ConcertsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XgO-n6-YLc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently do not have any friends. Go to the My Friends page to add some!" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qAl-Ql-v3M">
@@ -565,7 +565,7 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="IZo-Rl-rrq" customClass="MyFriendsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xds-eD-rIU">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3YG-8M-GYz">
@@ -619,7 +619,7 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="QEj-pB-Mje" customClass="MyListeningViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0B-VM-JH3">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="225" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="p30-0s-Cis">
@@ -649,7 +649,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="eCa-Rq-X6P">
-                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -674,7 +674,7 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="Zt2-D0-VwT" customClass="SettingsViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MpZ-NA-FSp">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJf-wY-wjW">
@@ -822,7 +822,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="pwN-7N-VJv">
-                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -851,7 +851,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="t3a-Bl-XTc">
-                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -880,7 +880,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="cT7-Uq-K5c">
-                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -903,7 +903,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9qM-Yc-Mvd"/>
-        <segue reference="Far-xt-RVw"/>
+        <segue reference="ZHE-oL-kFo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

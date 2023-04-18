@@ -48,14 +48,40 @@ class RegisterFirstViewController: UIViewController {
     @IBAction func continueToWelcomeScreen(_ sender: Any) {
         userEmail = email.text!
         userPassword = password.text!
-//        let currentUser = Auth.auth().currentUser?.uid
-//        let db = Database.database().reference()
         
-//        let db = Firestore.firestore()
-//        let ref = db.collection("Users")
-//        var document = ref.document(currentUser!)
-//
-//        document.setData(["Email": userEmail])
+        newAccount = true
+        // Register user with firebase Auth
+        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
+            guard let user = authResult?.user, error == nil else {
+                print("Firebase auth error \(String(describing: error))")
+                return
+            }
+            // Add user to Firebase user
+            // collection: https://firebase.google.com/docs/firestore/manage-data/add-data#swift
+            // Should only execute if firebase auth
+            // is successful, get UID from auth response object
+            db.collection("Users").document(user.uid).setData([
+                "Email": userEmail,
+                "First Name": "",
+                "Last Name": "",
+                "Phone Number": "",
+                "Location": "",
+                "Top Artists": [],
+                "Top Songs": [String: String](),
+                "friends": [],
+                "requests": []
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                    
+                    let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreen") as! WelcomeViewController
+                    self.present(tabVC, animated: true)
+                }
+            }
+        }
     }
+    
 
 }
