@@ -39,7 +39,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     
-    override func viewDidLoad() {
+    override func viewDidLoad()  {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
@@ -351,6 +351,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         completion(true)
     }
     
+    func printSharedSongData  (){
+        print("shared songs")
+        for sharedSong in sharedSongs.values {
+                print(sharedSong.songName)
+                for friend in sharedSong.friends {
+                    print(friend)
+                }
+            }
+    }
+    
     func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
@@ -407,9 +417,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                     sharedSongs[song] = currSong
                                                 }
                                             }
-                                           
                                        }
                                         
+                                        self.printSharedSongData()
+                                        
+                                   
+                                        
+                                     
                                         
                                         for artist in artists {
                                             if friendArtists.contains(artist) {
@@ -429,7 +443,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+//                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
 //                                        completion(true)
                                     }
                                 }
@@ -483,6 +497,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 }
                             }
                         }
+                        
+                        let storageManager = StorageManager()
+                        let uid = Auth.auth().currentUser?.uid
+                        let image = storageManager.getImage(uid: uid!)
+                        print("hi")
                         completion (true)
                     }
                 }

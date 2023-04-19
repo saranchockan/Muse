@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
+
 
 class SettingsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -19,6 +22,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     
     let imagePicker = UIImagePickerController()
     var currentUserObject: User = User()
+    var pictureEdited: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +75,13 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let currentUser = Auth.auth().currentUser?.uid
         
+        if pictureEdited {
+            currentUserObject.pic = profilePicture.image
+            
+            let storageManager = StorageManager()
+            storageManager.upload(image: profilePicture.image!)
+        }
+                
         let db = Firestore.firestore()
         db.collection("Users").document(currentUser!).updateData([
             "First Name": currentUserObject.firstName,
@@ -103,6 +114,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func editProfilePicture(_ sender: Any) {
         self.present(imagePicker, animated: true)
+        pictureEdited = true
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
@@ -110,6 +122,48 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         self.dismiss(animated: true, completion: { () -> Void in})
         let tempImage:UIImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         profilePicture.image  = tempImage
-        currentUserObject.pic = tempImage
     }
+}
+
+public class StorageManager: ObservableObject {
+    let storage = Storage.storage()
+
+    func upload(image: UIImage) {
+        // Create a storage reference
+        let storageRef = storage.reference().child("images/\(Auth.auth().currentUser!.uid).jpg")
+
+
+        // Convert the image into JPEG and compress the quality to reduce its size
+        let data = image.jpegData(compressionQuality: 0.2)!
+
+        // Change the content type to jpg. If you don't, it'll be saved as application/octet-stream type
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+
+        // Upload the image
+       
+        storageRef.putData(data, metadata: metadata) { (metadata, error) in
+            if let error = error {
+                print("Error while uploading file: ", error)
+            }
+
+            if let metadata = metadata {
+                print("Metadata: ", metadata)
+            }
+        }
+    }
+    
+
+    
+    func getImage(uid: String, completion: @escaping (_ success: Bool) -> Void)  -> UIImage? {
+        let reference = Storage.storage().reference().child("images/\(uid).jpg")
+        do {
+            let data = try await reference.data(maxSize: 1 * 1024 * 1024)
+            return UIImage(data: data)
+        } catch {
+            return nil
+        }
+        
+    }
+
 }
