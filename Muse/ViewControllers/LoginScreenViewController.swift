@@ -12,6 +12,7 @@ class LoginScreenViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
@@ -42,6 +43,8 @@ class LoginScreenViewController: UIViewController {
         Auth.auth().signIn(withEmail: email.text!, password: password.text!) {authResult, error in
             if let error = error as NSError? {
               print("\(error.localizedDescription)")
+                self.errorLabel.isHidden = false
+                self.errorLabel.text = error.localizedDescription
             } else {
                 print("User logged in... \(self.email.text!)")
                 // Reset login fields

@@ -46,7 +46,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         settingsButton.isHidden = true
-        tableView.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -55,9 +54,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
         } else {
             processSpotifyData()
-            
         }
-        
+
         self.getFriends { completion in
             if completion {
                 print("MY FRIENDS: \(self.currentUserObject.friends.count)")
@@ -73,6 +71,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("error getting user object")
             }
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            print("Reloading table view after 5 seconds")
+//            self.printOutput()
+//            self.tableView.reloadData()
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,13 +114,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 // Loading Screen should be false at this point
                                 // Reload table view
                                 self.printOutput()
-                                print("HOME: Reloading table view data...")
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                    self.checktableData()
-                                    self.tableView.isHidden = false
-                                    self.emptyLabel.isHidden = true
-                                }
+                                print("Reloading table view data...")
+                                self.tableView.reloadData()
                             } else {
                                 print("error")
                             }
@@ -223,6 +222,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let row = indexPath.row
         print("row \(row)")
         
+        if (sharedArtists.isEmpty && sharedSongs.isEmpty){
+            self.tableView.isHidden = true
+            return UITableViewCell()
+        } else {
+            self.tableView.isHidden = false
+        }
+        
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
@@ -239,6 +245,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 0")
                 cell.cardView.isHidden = true
@@ -250,8 +258,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
-            if !sharedSongs.isEmpty {
+            cell.collectionView.reloadData()
+            if !sharedArtists.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 1")
                 cell.collectionView.isHidden = true
@@ -274,6 +284,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 2")
                 cell.sharedType.text = "Featured Shared Song"
@@ -286,8 +298,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
             cell.collectionList = Array(sharedSongs.values)
+            cell.collectionView.reloadData()
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 3")
                 cell.collectionView.isHidden = true
@@ -443,14 +457,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-//                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
-//                                        completion(true)
+                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+                                        completion(true)
                                     }
                                 }
                             }
                         }
-                        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
-                        completion(true)
+//                        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
+//                        completion(true)
                     }
                 }
             }
@@ -475,9 +489,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.currentUserObject.firstName = "\(document.data()["First Name"]!)"
                         self.currentUserObject.lastName = "\(document.data()["Last Name"]!)"
                         self.currentUserObject.location = "\(document.data()["Location"]!)"
+                        self.currentUserObject.requested = document.data()["requested"] as! [String]
                         
                         let data = document.data()
                         let friends = data["friends"] as! [String]
+                        let requests = data["requests"] as! [String]
                         
                         for friend in friends {
                             ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
@@ -493,7 +509,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         currentFriend.lastName = document.data()["Last Name"] as! String
                                         self.currentUserObject.friends.append(currentFriend)
                                     }
-                                    
+                                }
+                            }
+                        }
+                        
+                        for request in requests {
+                            ref.whereField(FieldPath.documentID(), isEqualTo: request).getDocuments()
+                            {(querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    for document in querySnapshot!.documents {
+                                        let currentRequest = User()
+                                        currentRequest.uid = document.documentID
+                                        print ("request UID: \(currentRequest.uid)")
+                                        currentRequest.firstName = document.data()["First Name"] as! String
+                                        currentRequest.lastName = document.data()["Last Name"] as! String
+                                        self.currentUserObject.requests.append(currentRequest)
+                                    }
                                 }
                             }
                         }

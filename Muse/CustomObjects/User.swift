@@ -15,5 +15,6 @@ class User {
     var location:String = ""
     var friends:[User] = []
     var requests:[User] = []
+    var requested:[String] = []
     var pic: UIImage?
 }

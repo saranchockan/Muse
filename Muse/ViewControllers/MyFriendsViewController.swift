@@ -16,7 +16,7 @@ protocol ModifyFriendsDelegate {
 }
 
 class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, ModifyFriendsDelegate {
-
+    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -122,6 +122,10 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         selectedSet.remove(cell)
     }
     
+    func requestSelectedFromSet(cell: FriendCardTableViewCell) {
+        print("You can't request from this screen")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
@@ -130,7 +134,7 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FriendCardTableViewCell
         cell.name.text = "\(tableData[indexPath.row].firstName) \(tableData[indexPath.row].lastName)"
         cell.currentUserObject = currentUserObject
-        cell.friendUID = tableData[indexPath.row].uid
+        cell.friendObject = tableData[indexPath.row]
         cell.delegate = self
         cell.button.isSelected = false
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
@@ -143,4 +147,11 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         }
         return cell
 	}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addFriendsExistingUserIdentifier",
+            let addVC = segue.destination as? AddFriendsViewController {
+            addVC.currentUserObject = self.currentUserObject
+        }
+    }
 }
