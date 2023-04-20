@@ -67,4 +67,13 @@ class WelcomeViewController: UIViewController {
         document.setData(["Location": userLocation], merge: true)
     
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addFriendsNewUserIdentifier",
+            let addVC = segue.destination as? AddFriendsViewController {
+            let newUserObject = User()
+            newUserObject.uid = Auth.auth().currentUser!.uid
+            addVC.currentUserObject = newUserObject
+        }
+    }
 }

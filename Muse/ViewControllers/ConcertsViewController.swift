@@ -50,11 +50,12 @@ struct Event {
 //    var going: Bool
 }
 
-class ConcertsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ConcertsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var myArtists:[String] = []
     
     var sharedConcerts:[SharedConcert] = []
+    var filteredSharedConcerts: [SharedConcert] = []
     
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
     @IBOutlet weak var emptyLabel: UILabel!
@@ -72,6 +73,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.writeDataIntoFirebase()
                     print("IN COMPLETION \(self.sharedConcerts.count)")
                     DispatchQueue.main.async {
+                        self.filteredSharedConcerts = self.sharedConcerts
                         self.tableView.reloadData()
                         if self.sharedConcerts.isEmpty {
                             self.tableView.isHidden = true
@@ -118,12 +120,12 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sharedConcerts.count
+        return filteredSharedConcerts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
-        let concert = sharedConcerts[indexPath.row]
+        let concert = filteredSharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName
         
         let dateFormatterGet = DateFormatter()
@@ -271,6 +273,19 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
             return images![0].url
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredSharedConcerts = sharedConcerts
+        } else {
+            filteredSharedConcerts = sharedConcerts.filter { (item: SharedConcert) -> Bool in
+                let concert = item.concertName
+                return concert.range(of: searchText, options: .caseInsensitive) != nil
+            }
         }
+        
+        tableView.reloadData()
+    }
 }
 

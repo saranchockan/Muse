@@ -72,7 +72,8 @@ class RegisterFirstViewController: UIViewController {
                     "Top Artists": [],
                     "Top Songs": [String: String](),
                     "friends": [],
-                    "requests": []
+                    "requests": [],
+                    "requested": []
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
