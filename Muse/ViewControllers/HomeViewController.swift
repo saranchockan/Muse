@@ -246,6 +246,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
                 cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 0")
                 cell.cardView.isHidden = true
@@ -284,6 +285,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
                 cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 2")
                 cell.sharedType.text = "Featured Shared Song"
