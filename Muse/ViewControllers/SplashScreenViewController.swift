@@ -8,8 +8,6 @@
 import UIKit
 import FirebaseAuth
 
-var newAccount = false
-
 class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {

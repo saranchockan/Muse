@@ -50,7 +50,6 @@ class RegisterFirstViewController: UIViewController {
         userEmail = email.text!
         userPassword = password.text!
         
-        newAccount = true
         // Register user with firebase Auth
         if password.text == confirmPassword.text {
             Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in

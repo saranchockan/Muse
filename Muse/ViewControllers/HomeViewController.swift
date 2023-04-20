@@ -17,7 +17,6 @@ var sharedSongs:[String: SharedSong] = [:]
 
 protocol SpotifyProtocol {
     func processSpotifyData()
-    func getTopArtistSongDataFromFirebase()
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SpotifyProtocol {
@@ -46,17 +45,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "SharedCard", bundle: nil), forCellReuseIdentifier: sharedCellIdentifier)
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
-        settingsButton.isHidden = !newAccount
-        emptyLabel.isHidden = true
-        
-        print("New Account State: \(newAccount)")
-        if newAccount{
-            currentUserObject.firstName = userFirstName
-            currentUserObject.lastName = userLastName
-            currentUserObject.location = userLocation
-            
-            self.greeting.title = "Hello, \(currentUserObject.firstName)"
-        }
+        settingsButton.isHidden = true
         
         spotify = Spotify()
         print("Configure Spotify Authorization")
@@ -65,9 +54,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
         } else {
             processSpotifyData()
-            
         }
-        
+
         self.getFriends { completion in
             if completion {
                 print("MY FRIENDS: \(self.currentUserObject.friends.count)")
@@ -76,10 +64,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 friendsVC.currentUserObject = self.currentUserObject
                 self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
                 self.settingsButton.isHidden = false
+                if self.currentUserObject.friends.isEmpty {
+                    self.emptyLabel.isHidden = false
+                }
             } else {
                 print("error getting user object")
             }
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            print("Reloading table view after 5 seconds")
+//            self.printOutput()
+//            self.tableView.reloadData()
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,19 +90,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-  
-
-    func getTopArtistSongDataFromFirebase() {
-        self.fetchUserSongArtistData { completion in
-            if completion {
-                // Loading Screen should be false at this point
-                // Reload table view
-                self.printOutput()
-                print("Reloading table view data...")
-                self.tableView.reloadData()
-            } else {
-                print("error")
-            }
+    func checktableData() {
+        print("check table data")
+        // Iterate through sharedSongs and sharedArtists
+        if !(sharedArtists.isEmpty && sharedSongs.isEmpty){
+            self.tableView.isHidden = false
         }
     }
     
@@ -119,6 +108,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Retrieving user's top tracks")
                 self.processTopSongs() { processTopSongsCompletion in
                     if processTopSongsCompletion {
+                        print("Processed top songs")
                         self.fetchUserSongArtistData { fetchUserSongArtistDataCompletion in
                             if fetchUserSongArtistDataCompletion {
                                 // Loading Screen should be false at this point
@@ -230,15 +220,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
+        print("row \(row)")
         
-        // Iterate through sharedSongs and sharedArtists
         if (sharedArtists.isEmpty && sharedSongs.isEmpty){
             self.tableView.isHidden = true
-            if self.currentUserObject.friends.isEmpty {
-                self.emptyLabel.isHidden = false
-            }
             return UITableViewCell()
-        }else{
+        } else {
             self.tableView.isHidden = false
         }
         
@@ -258,6 +245,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 0")
                 cell.cardView.isHidden = true
@@ -269,8 +258,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
-            if !sharedSongs.isEmpty {
+            cell.collectionView.reloadData()
+            if !sharedArtists.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 1")
                 cell.collectionView.isHidden = true
@@ -293,6 +284,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
             } else {
                 print("case 2")
                 cell.sharedType.text = "Featured Shared Song"
@@ -305,8 +298,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
             cell.collectionList = Array(sharedSongs.values)
+            cell.collectionView.reloadData()
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 3")
                 cell.collectionView.isHidden = true
@@ -448,12 +443,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             }
                                         }
                                         
-//                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
+                                        print("Shared Songs count after fetching:  \(sharedSongs.count) Shared Artists count after fetching: \(sharedArtists.count)")
                                         completion(true)
                                     }
                                 }
                             }
                         }
+//                        print("Shared Songs count:  \(sharedSongs.count) Shared Artists count \(sharedArtists.count)")
+//                        completion(true)
                     }
                 }
             }
@@ -519,7 +516,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 }
                             }
                         }
-                        
                         completion (true)
                     }
                 }
