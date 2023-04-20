@@ -47,15 +47,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib.init(nibName: "ImageCard", bundle: nil), forCellReuseIdentifier: imageCellIdentifier)
         settingsButton.isHidden = true
         
-//        spotify = Spotify()
-//        print("Configure Spotify Authorization")
-//        if (!(spotify!).isUserAuthSavedToKeychain()) {
-//            print("Authorizing Spotify...")
-//            self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
-//        } else {
-//            processSpotifyData()
-//        }
-//
+        spotify = Spotify()
+        print("Configure Spotify Authorization")
+        if (!(spotify!).isUserAuthSavedToKeychain()) {
+            print("Authorizing Spotify...")
+            self.performSegue(withIdentifier: "authorizeSpotify", sender: nil)
+        } else {
+            processSpotifyData()
+        }
+
         processSpotifyData()
         self.getFriends { completion in
             if completion {
@@ -73,12 +73,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            print("Reloading table view after 5 seconds")
-            self.printOutput()
-            self.tableView.reloadData()
-            
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            print("Reloading table view after 5 seconds")
+//            self.printOutput()
+//            self.tableView.reloadData()
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,57 +133,55 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func processTopArtists(_ completion: @escaping (_ success: Bool) -> Void) {
-        completion(true)
-//        var topArtists = [Artist]()
-//        // Pull user's top artists from Spotify
-//        self.topArtistCancellables = spotify!.api
-//            .currentUserTopArtists(.shortTerm)
-//                    .receive(on: RunLoop.main)
-//                    .sink(
-//                        receiveCompletion: self.receiveTopArtistsCompletion(_:),
-//                        receiveValue: { topArtistsResponse in
-//                            topArtists = topArtistsResponse.items
-//                            // Parse top artist data
-//                            // Get artist name, genre?, image?
-//                            var topArtistNames = [String]()
-//                            var topArtistImages = [String:String]()
-//                            for artist in topArtists {
-//                                topArtistNames.append(artist.name)
-//                                topArtistImages[artist.name] = (artist.images?[0].url.absoluteString)!
-//                            }
-//                            // Load user's top artist data into Firebase
-//                            // Add artist to user top artist
-//                            self.loadTopArtistsToFirebase(topArtistNames: topArtistNames, topArtistImages: topArtistImages)
-//                            completion(true)
-//                        }
-//                    )
+        var topArtists = [Artist]()
+        // Pull user's top artists from Spotify
+        self.topArtistCancellables = spotify!.api
+            .currentUserTopArtists(.shortTerm)
+                    .receive(on: RunLoop.main)
+                    .sink(
+                        receiveCompletion: self.receiveTopArtistsCompletion(_:),
+                        receiveValue: { topArtistsResponse in
+                            topArtists = topArtistsResponse.items
+                            // Parse top artist data
+                            // Get artist name, genre?, image?
+                            var topArtistNames = [String]()
+                            var topArtistImages = [String:String]()
+                            for artist in topArtists {
+                                topArtistNames.append(artist.name)
+                                topArtistImages[artist.name] = (artist.images?[0].url.absoluteString)!
+                            }
+                            // Load user's top artist data into Firebase
+                            // Add artist to user top artist
+                            self.loadTopArtistsToFirebase(topArtistNames: topArtistNames, topArtistImages: topArtistImages)
+                            completion(true)
+                        }
+                    )
     }
     
     func processTopSongs(_ completion: @escaping (_ success: Bool) -> Void) {
-        completion(true)
-//        var topTracks = [Track]()
-//        // Pull user's top artists from Spotify
-//        self.topArtistCancellables = spotify!.api
-//            .currentUserTopTracks(.shortTerm)
-//                    .receive(on: RunLoop.main)
-//                    .sink(
-//                        receiveCompletion: self.receiveTopArtistsCompletion(_:),
-//                        receiveValue: { topTracksResponse in
-//                            topTracks = topTracksResponse.items
-//                            // Parse top artist data
-//                            // Get artist name, genre?, image?
-//                            var topSongs = [String:String]()
-//                            var topSongImages = [String:String]()
-//                            for track in topTracks {
-//                                topSongs[track.name] = track.artists?[0].name
-//                                topSongImages[track.name] = track.album?.images![0].url.absoluteString
-//                            }
-//                            // Load user's top artist data into Firebase
-//                            // Add artist to user top artist
-//                            self.loadTopSongsToFirebase(topSongs: topSongs, topSongImages: topSongImages)
-//                            completion(true)
-//                        }
-//                    )
+        var topTracks = [Track]()
+        // Pull user's top artists from Spotify
+        self.topArtistCancellables = spotify!.api
+            .currentUserTopTracks(.shortTerm)
+                    .receive(on: RunLoop.main)
+                    .sink(
+                        receiveCompletion: self.receiveTopArtistsCompletion(_:),
+                        receiveValue: { topTracksResponse in
+                            topTracks = topTracksResponse.items
+                            // Parse top artist data
+                            // Get artist name, genre?, image?
+                            var topSongs = [String:String]()
+                            var topSongImages = [String:String]()
+                            for track in topTracks {
+                                topSongs[track.name] = track.artists?[0].name
+                                topSongImages[track.name] = track.album?.images![0].url.absoluteString
+                            }
+                            // Load user's top artist data into Firebase
+                            // Add artist to user top artist
+                            self.loadTopSongsToFirebase(topSongs: topSongs, topSongImages: topSongImages)
+                            completion(true)
+                        }
+                    )
     }
     
     func loadTopSongsToFirebase(topSongs: [String: String], topSongImages: [String: String]) {
@@ -249,6 +246,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
             } else {
                 print("case 0")
                 cell.cardView.isHidden = true
@@ -263,6 +261,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.collectionView.reloadData()
             if !sharedArtists.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 1")
                 cell.collectionView.isHidden = true
@@ -285,6 +284,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("error")
                     }
                 }
+                cell.cardView.isHidden = false
             } else {
                 print("case 2")
                 cell.sharedType.text = "Featured Shared Song"
@@ -300,6 +300,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.collectionView.reloadData()
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
             } else {
                 print("case 3")
                 cell.collectionView.isHidden = true
