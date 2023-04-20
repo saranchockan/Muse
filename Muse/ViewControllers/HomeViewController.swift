@@ -56,7 +56,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             processSpotifyData()
         }
 
-        processSpotifyData()
         self.getFriends { completion in
             if completion {
                 print("MY FRIENDS: \(self.currentUserObject.friends.count)")
