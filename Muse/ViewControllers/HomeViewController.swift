@@ -464,6 +464,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         
                         let data = document.data()
                         let friends = data["friends"] as! [String]
+                        let requests = data["requests"] as! [String]
                         
                         for friend in friends {
                             ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
@@ -479,7 +480,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         currentFriend.lastName = document.data()["Last Name"] as! String
                                         self.currentUserObject.friends.append(currentFriend)
                                     }
-                                    
+                                }
+                            }
+                        }
+                        
+                        for request in requests {
+                            ref.whereField(FieldPath.documentID(), isEqualTo: request).getDocuments()
+                            {(querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    for document in querySnapshot!.documents {
+                                        let currentRequest = User()
+                                        currentRequest.uid = document.documentID
+                                        print ("request UID: \(currentRequest.uid)")
+                                        currentRequest.firstName = document.data()["First Name"] as! String
+                                        currentRequest.lastName = document.data()["Last Name"] as! String
+                                        self.currentUserObject.requests.append(currentRequest)
+                                    }
                                 }
                             }
                         }

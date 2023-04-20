@@ -15,6 +15,7 @@ class RegisterFirstViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var confirmPassword: UITextField!
     
     override func viewDidLoad() {
@@ -50,35 +51,42 @@ class RegisterFirstViewController: UIViewController {
         userPassword = password.text!
         
         // Register user with firebase Auth
-        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
-            guard let user = authResult?.user, error == nil else {
-                print("Firebase auth error \(String(describing: error))")
-                return
-            }
-            // Add user to Firebase user
-            // collection: https://firebase.google.com/docs/firestore/manage-data/add-data#swift
-            // Should only execute if firebase auth
-            // is successful, get UID from auth response object
-            db.collection("Users").document(user.uid).setData([
-                "Email": userEmail,
-                "First Name": "",
-                "Last Name": "",
-                "Phone Number": "",
-                "Location": "",
-                "Top Artists": [],
-                "Top Songs": [String: String](),
-                "friends": [],
-                "requests": []
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                    
-                    let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreen") as! WelcomeViewController
-                    self.present(tabVC, animated: true)
+        if password.text == confirmPassword.text {
+            Auth.auth().createUser(withEmail: userEmail, password: userPassword) { authResult, error in
+                guard let user = authResult?.user, error == nil else {
+                    print("Firebase auth error \(String(describing: error))")
+                    self.errorLabel.isHidden = false
+                    self.errorLabel.text = error?.localizedDescription
+                    return
+                }
+                // Add user to Firebase user
+                // collection: https://firebase.google.com/docs/firestore/manage-data/add-data#swift
+                // Should only execute if firebase auth
+                // is successful, get UID from auth response object
+                db.collection("Users").document(user.uid).setData([
+                    "Email": userEmail,
+                    "First Name": "",
+                    "Last Name": "",
+                    "Phone Number": "",
+                    "Location": "",
+                    "Top Artists": [],
+                    "Top Songs": [String: String](),
+                    "friends": [],
+                    "requests": []
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                        
+                        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreen") as! WelcomeViewController
+                        self.present(tabVC, animated: true)
+                    }
                 }
             }
+        } else {
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = "Your password inputs do not match."
         }
     }
     

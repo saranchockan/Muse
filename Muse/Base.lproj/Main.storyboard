@@ -103,6 +103,13 @@
                                     <segue destination="Z9w-eD-VPz" kind="show" id="7f4-2W-FFG"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiB-5g-xoH">
+                                <rect key="frame" x="49" y="661" width="292" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kXw-1P-prx"/>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.10196078431372549" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -110,13 +117,14 @@
                     <navigationItem key="navigationItem" id="lG1-HQ-84C"/>
                     <connections>
                         <outlet property="email" destination="jQi-QX-IuJ" id="9u2-xW-A7p"/>
+                        <outlet property="errorLabel" destination="wiB-5g-xoH" id="jGH-z3-I0I"/>
                         <outlet property="loginButton" destination="2Px-ey-V9I" id="YFL-sn-tjz"/>
                         <outlet property="password" destination="yxm-Ks-MUO" id="WAN-xb-6Zp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O1i-qR-FMF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2698" y="4"/>
+            <point key="canvasLocation" x="2696.9465648854962" y="3.5211267605633805"/>
         </scene>
         <!--Register First View Controller-->
         <scene sceneID="N00-tf-7Sb">
@@ -201,6 +209,13 @@
                                     <segue destination="moX-6L-PDK" kind="show" id="ZHE-oL-kFo"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDs-WY-bAo">
+                                <rect key="frame" x="50" y="702" width="292" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QFx-8R-KAi"/>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -210,6 +225,7 @@
                         <outlet property="confirmPassword" destination="1Xe-OQ-5Qa" id="IYH-wL-5nQ"/>
                         <outlet property="continueButton" destination="h9U-xL-D4I" id="ug1-eV-e2f"/>
                         <outlet property="email" destination="tGN-5r-WaR" id="uvx-vy-QHa"/>
+                        <outlet property="errorLabel" destination="iDs-WY-bAo" id="wpR-wy-htb"/>
                         <outlet property="password" destination="mhb-1T-7To" id="VA2-68-b3h"/>
                     </connections>
                 </viewController>
@@ -538,7 +554,7 @@
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-aq-goj">
-                                <rect key="frame" x="-2" y="158" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="146" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
