@@ -12,6 +12,14 @@ class SharedArtist: ImageCardObject {
     var friends:[String] = []
     var imgURLString: String = ""
     
+    func getSongArtists() -> String {
+        return ""
+    }
+    
+    func getFriends() -> [String] {
+        return friends
+    }
+    
     func getName() -> String {
         return artistName
     }

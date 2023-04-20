@@ -250,6 +250,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
+            cell.navigationController = self.navigationController
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {
@@ -286,6 +287,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
             cell.collectionList = Array(sharedSongs.values)
+            cell.navigationController = self.navigationController
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {

@@ -26,6 +26,7 @@
 		5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */; };
 		5B82A74229B17D7C0032C1FE /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */; };
 		5B82A74429B17D890032C1FE /* MyListeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82A74329B17D890032C1FE /* MyListeningViewController.swift */; };
+		5BBAA92429F1B60900FB4B58 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAA92329F1B60900FB4B58 /* PopupViewController.swift */; };
 		5BCA7A2929EEEDDD00C00A1B /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCA7A2829EEEDDD00C00A1B /* edit@3x.png */; };
 		5BE0B6DB29D6541100376010 /* ImageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6DA29D6541100376010 /* ImageCard.xib */; };
 		5BE0B6DF29D6555E00376010 /* ImageCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0B6DE29D6555E00376010 /* ImageCardCell.xib */; };
@@ -80,6 +81,7 @@
 		5B82A73F29B17D680032C1FE /* ConcertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertsViewController.swift; sourceTree = "<group>"; };
 		5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsViewController.swift; sourceTree = "<group>"; };
 		5B82A74329B17D890032C1FE /* MyListeningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListeningViewController.swift; sourceTree = "<group>"; };
+		5BBAA92329F1B60900FB4B58 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		5BCA7A2829EEEDDD00C00A1B /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
 		5BE0B6DA29D6541100376010 /* ImageCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCard.xib; sourceTree = "<group>"; };
 		5BE0B6DE29D6555E00376010 /* ImageCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCardCell.xib; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				5B82A74129B17D7C0032C1FE /* MyFriendsViewController.swift */,
 				5B82A74329B17D890032C1FE /* MyListeningViewController.swift */,
 				5B72CD1529B7F0C00024DEAF /* SettingsViewController.swift */,
+				5BBAA92329F1B60900FB4B58 /* PopupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				5BE0B6E329D657CE00376010 /* ImageCardCollectionViewCell.swift in Sources */,
 				5B82A74029B17D680032C1FE /* ConcertsViewController.swift in Sources */,
 				5B82A74229B17D7C0032C1FE /* MyFriendsViewController.swift in Sources */,
+				5BBAA92429F1B60900FB4B58 /* PopupViewController.swift in Sources */,
 				5BE0B6E529D664FA00376010 /* MyArtist.swift in Sources */,
 				5BE0B6E129D6557700376010 /* ImageCardTableViewCell.swift in Sources */,
 				1EF30F3129DCACD40082E775 /* User.swift in Sources */,

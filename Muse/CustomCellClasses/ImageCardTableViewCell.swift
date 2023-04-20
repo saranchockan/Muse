@@ -14,18 +14,20 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     @IBOutlet weak var title: UILabel!
     var cellIdentifier = "ImageCardCell"
     var collectionList : [ImageCardObject]!
+    var navigationController: UINavigationController!
+    var popupViewController: PopupViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib.init(nibName: "ImageCardCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        let st = UIStoryboard(name: "Main", bundle: nil)
+        popupViewController = st.instantiateViewController(withIdentifier: "PopupViewController") as? PopupViewController
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,6 +46,30 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
             }
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let item = collectionList[index]
+        let imageURL = URL(string: item.getImage())!
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let imageData = NSData(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                self.popupViewController.img.image = UIImage(data: imageData! as Data)
+            }
+        }
+        
+        if item is SharedArtist {
+            popupViewController.type = "artist"
+        } else if item is SharedSong {
+            popupViewController.type = "song"
+            popupViewController.artist = item.getSongArtists()
+        }
+        
+        popupViewController.name = item.getName()
+        popupViewController.friends = item.getFriends()
+        navigationController.present(popupViewController, animated: true)
     }
     
     func fetchImages(_ item: ImageCardObject,_ cell: ImageCardCollectionViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {

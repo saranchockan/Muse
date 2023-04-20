@@ -10,8 +10,15 @@ import Foundation
 class MySong: ImageCardObject {
     var songName: String = ""
     var imgURLString: String = ""
-    
     var artistName: String = ""
+    
+    func getSongArtists() -> String {
+        return ""
+    }
+    
+    func getFriends() -> [String] {
+        return []
+    }
     
     func getName() -> String {
         return songName
