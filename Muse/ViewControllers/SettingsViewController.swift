@@ -47,6 +47,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
 
         if currentUserObject.pic != nil{
             profilePicture.image = currentUserObject.pic
+        } else {
+            print("Nil profile picture")
         }
         
         imagePicker.delegate = self
@@ -155,7 +157,7 @@ public class StorageManager: ObservableObject {
     
 
     
-    func getImage(uid: String, completion: @escaping (_ success: Bool) -> Void)  -> UIImage? {
+    func getImage(uid: String) async  -> UIImage? {
         let reference = Storage.storage().reference().child("images/\(uid).jpg")
         do {
             let data = try await reference.data(maxSize: 1 * 1024 * 1024)

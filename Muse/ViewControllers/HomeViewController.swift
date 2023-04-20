@@ -533,9 +533,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         
                         let storageManager = StorageManager()
                         let uid = Auth.auth().currentUser?.uid
-                        let image = storageManager.getImage(uid: uid!)
-                        print("hi")
-                        completion (true)
+                        Task.init {
+                            let image = await storageManager.getImage(uid: uid!)
+                            self.currentUserObject.pic = image
+                            completion (true)
+                        }
                     }
                 }
             }
