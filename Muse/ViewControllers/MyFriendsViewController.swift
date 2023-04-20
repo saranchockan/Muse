@@ -132,9 +132,13 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FriendCardTableViewCell
-        cell.name.text = "\(tableData[indexPath.row].firstName) \(tableData[indexPath.row].lastName)"
+        let friend = tableData[indexPath.row]
+        cell.name.text = "\(friend.firstName) \(friend.lastName)"
         cell.currentUserObject = currentUserObject
-        cell.friendObject = tableData[indexPath.row]
+        cell.friendObject = friend
+        if friend.pic != nil {
+            cell.profilePicture.image = friend.pic
+        }
         cell.delegate = self
         cell.button.isSelected = false
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)

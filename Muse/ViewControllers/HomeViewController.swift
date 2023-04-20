@@ -495,6 +495,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let friends = data["friends"] as! [String]
                         let requests = data["requests"] as! [String]
                         
+                        let storageManager = StorageManager()
+                        
                         for friend in friends {
                             ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()
                             {(querySnapshot, err) in
@@ -507,6 +509,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         print ("friend UID: \(currentFriend.uid)")
                                         currentFriend.firstName = document.data()["First Name"] as! String
                                         currentFriend.lastName = document.data()["Last Name"] as! String
+                                        Task.init {
+                                            let image = await storageManager.getImage(uid: currentFriend.uid)
+                                            currentFriend.pic = image
+                                        }
                                         self.currentUserObject.friends.append(currentFriend)
                                     }
                                 }
@@ -525,16 +531,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         print ("request UID: \(currentRequest.uid)")
                                         currentRequest.firstName = document.data()["First Name"] as! String
                                         currentRequest.lastName = document.data()["Last Name"] as! String
+                                        Task.init {
+                                            let image = await storageManager.getImage(uid: currentRequest.uid)
+                                            currentRequest.pic = image
+                                        }
                                         self.currentUserObject.requests.append(currentRequest)
                                     }
                                 }
                             }
                         }
-                        
-                        let storageManager = StorageManager()
-                        let uid = Auth.auth().currentUser?.uid
                         Task.init {
-                            let image = await storageManager.getImage(uid: uid!)
+                            let image = await storageManager.getImage(uid: currentUser!)
                             self.currentUserObject.pic = image
                             completion (true)
                         }
