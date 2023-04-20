@@ -74,7 +74,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            print("Reloading table view after 5 seconds")
+            self.printOutput()
             self.tableView.reloadData()
+            
         }
     }
     
@@ -257,7 +260,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Who Your Friends Are Listening To"
             cell.collectionList = Array(sharedArtists.values)
-            if !sharedSongs.isEmpty {
+            cell.collectionView.reloadData()
+            if !sharedArtists.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {
                 print("case 1")
@@ -293,6 +297,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Songs Your Friends Are Listening To"
             cell.collectionList = Array(sharedSongs.values)
+            cell.collectionView.reloadData()
             if !sharedSongs.isEmpty {
                 cell.emptyLabel.isHidden = true
             } else {
