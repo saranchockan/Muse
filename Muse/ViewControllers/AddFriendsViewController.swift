@@ -44,6 +44,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.tableData = self.contacts
                         self.filteredData = self.tableData
                         self.tableView.reloadData()
+                        if self.tableData.isEmpty {
+                            self.tableView.isHidden = true
+                            self.emptyLabel.text = self.contactsAllowed ? "You have requested all your contacts on the app. Check out all users to look for more potential friends!" : "You did not allow contact access. You can explore all users or change this in settings to see potential friends here!"
+                        }
                     } else {
                         print("error getting potential user objects")
                     }
@@ -100,6 +104,9 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.name.text = "\(filteredData[indexPath.row].firstName) \(filteredData[indexPath.row].lastName)"
         cell.currentUserObject = currentUserObject
         cell.friendObject = filteredData[indexPath.row]
+        if filteredData[indexPath.row].pic != nil{
+            cell.profilePicture.image = filteredData[indexPath.row].pic
+        }
         cell.delegate = self
         cell.button.isSelected = false
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
@@ -119,6 +126,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 return
             }
             
+            let storageManager = StorageManager()
+            
             if let snapshot = snapshot {
                 for document in snapshot.documents {
                     let otherUser = User()
@@ -127,6 +136,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                         print ("otherUser UID: \(otherUser.uid)")
                         otherUser.firstName = document.data()["First Name"] as! String
                         otherUser.lastName = document.data()["Last Name"] as! String
+                        Task.init {
+                            let image = await storageManager.getImage(uid: otherUser.uid)
+                            otherUser.pic = image
+                        }
                         self.potentialFriends.append(otherUser)
                         
                         // check if in contacts too
