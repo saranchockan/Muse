@@ -9,15 +9,22 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
+import Contacts
 
 class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ModifyFriendsDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentCtrl: UISegmentedControl!
+    @IBOutlet weak var emptyLabel: UILabel!
+    var contactsAllowed = false
     let cellIdentifier = "FriendCard"
     var currentUserObject: User!
     var potentialFriends: [User] = []
-    var filteredPotentialFriends: [User] = []
+    var contacts: [User] = []
+    var contactInfo: [String] = []
+    var tableData: [User]!
+    var filteredData: [User] = []
     var selectedSet: Set<FriendCardTableViewCell> = []
     
     override func viewDidLoad() {
@@ -29,16 +36,52 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
-        self.getNonFriendUsers { completion in
+        self.getContactInfo() { completion in
             if completion {
-                print ("potential friends in completion size", self.potentialFriends.count)
-                self.filteredPotentialFriends = self.potentialFriends
-                self.tableView.reloadData()
+                self.getNonFriendUsers { completion in
+                    if completion {
+                        print ("potential friends in completion size", self.potentialFriends.count)
+                        self.tableData = self.potentialFriends
+                        self.filteredData = self.potentialFriends
+                        self.tableView.reloadData()
+                    } else {
+                        print("error getting potential user objects")
+                    }
+                }
             } else {
-                print("error getting potential user objects")
+                print("error getting contacts")
             }
         }
     }
+    
+    @IBAction func onSegmentChange(_ sender: Any) {
+        switch segmentCtrl.selectedSegmentIndex {
+        case 0:
+            tableData = potentialFriends
+            filteredData = potentialFriends
+            if tableData.isEmpty {
+                tableView.isHidden = true
+                emptyLabel.text = "You have requested all users on the app!"
+            } else {
+                tableView.reloadData()
+                tableView.isHidden = false
+            }
+        case 1:
+            tableData = contacts
+            filteredData = contacts
+            if tableData.isEmpty {
+                tableView.isHidden = true
+                emptyLabel.text = contactsAllowed ? "You have requested all your contacts on the app!" : "You did not allow contact access. Please change this in settings to see potential friends here!"
+            } else {
+                print ("num contacts: ", contacts.count)
+                tableView.reloadData()
+                tableView.isHidden = false
+            }
+        default:
+            print("this isn't supposed to happen")
+        }
+    }
+    
     
     func addSelectedToSet(cell: FriendCardTableViewCell) {
         selectedSet.insert(cell)
@@ -49,14 +92,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredPotentialFriends.count
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FriendCardTableViewCell
-        cell.name.text = "\(filteredPotentialFriends[indexPath.row].firstName) \(filteredPotentialFriends[indexPath.row].lastName)"
+        cell.name.text = "\(filteredData[indexPath.row].firstName) \(filteredData[indexPath.row].lastName)"
         cell.currentUserObject = currentUserObject
-        cell.friendObject = filteredPotentialFriends[indexPath.row]
+        cell.friendObject = filteredData[indexPath.row]
         cell.delegate = self
         cell.button.isSelected = false
         cell.button.backgroundColor = UIColor(red: 31/255, green: 34/255, blue: 42/255, alpha: 1)
@@ -85,6 +128,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                         otherUser.firstName = document.data()["First Name"] as! String
                         otherUser.lastName = document.data()["Last Name"] as! String
                         self.potentialFriends.append(otherUser)
+                        
+                        // check if in contacts too
+                        var phone = document.data()["Phone Number"] as! String
+                        var email = document.data()["Email"] as! String
+                        if self.contactInfo.contains(phone) || self.contactInfo.contains(email) {
+                            self.contacts.append(otherUser)
+                        }
+                        
                     }
                 }
                 completion(true)
@@ -92,11 +143,47 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
+        let store = CNContactStore()
+        store.requestAccess(for: .contacts) { (access, error) in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            self.contactsAllowed = access
+        }
+        
+        if (CNContactStore.authorizationStatus(for: CNEntityType.contacts) == .authorized) {
+            
+            let request = CNContactFetchRequest(keysToFetch: [
+                CNContactEmailAddressesKey as CNKeyDescriptor,
+                CNContactPhoneNumbersKey as CNKeyDescriptor
+            ])
+            
+            do {
+                try store.enumerateContacts(with: request) {
+                    (contact, stop) in
+                    contactInfo.append(contentsOf: contact.emailAddresses.map({ address in
+                        address.value as String
+                    }))
+                    contactInfo.append(contentsOf: contact.phoneNumbers.map({ number in
+                        "\(number.value)"
+                    }))
+                }
+                completion(true)
+            } catch {
+                print("contact error: \(error)")
+            }
+        } else {
+            completion(true)
+        }
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredPotentialFriends = potentialFriends
+            filteredData = tableData
         } else {
-            filteredPotentialFriends = potentialFriends.filter { (item: User) -> Bool in
+            filteredData = tableData.filter { (item: User) -> Bool in
                 let fullName = "\(item.firstName) \(item.lastName)"
                 return fullName.range(of: searchText, options: .caseInsensitive) != nil
             }

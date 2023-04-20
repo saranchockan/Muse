@@ -17,6 +17,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSContactsUsageDescription</key>
+	<string>We use your contacts to find people you may know who are already using the app!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
