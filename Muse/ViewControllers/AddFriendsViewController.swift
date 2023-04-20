@@ -41,8 +41,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.getNonFriendUsers { completion in
                     if completion {
                         print ("potential friends in completion size", self.potentialFriends.count)
-                        self.tableData = self.potentialFriends
-                        self.filteredData = self.potentialFriends
+                        self.tableData = self.contacts
+                        self.filteredData = self.tableData
                         self.tableView.reloadData()
                     } else {
                         print("error getting potential user objects")
@@ -57,23 +57,23 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func onSegmentChange(_ sender: Any) {
         switch segmentCtrl.selectedSegmentIndex {
         case 0:
+            tableData = contacts
+            filteredData = contacts
+            if tableData.isEmpty {
+                tableView.isHidden = true
+                emptyLabel.text = contactsAllowed ? "You have requested all your contacts on the app. Check out all users to look for more potential friends!" : "You did not allow contact access. You can explore all users or change this in settings to see potential friends here!"
+            } else {
+                print ("num contacts: ", contacts.count)
+                tableView.reloadData()
+                tableView.isHidden = false
+            }
+        case 1:
             tableData = potentialFriends
             filteredData = potentialFriends
             if tableData.isEmpty {
                 tableView.isHidden = true
                 emptyLabel.text = "You have requested all users on the app!"
             } else {
-                tableView.reloadData()
-                tableView.isHidden = false
-            }
-        case 1:
-            tableData = contacts
-            filteredData = contacts
-            if tableData.isEmpty {
-                tableView.isHidden = true
-                emptyLabel.text = contactsAllowed ? "You have requested all your contacts on the app!" : "You did not allow contact access. Please change this in settings to see potential friends here!"
-            } else {
-                print ("num contacts: ", contacts.count)
                 tableView.reloadData()
                 tableView.isHidden = false
             }
@@ -159,20 +159,23 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 CNContactEmailAddressesKey as CNKeyDescriptor,
                 CNContactPhoneNumbersKey as CNKeyDescriptor
             ])
-            
-            do {
-                try store.enumerateContacts(with: request) {
-                    (contact, stop) in
-                    contactInfo.append(contentsOf: contact.emailAddresses.map({ address in
-                        address.value as String
-                    }))
-                    contactInfo.append(contentsOf: contact.phoneNumbers.map({ number in
-                        "\(number.value)"
-                    }))
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    try store.enumerateContacts(with: request) {
+                        (contact, stop) in
+                        DispatchQueue.main.async {
+                            self.contactInfo.append(contentsOf: contact.emailAddresses.map({ address in
+                                address.value as String
+                            }))
+                            self.contactInfo.append(contentsOf: contact.phoneNumbers.map({ number in
+                                "\(number.value)"
+                            }))
+                        }
+                    }
+                    completion(true)
+                } catch {
+                    print("contact error: \(error)")
                 }
-                completion(true)
-            } catch {
-                print("contact error: \(error)")
             }
         } else {
             completion(true)
