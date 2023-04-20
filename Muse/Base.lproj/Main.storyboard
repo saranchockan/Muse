@@ -554,11 +554,7 @@
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-aq-goj">
-<<<<<<< Updated upstream
-                                <rect key="frame" x="-2" y="158" width="393" height="44"/>
-=======
                                 <rect key="frame" x="0.0" y="146" width="393" height="44"/>
->>>>>>> Stashed changes
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

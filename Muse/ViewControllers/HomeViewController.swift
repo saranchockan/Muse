@@ -480,12 +480,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         currentFriend.lastName = document.data()["Last Name"] as! String
                                         self.currentUserObject.friends.append(currentFriend)
                                     }
-<<<<<<< Updated upstream
-                                    
-                                }
-                            }
-                        }
-=======
                                 }
                             }
                         }
@@ -507,8 +501,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 }
                             }
                         }
-                        
->>>>>>> Stashed changes
                         completion (true)
                     }
                 }
