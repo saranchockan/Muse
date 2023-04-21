@@ -36,6 +36,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         tableView.register(UINib.init(nibName: "FriendCard", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
+        emptyLabel.isHidden = true
+        
         self.getContactInfo() { completion in
             if completion {
                 self.getNonFriendUsers { completion in
@@ -47,6 +49,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                         if self.tableData.isEmpty {
                             self.tableView.isHidden = true
                             self.emptyLabel.text = self.contactsAllowed ? "You have requested all your contacts on the app. Check out all users to look for more potential friends!" : "You did not allow contact access. You can explore all users or change this in settings to see potential friends here!"
+                            self.emptyLabel.isHidden = false
+                        } else {
+                            self.tableView.isHidden = false
+                            self.emptyLabel.isHidden = true
                         }
                     } else {
                         print("error getting potential user objects")
@@ -67,10 +73,12 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
             if tableData.isEmpty {
                 tableView.isHidden = true
                 emptyLabel.text = contactsAllowed ? "You have requested all your contacts on the app. Check out all users to look for more potential friends!" : "You did not allow contact access. You can explore all users or change this in settings to see potential friends here!"
+                emptyLabel.isHidden = false
             } else {
                 print ("num contacts: ", contacts.count)
                 tableView.reloadData()
                 tableView.isHidden = false
+                emptyLabel.isHidden = true
             }
         case 1:
             tableData = potentialFriends
@@ -214,8 +222,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.requestFriend()
             let potentialIndex: Int = potentialFriends.firstIndex(where: {$0.uid == cell.friendObject.uid})!
             potentialFriends.remove(at: potentialIndex)
-            let contactIndex: Int = contacts.firstIndex(where: {$0.uid == cell.friendObject.uid})!
-            contacts.remove(at: contactIndex)
+            let contactIndex: Int = contacts.firstIndex(where: {$0.uid == cell.friendObject.uid}) ?? -1
+            if contactIndex >= 0 {
+                contacts.remove(at: contactIndex)
+            }
         }
         selectedSet.removeAll()
     }

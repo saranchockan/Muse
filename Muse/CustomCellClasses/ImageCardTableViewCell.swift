@@ -14,7 +14,7 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     @IBOutlet weak var title: UILabel!
     var cellIdentifier = "ImageCardCell"
     var collectionList : [ImageCardObject]!
-    var navigationController: UINavigationController!
+    var navigationController: UINavigationController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,30 +46,33 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let st = UIStoryboard(name: "Main", bundle: nil)
-        let popupViewController = st.instantiateViewController(withIdentifier: "PopupViewController") as! PopupViewController
         let index = indexPath.row
         let item = collectionList[index]
         let imageURL = URL(string: item.getImage())!
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            let imageData = NSData(contentsOf: imageURL)
-            DispatchQueue.main.async {
-                popupViewController.img.image = UIImage(data: imageData! as Data)
-                popupViewController.blurredImg.image = UIImage(data: imageData! as Data)
+        if navigationController != nil {
+            let st = UIStoryboard(name: "Main", bundle: nil)
+            let popupViewController = st.instantiateViewController(withIdentifier: "PopupViewController") as! PopupViewController
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let imageData = NSData(contentsOf: imageURL)
+                DispatchQueue.main.async {
+                    popupViewController.img.image = UIImage(data: imageData! as Data)
+                    popupViewController.blurredImg.image = UIImage(data: imageData! as Data)
+                }
             }
+            
+            if item is SharedArtist {
+                popupViewController.type = "artist"
+            } else if item is SharedSong {
+                popupViewController.type = "song"
+                popupViewController.artist = item.getSongArtists()
+            }
+            
+            popupViewController.name = item.getName()
+            popupViewController.friends = item.getFriends()
+            navigationController!.present(popupViewController, animated: false)
         }
-        
-        if item is SharedArtist {
-            popupViewController.type = "artist"
-        } else if item is SharedSong {
-            popupViewController.type = "song"
-            popupViewController.artist = item.getSongArtists()
-        }
-        
-        popupViewController.name = item.getName()
-        popupViewController.friends = item.getFriends()
-        navigationController.present(popupViewController, animated: false)
     }
     
     func fetchImages(_ item: ImageCardObject,_ cell: ImageCardCollectionViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
