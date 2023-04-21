@@ -59,6 +59,7 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func onSegmentChange(_ sender: Any) {
+        actOnSelected()
         switch segmentCtrl.selectedSegmentIndex {
         case 0:
             tableData = contacts
@@ -208,10 +209,19 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.reloadData()
     }
     
-    @IBAction func finishPressed(_ sender: Any) {
+    func actOnSelected() {
         for cell in selectedSet {
             cell.requestFriend()
+            let potentialIndex: Int = potentialFriends.firstIndex(where: {$0.uid == cell.friendObject.uid})!
+            potentialFriends.remove(at: potentialIndex)
+            let contactIndex: Int = contacts.firstIndex(where: {$0.uid == cell.friendObject.uid})!
+            contacts.remove(at: contactIndex)
         }
         selectedSet.removeAll()
     }
+    
+    @IBAction func finishPressed(_ sender: Any) {
+        actOnSelected()
+    }
+    
 }

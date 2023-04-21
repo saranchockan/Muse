@@ -62,21 +62,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let friendsNavVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
                 let friendsVC = friendsNavVC.topViewController as! MyFriendsViewController
                 friendsVC.currentUserObject = self.currentUserObject
+                let concertsNavVC = self.tabBarController?.viewControllers?[1] as! UINavigationController
+                let concertsVC = concertsNavVC.topViewController as! ConcertsViewController
+                concertsVC.currentUserObject = self.currentUserObject
                 self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
                 self.settingsButton.isHidden = false
                 if self.currentUserObject.friends.isEmpty {
                     self.emptyLabel.isHidden = false
+                } else {
+                    self.emptyLabel.isHidden = true
                 }
             } else {
                 print("error getting user object")
             }
         }
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            print("Reloading table view after 5 seconds")
-//            self.printOutput()
-//            self.tableView.reloadData()
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

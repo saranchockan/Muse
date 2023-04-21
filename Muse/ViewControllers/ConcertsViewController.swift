@@ -56,6 +56,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var sharedConcerts:[SharedConcert] = []
     var filteredSharedConcerts: [SharedConcert] = []
+    var currentUserObject: User!
     
     let TICKETMASTER_API_KEY: String = "TICKETMASTER_DISCOVERY_API_KEY"
     @IBOutlet weak var emptyLabel: UILabel!
@@ -72,12 +73,22 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                 if completion {
                     self.writeDataIntoFirebase()
                     print("IN COMPLETION \(self.sharedConcerts.count)")
-                    DispatchQueue.main.async {
                         self.filteredSharedConcerts = self.sharedConcerts
+                    DispatchQueue.main.async {
                         self.tableView.reloadData()
                         if self.sharedConcerts.isEmpty {
                             self.tableView.isHidden = true
                             self.emptyLabel.isHidden = false
+                        } else {
+                            self.tableView.isHidden = false
+                            self.emptyLabel.isHidden = true
+                        }
+                    }
+                    if self.sharedConcerts.isEmpty {
+                        if self.currentUserObject.friends.isEmpty {
+                            self.emptyLabel.text = "You currently do not have any friends. Go to the My Friends page to add some!"
+                        } else {
+                            self.emptyLabel.text = "You currently do not have any shared concerts."
                         }
                     }
                 } else {
@@ -93,7 +104,6 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "ConcertCard", bundle: nil), forCellReuseIdentifier: concertCellIdentifier)
-        emptyLabel.isHidden = true
         
         getConcertDataFromTicketMaster()
         
@@ -123,7 +133,7 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
         return filteredSharedConcerts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: concertCellIdentifier, for: indexPath) as! ConcertTableViewCell
         let concert = filteredSharedConcerts[indexPath.row]
         cell.artistName.text = concert.concertName
