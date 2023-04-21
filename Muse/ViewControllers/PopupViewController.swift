@@ -35,8 +35,6 @@ class PopupViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        blurredImg.image = img.image
-        
         if type == "artist" {
             cardTitle.text = name
             friendDescription.text = writeDescription(friends, type)
@@ -44,10 +42,19 @@ class PopupViewController: UIViewController {
             cardTitle.text = title + "\n" + artists
             friendDescription.text = writeDescription(friends, type)
         }
+        
+        addAnimation()
+    }
+    
+    func addAnimation() {
+        blurredImg.transform = CGAffineTransform(scaleX: 0.8, y: 1.2)
+        UIImageView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [],  animations: {
+           self.blurredImg.transform = .identity
+         })
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func writeDescription(_ friends: [String], _ type: String) -> String{

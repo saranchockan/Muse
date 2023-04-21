@@ -57,6 +57,7 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
             let imageData = NSData(contentsOf: imageURL)
             DispatchQueue.main.async {
                 self.popupViewController.img.image = UIImage(data: imageData! as Data)
+                self.popupViewController.blurredImg.image = UIImage(data: imageData! as Data)
             }
         }
         
@@ -69,7 +70,7 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
         
         popupViewController.name = item.getName()
         popupViewController.friends = item.getFriends()
-        navigationController.present(popupViewController, animated: true)
+        navigationController.present(popupViewController, animated: false)
     }
     
     func fetchImages(_ item: ImageCardObject,_ cell: ImageCardCollectionViewCell, _ completion: @escaping (_ success: Bool) -> Void)  {
