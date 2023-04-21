@@ -46,6 +46,10 @@ class PopupViewController: UIViewController {
         addAnimation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
     func addAnimation() {
         blurredImg.transform = CGAffineTransform(scaleX: 0.8, y: 1.2)
         UIImageView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [],  animations: {
@@ -69,7 +73,7 @@ class PopupViewController: UIViewController {
         case 3:
             desc = "\(friends[0]), \(friends[1]), and \(friends[2]) are" + desc
         default:
-            desc = "\(friends[0]), \(friends[1]), \(friends[2]), and more are"
+            desc = "\(friends[0]), \(friends[1]), \(friends[2]), and more are" + desc
         }
         return desc
     }

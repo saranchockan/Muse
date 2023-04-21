@@ -15,15 +15,12 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     var cellIdentifier = "ImageCardCell"
     var collectionList : [ImageCardObject]!
     var navigationController: UINavigationController!
-    var popupViewController: PopupViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib.init(nibName: "ImageCardCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
-        let st = UIStoryboard(name: "Main", bundle: nil)
-        popupViewController = st.instantiateViewController(withIdentifier: "PopupViewController") as? PopupViewController
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -49,6 +46,8 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let st = UIStoryboard(name: "Main", bundle: nil)
+        let popupViewController = st.instantiateViewController(withIdentifier: "PopupViewController") as! PopupViewController
         let index = indexPath.row
         let item = collectionList[index]
         let imageURL = URL(string: item.getImage())!
@@ -56,8 +55,8 @@ class ImageCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICol
         DispatchQueue.global(qos: .userInitiated).async {
             let imageData = NSData(contentsOf: imageURL)
             DispatchQueue.main.async {
-                self.popupViewController.img.image = UIImage(data: imageData! as Data)
-                self.popupViewController.blurredImg.image = UIImage(data: imageData! as Data)
+                popupViewController.img.image = UIImage(data: imageData! as Data)
+                popupViewController.blurredImg.image = UIImage(data: imageData! as Data)
             }
         }
         
