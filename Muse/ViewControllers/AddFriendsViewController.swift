@@ -182,8 +182,12 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         switch CNContactStore.authorizationStatus(for: .contacts) {
         case .authorized:
             self.contactsAllowed = true
+            completion(true)
+
         case .denied:
             self.contactsAllowed = false
+            completion(true)
+
         case .notDetermined:
             print (" not determined ")
             self.store.requestAccess(for: .contacts) { (access, error) in
@@ -192,11 +196,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                     return
                 }
                 self.contactsAllowed = access
+                completion(true)
+
             }
         default:
             print("This should not happen checking contacts access")
+            completion(true)
+
         }
-        completion(true)
     }
     
     func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
