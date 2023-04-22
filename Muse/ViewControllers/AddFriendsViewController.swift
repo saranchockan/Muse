@@ -181,31 +181,18 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func getContactAccess(_ completion: @escaping (_ success: Bool) -> Void){
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .authorized:
-            self.contactsAllowed = true
+        self.store.requestAccess(for: .contacts) { (access, error) in
+            print("Contacts Allowed: \(access)")
+            self.contactsAllowed = access
+//            guard error == nil else {
+//                print("Contact Access Error \(error!.localizedDescription)")
+//                return
+//            }
+            
             completion(true)
-
-        case .denied:
-            self.contactsAllowed = false
-            completion(true)
-
-        case .notDetermined:
-            print (" not determined ")
-            self.store.requestAccess(for: .contacts) { (access, error) in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                self.contactsAllowed = access
-                completion(true)
-
-            }
-        default:
-            print("This should not happen checking contacts access")
-            completion(true)
-
         }
+    
+        print("getContactAccess End")
     }
     
     func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
