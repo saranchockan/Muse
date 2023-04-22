@@ -415,8 +415,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             if artist == friendSongs[song] {
                                                 if sharedSongs[song] != nil {
                                                     let currSong = sharedSongs[song]
-                                                    currSong!.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
-                                                    // Swift does not have unique keys ??
+                                                    let friendName = "\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)"
+                                                    if (!currSong!.friends.contains(friendName)) {
+                                                        currSong!.friends.append(friendName)
+                                                    }
                                                     sharedSongs.removeValue(forKey: song)
                                                     sharedSongs[song] = currSong
                                                 } else {
@@ -435,16 +437,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                        }
                                         
                                         self.printSharedSongData()
-                                        
-                                   
-                                        
-                                     
+
                                         
                                         for artist in artists {
                                             if friendArtists.contains(artist) {
                                                 if sharedArtists[artist] != nil {
                                                     let currArtist = sharedArtists[artist]
-                                                    currArtist?.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                    let friendName = "\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)"
+                                                    if (!currArtist!.friends.contains(friendName)) {
+                                                        currArtist!.friends.append(friendName)
+                                                    }
                                                     sharedArtists.removeValue(forKey: artist)
                                                     sharedArtists[artist] = currArtist
                                                 } else {
