@@ -39,6 +39,18 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         emptyLabel.isHidden = true
         
+        self.getContactAccess { completion in
+            if completion {
+                self.runContactProcessing()
+            } else {
+                print ("error getting access")
+            }
+        }
+    }
+    
+    
+    
+    func runContactProcessing() {
         self.getContactInfo() { completion in
             if completion {
                 self.getNonFriendUsers { completion in
@@ -166,11 +178,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
-        let group = DispatchGroup()
-        group.enter()
-        
-        DispatchQueue.global(qos: .default).async {
+    func getContactAccess(_ completion: @escaping (_ success: Bool) -> Void){
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            self.contactsAllowed = true
+        case .denied:
+            self.contactsAllowed = false
+        case .notDetermined:
+            print (" not determined ")
             self.store.requestAccess(for: .contacts) { (access, error) in
                 guard error == nil else {
                     print(error!.localizedDescription)
@@ -178,10 +193,13 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
                 self.contactsAllowed = access
             }
-            group.leave()
+        default:
+            print("This should not happen checking contacts access")
         }
-        
-        group.wait()
+        completion(true)
+    }
+    
+    func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
         
         print ("past request")
         
