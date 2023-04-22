@@ -17,6 +17,7 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentCtrl: UISegmentedControl!
     @IBOutlet weak var emptyLabel: UILabel!
+    let store = CNContactStore()
     var contactsAllowed = false
     let cellIdentifier = "FriendCard"
     var currentUserObject: User!
@@ -38,6 +39,18 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         emptyLabel.isHidden = true
         
+        self.getContactAccess { completion in
+            if completion {
+                self.runContactProcessing()
+            } else {
+                print ("error getting access")
+            }
+        }
+    }
+    
+    
+    
+    func runContactProcessing() {
         self.getContactInfo() { completion in
             if completion {
                 self.getNonFriendUsers { completion in
@@ -115,6 +128,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.friendObject = filteredData[indexPath.row]
         if filteredData[indexPath.row].pic != nil{
             cell.profilePicture.image = filteredData[indexPath.row].pic
+        } else {
+            cell.profilePicture.image = UIImage(named: "profile@3x.png")
         }
         cell.delegate = self
         cell.button.isSelected = false
@@ -152,8 +167,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.potentialFriends.append(otherUser)
                         
                         // check if in contacts too
-                        var phone = document.data()["Phone Number"] as! String
-                        var email = document.data()["Email"] as! String
+                        let phone = document.data()["Phone Number"] as! String
+                        let email = document.data()["Email"] as! String
                         if self.contactInfo.contains(phone) || self.contactInfo.contains(email) {
                             self.contacts.append(otherUser)
                         }
@@ -165,15 +180,24 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { (access, error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
+    func getContactAccess(_ completion: @escaping (_ success: Bool) -> Void){
+        self.store.requestAccess(for: .contacts) { (access, error) in
+            print("Contacts Allowed: \(access)")
             self.contactsAllowed = access
+//            guard error == nil else {
+//                print("Contact Access Error \(error!.localizedDescription)")
+//                return
+//            }
+            
+            completion(true)
         }
+    
+        print("getContactAccess End")
+    }
+    
+    func getContactInfo(_ completion: @escaping (_ success: Bool) -> Void){
+        
+        print ("past request")
         
         if (CNContactStore.authorizationStatus(for: CNEntityType.contacts) == .authorized) {
             
@@ -183,7 +207,7 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
             ])
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
-                    try store.enumerateContacts(with: request) {
+                    try self.store.enumerateContacts(with: request) {
                         (contact, stop) in
                         DispatchQueue.main.async {
                             self.contactInfo.append(contentsOf: contact.emailAddresses.map({ address in
