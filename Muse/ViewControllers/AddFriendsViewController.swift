@@ -115,6 +115,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.friendObject = filteredData[indexPath.row]
         if filteredData[indexPath.row].pic != nil{
             cell.profilePicture.image = filteredData[indexPath.row].pic
+        } else {
+            cell.profilePicture.image = UIImage(named: "profile@3x.png")
         }
         cell.delegate = self
         cell.button.isSelected = false
