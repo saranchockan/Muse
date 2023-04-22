@@ -431,6 +431,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                     }
                                                     currSong.friends = []
                                                     currSong.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                    sharedSongs.removeValue(forKey: song)
                                                     sharedSongs[song] = currSong
                                                 }
                                             }
@@ -455,6 +456,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                     currArtist.imgURLString = artistsImages[artist]!
                                                     currArtist.friends = []
                                                     currArtist.friends.append("\(document.data()["First Name"] as! String) \(document.data()["Last Name"] as! String)")
+                                                    sharedArtists.removeValue(forKey: artist)
                                                     sharedArtists[artist] = currArtist
                                                 }
                                             }
