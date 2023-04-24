@@ -111,6 +111,20 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func deleteAccount(_ sender: Any) {
         sharedArtists = [:]
         sharedSongs = [:]
+        let friends = currentUserObject.friends
+        let db = Firestore.firestore()
+        let ref = db.collection("Users")
+        
+        for friend in friends {
+            let document = ref.document(friend.uid)
+            document.updateData(["friends": FieldValue.arrayRemove([currentUserObject.uid])])
+        }
+        
+        let requested = currentUserObject.requested
+        for request in requested {
+            let document = ref.document(request)
+            document.updateData(["requests": FieldValue.arrayRemove([currentUserObject.uid])])
+        }
         Auth.auth().currentUser?.delete()
     }
     
