@@ -19,10 +19,10 @@ class SplashScreenViewController: UIViewController {
                 if user != nil {
                     nextVC = self.storyboard?.instantiateViewController(withIdentifier: "TabControllerIdentifier") as! UITabBarController
                 } else {
-                    nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginScreenIdentifier") as! LoginScreenViewController
-                    
+                    nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
                 }
-                self.present(nextVC, animated: true)
+                self.show(nextVC, sender: nil)
+    
             }
             
         }
