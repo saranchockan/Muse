@@ -42,7 +42,7 @@
             <objects>
                 <viewController storyboardIdentifier="LoginScreenIdentifier" modalPresentationStyle="fullScreen" id="moX-6L-PDK" customClass="LoginScreenViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dQ2-4L-pUB">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxm-Ks-MUO">
@@ -131,7 +131,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="Z9w-eD-VPz" customClass="RegisterFirstViewController" customModule="Muse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sez-ac-6Ad" customClass="Register">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Xe-OQ-5Qa">
@@ -238,6 +238,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginNavigation" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="I6K-0t-cps" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="TYw-OM-imZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RK2-qB-TKR">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -444,7 +445,7 @@
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search by Name" translatesAutoresizingMaskIntoConstraints="NO" id="SLL-2t-WTR">
-                                <rect key="frame" x="-3" y="203" width="395" height="44"/>
+                                <rect key="frame" x="-4" y="203" width="395" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -580,7 +581,7 @@
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search by Artist" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-aq-goj">
-                                <rect key="frame" x="-2" y="146" width="395" height="44"/>
+                                <rect key="frame" x="-3" y="146" width="395" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -802,7 +803,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Logout" titleAlignment="center"/>
                                 <connections>
                                     <action selector="logout:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="Pv7-Qd-meM"/>
-                                    <segue destination="moX-6L-PDK" kind="showDetail" id="EKa-lu-XPf"/>
+                                    <segue destination="I6K-0t-cps" kind="showDetail" id="Zmy-17-3gx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-QA-3hy">
@@ -840,7 +841,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Delete Account"/>
                                 <connections>
                                     <action selector="deleteAccount:" destination="Zt2-D0-VwT" eventType="touchUpInside" id="kne-4A-Pl6"/>
-                                    <segue destination="moX-6L-PDK" kind="showDetail" id="Far-xt-RVw"/>
+                                    <segue destination="I6K-0t-cps" kind="showDetail" id="L6k-If-z77"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1006,7 +1007,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9qM-Yc-Mvd"/>
-        <segue reference="Far-xt-RVw"/>
+        <segue reference="Zmy-17-3gx"/>
+        <segue reference="6tA-8Z-tHe"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

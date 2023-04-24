@@ -75,7 +75,7 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.emptyLabel.text = "Listen to more artists to have them featured!"
             }
             return cell
-        case 1:
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Recently Played Tracks"
             cell.collectionList = Array(mySongs.values)
@@ -111,7 +111,7 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.emptyLabel.text = "Listen to more songs to have them featured!"
             }
             return cell
-        case 3:
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Recent Artists"
             cell.collectionList = myArtists

@@ -71,6 +71,8 @@ class RegisterFirstViewController: UIViewController {
                     "Location": "",
                     "Top Artists": [],
                     "Top Songs": [String: String](),
+                    "Top Artist Images": [String: String](),
+                    "Top Song Images": [String: String](),
                     "friends": [],
                     "requests": [],
                     "requested": []
