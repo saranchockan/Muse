@@ -54,43 +54,75 @@ class MyListeningViewController: UIViewController, UITableViewDelegate, UITableV
         switch row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredMyArtist = myArtists.randomElement()
-            cell.name.text = featuredMyArtist?.artistName
-            cell.friendsDescription.text = ""
-            cell.sharedType.text = "My Featured Artist"
-            fetchImages(featuredMyArtist! as ImageCardObject, cell) {
-                completion in
-                if completion {
-                    print("images correctly fetched")
-                } else {
-                    print("error")
+            if !myArtists.isEmpty {
+                let featuredMyArtist = myArtists.randomElement()
+                cell.name.text = featuredMyArtist?.artistName
+                cell.friendsDescription.text = ""
+                cell.sharedType.text = "My Featured Artist"
+                fetchImages(featuredMyArtist! as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
+            } else {
+                cell.cardView.isHidden = true
+                cell.sharedType.text = "My Featured Artist"
+                cell.emptyLabel.text = "Listen to more artists to have them featured!"
             }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Recently Played Tracks"
             cell.collectionList = Array(mySongs.values)
+            if !mySongs.isEmpty {
+                cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
+            } else {
+                cell.collectionView.isHidden = true
+                cell.emptyLabel.isHidden = false
+                cell.emptyLabel.text = "Listen to some more songs to have them featured!"
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: sharedCellIdentifier, for: indexPath) as! SharedCardTableViewCell
-            let featuredMySong = mySongs.randomElement()
-            cell.name.text = featuredMySong?.key
-            cell.friendsDescription.text = ""
-            cell.sharedType.text = "My Featured Song"
-            fetchImages(featuredMySong!.value as ImageCardObject, cell) {
-                completion in
-                if completion {
-                    print("images correctly fetched")
-                } else {
-                    print("error")
+            if !mySongs.isEmpty {
+                let featuredMySong = mySongs.randomElement()
+                cell.name.text = featuredMySong?.key
+                cell.friendsDescription.text = ""
+                cell.sharedType.text = "My Featured Song"
+                fetchImages(featuredMySong!.value as ImageCardObject, cell) {
+                    completion in
+                    if completion {
+                        print("images correctly fetched")
+                    } else {
+                        print("error")
+                    }
                 }
+                cell.cardView.isHidden = false
+                cell.emptyLabel.isHidden = true
+            } else {
+                cell.cardView.isHidden = true
+                cell.sharedType.text = "My Featured Song"
+                cell.emptyLabel.text = "Listen to more songs to have them featured!"
             }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier, for: indexPath) as! ImageCardTableViewCell
             cell.title.text = "Recent Artists"
             cell.collectionList = myArtists
+            if !myArtists.isEmpty {
+                cell.emptyLabel.isHidden = true
+                cell.collectionView.isHidden = false
+            } else {
+                cell.collectionView.isHidden = true
+                cell.emptyLabel.isHidden = false
+                cell.emptyLabel.text = "Listen to some artists songs to have them featured!"
+            }
             return cell
         default:
             print("this isn't supposed to happen")
