@@ -14,6 +14,7 @@ class User {
     var lastName:String = ""
     var location:String = ""
     var friends:[User] = []
+    var modifiedFriends: Bool = false
     var requests:[User] = []
     var requested:[String] = []
     var pic: UIImage?

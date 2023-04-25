@@ -37,6 +37,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         self.greeting.title = "Hello, \(self.currentUserObject.firstName)"
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear")
+        print("Modified Friends: \(self.currentUserObject.modifiedFriends)")
+        if (self.currentUserObject.modifiedFriends) {
+            print("viewDidAppear fetchUserSongArtistData")
+            self.fetchUserSongArtistData { fetchUserSongArtistDataCompletion in
+                if fetchUserSongArtistDataCompletion {
+                    // Loading Screen should be false at this point
+                    // Reload table view
+                    self.printOutput()
+                    print("viewDidAppear Reloading table view data...")
+                    self.tableView.reloadData()
+                    self.currentUserObject.modifiedFriends = false
+                    if self.currentUserObject.friends.isEmpty {
+                        self.tableView.isHidden = true
+                        self.emptyLabel.isHidden = false
+                    } else {
+                        self.tableView.isHidden = false
+                        self.emptyLabel.isHidden = true
+                    }
+                } else {
+                    print("error")
+                }
+            }
+        }
+    }
 
     
     override func viewDidLoad()  {
@@ -377,6 +404,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fetchUserSongArtistData(_ completion: @escaping (_ success: Bool) -> Void)  {
+//        sharedArtists = [:]
+//        sharedSongs = [:]
+        print("fetchUserSongArtistData...")
         let currentUser = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
         let ref = db.collection("Users")
@@ -398,7 +428,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let artistsImages = data["Top Artist Images"] as! [String: String]
                         let songImages = data["Top Song Images"] as! [String: String]
                         let friends = data["friends"] as! [String]
-                        
+                        if friends.isEmpty {
+                            sharedArtists = [:]
+                            sharedSongs = [:]
+                            completion(true)
+                        }
                         // Iterate through user's friends to get their Top Songs and Top Artists
                         for friend in friends {
                             ref.whereField(FieldPath.documentID(), isEqualTo: friend).getDocuments()

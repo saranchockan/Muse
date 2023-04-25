@@ -64,6 +64,17 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var searchBar: UISearchBar!
     let concertCellIdentifier = "ConcertCard"
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+        if self.sharedConcerts.isEmpty {
+            self.tableView.isHidden = true
+            self.emptyLabel.isHidden = false
+        } else {
+            self.tableView.isHidden = false
+            self.emptyLabel.isHidden = true
+        }
+    }
+    
     func getConcertDataFromTicketMaster() {
         for artist in sharedArtists {
             let fetchEventsEndpoint: String = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=\(ProcessInfo.processInfo.environment[self.TICKETMASTER_API_KEY]!)&keyword=\(artist.key)"

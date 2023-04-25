@@ -98,6 +98,11 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
     }
     
     func actOnSelected(index: Int) {
+        print("!selectedSet.isEmpty: \(!selectedSet.isEmpty)")
+        if (!selectedSet.isEmpty) {
+            currentUserObject.modifiedFriends = true
+        }
+
         switch index {
         case 0:
             for cell in selectedSet {
