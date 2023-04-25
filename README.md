@@ -1,3 +1,15 @@
+
+# Muse
+1. Group #: 12
+2. Team Members: Saran Chockan, Richa Gadre, Saahithi Joopelli, Elizabeth Sinder
+3. Project Name: Muse
+
+# Dependencies 
+1. Spotify API
+2. Keychain Access
+3. Firebase iOS SDK
+
+# Feature Description
 | Feature            | Description                                                                                                                                                                                                                                                    | Release Planned | Release actual | Deviations (if any)                      | Who/Percentage worked on                               |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|----------------|------------------------------------------|--------------------------------------------------------|
 | Login              | Allows user to log into their Muse account.  Authenticates using Firebase Auth.                                                                                                                                                                                | Alpha           | Alpha          | None                                     | Saran (25%) Saahithi (25%) Richa (25%) Elizabeth (25%) |
