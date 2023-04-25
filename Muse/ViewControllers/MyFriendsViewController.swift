@@ -138,6 +138,8 @@ class MyFriendsViewController: UIViewController , UITableViewDelegate, UITableVi
         cell.friendObject = friend
         if friend.pic != nil {
             cell.profilePicture.image = friend.pic
+        } else {
+            cell.profilePicture.image = UIImage(named: "profile@3x.png")
         }
         cell.delegate = self
         cell.button.isSelected = false

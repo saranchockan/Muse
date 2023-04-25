@@ -184,11 +184,6 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.store.requestAccess(for: .contacts) { (access, error) in
             print("Contacts Allowed: \(access)")
             self.contactsAllowed = access
-//            guard error == nil else {
-//                print("Contact Access Error \(error!.localizedDescription)")
-//                return
-//            }
-            
             completion(true)
         }
     

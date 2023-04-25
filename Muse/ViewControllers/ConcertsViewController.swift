@@ -84,13 +84,6 @@ class ConcertsViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.emptyLabel.isHidden = true
                         }
                     }
-                    if self.sharedConcerts.isEmpty {
-                        if self.currentUserObject.friends.isEmpty {
-                            self.emptyLabel.text = "You currently do not have any friends. Go to the My Friends page to add some!"
-                        } else {
-                            self.emptyLabel.text = "You currently do not have any shared concerts."
-                        }
-                    }
                 } else {
                     print("error")
                 }
